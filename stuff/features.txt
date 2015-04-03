@@ -1,0 +1,72 @@
+C# WinForms
+
+	done
+window transparency
+ontop option
+minimal interface stays out of the way of your experience
+multiple input boxes
+mousewheel anywhere scrolls the main window
+
+
+	bugs
+last intercept makes newlines
+multiline poses don't scroll to bottom correctly, only scrolls to start of line
+when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
+
+
+	not done
+world library
+	add world, store mucks/characters separately
+	remove world
+	list worlds in connection dropdown
+	basic password encryption for saved worlds
+logging
+	one click logging, start logging and auto-name log file with date
+	on the fly log file rename
+	auto log option, log everything to separate log
+	needs better visual feedback that it's logging
+inputbox
+	command history with up/down arrows
+	tab-key autocompletion of names/objects that are in the same room or in your WF list
+	spellcheck on the fly
+	autocompletion of 'p =' and 'w =' to reduce mavs
+world window
+	colors/fonts settings
+	clickable links
+	pageup/pagedown scroll main window too (even tho input box is selected)
+	regex color highlighting
+	mIRC style copying (drag select, copy, refocus)
+	timestamps optional, toggleable
+	don't autoscroll if scrolled up
+connect/disconnect
+	connect to multiple worlds
+	reconnect when disconnected
+	disconnect
+	close when disconnected
+muck integration onboarding
+	inject echo command if not present, ask user
+muck command integration
+	email auto-verification
+	description editor
+	morph editor
+	room builder
+WI helper needs a preview, some polish
+window
+	resize doesn't keep bottom line in view
+	window transparency
+	ontop option
+	minimal interface stays out of the way of your experience
+	background images for the world window
+tabbed pages (untabbable with a click)
+tabbed whispers
+WS interception to sidebar
+WF
+	hidefrom button
+	list interception
+	address book style list, store info on people, lookup logs
+	icons
+	popout window
+	countdown until visibility
+	fur db integration, save info locally for furs
+WHO list interception
+stupid statistics (time since pose, time per pose, average character name length)

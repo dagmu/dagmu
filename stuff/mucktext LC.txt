@@ -1,0 +1,31 @@
+Area                      ### Description                  (Threshhold   2)
+------------------------- --- ---------------------------------------------
+Layleaux Town............ 229 Largest town; north side of the lake
+  Bull's Gym, The........   4 Fitness Center & Hangout (t bullgym)
+  Casa Del Verdga........   3 Gay Friendly Hotel (Rooms available) (t Verdga)
+  Feedery Barn & Grill...   3 Weight Gainer's Bar (t cafevore; feed)
+  Fox Plaza..............  43 Central Gathering Spot (t plaza; out)
+  Golden Lash, The.......  11 BDSM Club (t goldenlash)
+  Hermaphrodite Haven....  28 Herm themed Bar/hotel (all welcome) (t HermH)
+  Lining, The............  39 Gay/Bi/Straight BDSM Bar (t lining)
+  Lion's Den.............  10 Bars, Beach Hotel and Parks (t lionsden)
+  Merriam's Pub..........  13 Erudite Erotica (t merriam)
+  Orchids................   3 Women's arthouse cafe (t Orchids)
+  Public Play Area.......   8 (t plaza; out; sw)
+  St. Mary's.............   6 School for Wayward Furs (t school; e)
+  Shimmering Sun Club....  10 Reptilian-Themed Lounge and Resort (t sunclub)
+  Velvet Underground.....  10 Everyone welcome - come in, have fun! (t vunder)
+  Vor Cafe...............   7 Predator/Prey and More (t cafevore)
+Northern Forest..........  25 Forest north of Layleaux
+  Secret Moon............  17 Treehouse (t secretmoon)
+East Forest & Mountains..  13 The area to the East of Layleaux
+  Mystic Stables.........  12 Stud Farm and Horseback Riding Area (t mystic)
+Lake Alodaelia...........   9 In or Above the Lake (t ferry)
+  Isle Timat.............   2 Avian Island (t timat)
+  Temple of Divinity.....   5 Egyptian Area for rituals/breeders (t divine)
+The Cloud Castle.........   2 Old Muck Center (t castle)
+The Oceans of Tapestries.   7 
+  Island of Dr I.N.Sane..   5 Heavy Scenes Island (t insane)
+  Missing Link, The......   4 Castration/Nullification Bar (t tml)
+Unlinked Rooms........... 287 Unapproved Building
+--- Total Online 578 ------------------------------------------ lc v2.1 ---

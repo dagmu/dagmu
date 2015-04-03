@@ -1,0 +1,136 @@
+Somewhere on the muck, Ashkii has connected.
+Somewhere on the muck, Ashkii has reconnected.
+Somewhere on the muck, Ashkii has disconnected.
+
+Players online for whom you are watching:
+Ayorith           Azulez            Doc               Javin             
+Karri             Tad               Velos             Wild              
+Spitfire          Talin             Zuchter           
+Done.
+
+No one that you are watching for is online.
+
+    to view WI settings in general
+  exa me=/_prefs/whatis/
+str /_prefs/whatis/custom:oftenshapeshifted cinfo-reader
+str /_prefs/whatis/flags:bi d sw ic cin rom prd int
+str /_prefs/whatis/used:yes
+9 properties listed.
+
+    to set custom flag (note limit 30 characters!)
+  @set me=/_prefs/whatis/custom:__________________20________30
+Property set.
+    to remove custom flag
+  @set me=/_prefs/whatis/custom:
+Property removed.
+
+    to check flags list
+  wi #flags
+-- WhatIsZ Extended V1.0.0.1 WF --------------------------------[ List flags ]
+   !:no               a:available       ag:anything-goes  age:ageplay       
+  an:anal            ap:avian-preferre  aq:aquatic         bi:bisexual      
+ bit:biting         blo:blood          bod:body-modificat bon:bondage       
+ bot:bottom         brc:breath-control brd:breeding        bt:boots         
+ cas:castration     cbt:C&BT            ch:chemical       cha:chastity      
+ cin:cinfo          clv:cunt-loving    cmc:cum-covered    cml:cum-loving    
+ cok:cock-worshippi con:consensual-onl crx:crossdresser   cws:cunt-worshipin
+   d:dominant       dia:diapers        dir:dirty-talk     dis:disobedient   
+ dsc:discipline     dye:dyes           edi:edible          el:electrical    
+ ema:emasculation    en:enema           ex:exhibitionist  exp:experienced   
+  fe:female-biased  fea:fear            ff:foot-fetish    fmz:feminization  
+  fp:fur-preferred  fsh:forcedshifting fst:fisting        fud:food-fetish   
+ fuk:fuckable       gay:homosexual     gen:gendershifting gro:group-sex     
+ het:heterosexual   hmb:herm-biased    hor:horny           hu:humiliation   
+ hum:humor-and-come hyp:hypnosis         i:inexperienced   ic:Always-IC     
+  if:inflation      iht:in-heat        inc:incest         inf:infantilist   
+ int:intelligence-b  jo:masturbating     l:lecherous       la:large         
+ lac:lactate        lat:latex           le:leather        lea:leashable     
+ les:lesbian        loo:loose           ma:male-biased    mac:macrophile    
+ mag:magic-sex      mas:masochist      mat:mated          mic:microphile    
+ mnd:mind-control   mon:monogamous     mum:mummification   no:non-morphic   
+ non:nonconsensual   ns:non-sexual      nt:nipple-torture ull:nullification 
+  od:orgasm-denial  ooc:Always-OOC     ora:oral            ow:owned         
+ owc:owner-consent  pax:no-pages       pet:pet            pie:piercing      
+ plt:plants         plu:plushophile    ply:polyamorous     pp:public-propert
+ prd:predator       prg:pregnophile    pri:private        pry:prey          
+ pty:panty-fetish   pub:public         rim:rimming        rom:romantic      
+ sad:sadist          sc:scat            sh:shapeshifting  sha:shaving       
+ shy:shy            siz:size-queen     slu:slutty         slv:slave         
+  sm:small          smc:sex-machines   snu:snuff           sp:scale-preferre
+ spk:spanking        su:submissive      sw:switch         sxd:sex-doll      
+ tan:tantric        tat:tattoo(ing)    tea:teasing        ten:tentacles     
+ tik:tickling       tit:breast-loving  top:top            toy:toys          
+ tra:trainable       tz:transformation  un:unavailable    unb:unbirthing    
+  up:uppity         vam:vampirism      van:vanilla         vi:virgin        
+ vor:vorarephile    voy:voyeur          wa:watersports    wet:wet-and-messy 
+ whx:no-whispers     xp:xeno-preferred yif:yiffy          zoo:zoophile      
+Flags are presently being maintained by : WhiteWizard
+-------------------------------------------------------- by K'T/AnnonyMouse --
+
+    to view whole desc in lines
+  exa me=/redesc#/
+str /redesc#/1:test1
+str /redesc#/2:Test2
+2 properties listed.
+
+    to change current desc
+lsedit me=redesc
+.del 1 40
+new description goes here!
+and here
+.end
+
+    to view list of morphs (smallest way)
+  exa me=/_regmorphs
+str /_regmorphs:  TIGER    DRAGON    WOLF    ELF    TEACHER          PURPLE          PANTSDRGN      SWIMDRGN    TEACHDRGN    DRGN    PANTSTGR    TGR    BUFFTGR    TEACHTGR    LABTGR    gothwolf    weredrgn    xmasptgr    minidrag    robedrgn    invis    mdragon    hallodrgn    sldrtgr    47drgn  
+1 property listed.
+
+    to view morph properties
+  exa me=/morph#/boxers#/
+str /morph#/boxers#/desc#/:7
+str /morph#/boxers#/message:changes clothes!
+str /morph#/boxers#/name:anthro boxer shorts nothin else
+str /morph#/boxers#/osay:rumbles ~%m~
+str /morph#/boxers#/say:You rumble ~%m~
+str /morph#/boxers#/scent:The wolf smells like wolf, that's for certain. He may be of mixed heritidge, but he's all canine, and his lupine side has taken over his scent. His fur is clean though, at least within a few days.
+str /morph#/boxers#/sex:male
+str /morph#/boxers#/species:anthro dark wolf
+6 properties listed.
+
+    to view morph desc
+  exa me=/morph#/boxers#/desc#/
+str /morph#/boxers#/desc#/1:test1
+str /morph#/boxers#/desc#/2:Test2
+
+
+    to view list of morphs (hard way)
+  morph #list
+Morph Hammer V1.2 (C) 1994 by Triggur
+-------------------------------------
+ 
+         Command    ...morphs you to...
+----------------------------------------------------------
+[Q]MORPH TIGER      tiger
+[Q]MORPH DRAGON     ice dragon
+[Q]MORPH WOLF       dark grey anthro wolf
+[Q]MORPH ELF        elf
+[Q]MORPH TEACHER    teacher wolf
+[Q]MORPH PURPLE     antho white tiger sans clothes, with purple stripes!
+[Q]MORPH PANTSDRGN  pants wearing anthro ice dragon
+[Q]MORPH SWIMDRGN   anthro ice dragon in swimtrunks
+[Q]MORPH TEACHDRGN  anthro ice dragon teacher
+[Q]MORPH DRGN       anthro ice dragon sans clothes
+[Q]MORPH BOXERS     wolf with boxers
+     <- space
+
+    another example: note they're padded on either side by two spaces
+  str /_regmorphs:  pants    boxers  
+
+
+    to clear custom say
+  @set me=/_say/oformat:
+  @set me=/_say/format:
+
+    to view current speech settings
+str /_say/format:You growl softly, "%m"
+str /_say/oformat:growls softly, "%m"

@@ -1,0 +1,22 @@
+When an object that you own is looked at, you can be notified of that fact. This includes yourself.
+The following messages can be set on an object that will tell you when a look happens, they may be set to either yes, no or a message, yes will get you the default message. The props are:
+
+_look/notify - Tell you if the object is looked at.
+_look/notify-contents - Tell you if something in the objects contents is looked at.
+_look/notify-looker - Tell you if the object you looked at has a look notify.
+The message may contain the following special strings:
+%obj - Name of the object being looked at.
+%name - Name of the looker, OR the name of the owner of the object in a _look/notify-looker message.
+%on - In a _look/notify-looker message, the name of the 'container'.
+The message is also pared through MPI which allows you to do things like:
+{sex:me} - The gender of the looker
+{species:me} - The species of the looker
+or what you are looking at for notify-looker
+Examples:
+@set me=_look/notify:yes
+@set me=_look/notify:## %name looked at you!
+
+You may set it so you see a [awake] or [asleep] after people in a rooms contents by setting the property:
+@set me=_look/notify-awake:yes
+
+@set me=_look/notify:<<< %name {sex:me} {species:me} looked at you! >>>

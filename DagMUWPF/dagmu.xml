@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DagMU>
+<Mucks>
+	<Muck Name="local" NameShort="local" Address="localhost" Port="8080" QUITString="QUIT"/>
+	<Muck Name="Tapestries" NameShort="Taps" Address="tapestries.fur.com" Port="2069" QUITString="QUIT"/>
+</Mucks>
+<Worlds>
+	<World Name="Dagon" Muck="Tapestries"/>
+	<World Name="Shean" Muck="Tapestries"/>
+	<World Name="Rar" Muck="local"/>
+</Worlds>
+<Furs>
+	<Fur Name="Ashkii"/>
+	<Fur Name="Anjire"/>
+	<Fur Name="Enya"/>
+	<Fur Name="Drask"/>
+	<Fur Name="Kelshin"/>
+	<Fur Name="Yko"/>
+</Furs>
+</DagMU>

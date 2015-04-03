@@ -1,0 +1,34 @@
+new
+name Zuchter
+group Horses
+altof Krahnos
+timezone PST
+birthday 
+whenmet
+notes notes go here
+
+new
+name Ashkii
+group Wolves
+altof Ashkii
+timezone +10
+birthday 
+notes my wolf!
+
+
+new
+name Test
+
+new
+name Krahnos
+group Dragons
+notes real name is Jason Saunders
+
+new
+name Lykos
+group Wolves
+altof Lykos_Bane
+
+new
+name Lykos_Bane
+notes wolf number two

@@ -1,0 +1,359 @@
+    to set line 2
+  @set me=/redesc#/2:Test line number two
+Property set.
+
+    to set the total number of line
+  @set me=/redesc#/:2
+Property set.
+
+    to view number of lines in redesc# list
+  exa me=/redesc#
+str /redesc#/:2
+1 property listed.
+
+    to save current desc/scent/etc to a morph
+morph #add
+__(morphname__ <- name of morph
+yes  <- overwrite
+     <- space
+     <- space
+
+"
+Morph Hammer V1.2 (C) 1994 by Triggur
+-------------------------------------
+ 
+(you have created no morphs with this program)
+"
+
+    to view current sweep settings
+str /_sweep:sweeps, ooc'ly or ic'ly, you choose.
+str /_sweep_player:sweeps, ooc'ly or ic'ly, you choose.
+
+  exa me=/_page/lastpager
+  exa me=/_page/lastpaged
+  exa me=/_whisp/lastwhisperer
+  exa me=/_whisp/lastwhispered
+
+    to view cinfo settings:
+  exa me=/_cinfo/
+str /_cinfo/bdsm:___
+str /_cinfo/blog:__
+str /_cinfo/character:__
+str /_cinfo/image:___
+str /_cinfo/misc:___
+str /_cinfo/player:__
+str /_cinfo/preference:___
+str /_cinfo/residence:___
+str /_cinfo/roleplay:___
+9 properties listed.
+
+  exa me=/_cinfo/misc/
+str /_cinfo/misc/alts:___this is misc field 1____
+str /_cinfo/misc/anatomyetc:____this is misc field 2____
+2 properties listed.
+
+
+
+  carry ____
+  rend
+  @set me=ride/_mode:ride
+  @set me=ride/_mode:hand
+  @set me=ride/_mode:walk
+  @set me=ride/_mode:fly
+
+  @set me=ride/_ridercheck:YES
+RIDE does check exits passed through for locks against
+ your riders. If they are locked out, they fall off. If in your RIDE/
+ directory, you @set me=ride/_ridercheck:YES
+ then your riders will be checked just after you move to a new place,
+ and if any are locked out, you will automatically be yoyo'ed back
+ to the place you just left, and get a warning message.
+
+
+
+    to see who you're watching for
+  exa me=/_prefs/con_announce_list
+str /_prefs/con_announce_list:Adustus AndrewNeo Aulos Dorik
+1 property listed.
+
+
+
+    to view wi
+  wi whitefire
+-- WhatIsZ Extended V1.0.0.1 WF ------------------------------[ Focused View ]
+WhiteFire      slutty polyamorous submissive bisexual fear masochist 
+               nipple-torture C&BT castration chastity electrical bondage toys 
+               exhibitionist cum-loving sex-machines magic-sex plants 
+               tentacles cinfo [and more] male Anthro Fagon (Fox-Dragon) 
+               [Loiosh's / Slave]
+-------------------------------------------------------- by K'T/AnnonyMouse --
+
+    to view detailed WI
+  wi #detail dagon
+-- WhatIsZ Extended V1.0.0.1 WF -----------------------------[ Detailed View ]
+Dagon              Never-vorarephile plushophile unbirthing scat 
+                         macrophile diapers infantilist
+                Dislikes-boots foot-fetish body-modification watersports 
+                         snuff leather
+                 Neutral-bondage voyeur rimming castration
+                   Likes-incest vanilla breast-loving ageplay C&BT 
+                         cock-worshipping
+                   Loves-anal romantic teasing bisexual
+-------------------------------------------------------- by K'T/AnnonyMouse --
+
+    to view WI detail settings
+  exa me=/_prefs/whatis/
+str /_prefs/whatis/wiEUsed?:yes
+str /_prefs/whatis/1:vor plu unb sc mac dia inf
+str /_prefs/whatis/2:bt ff bod wa snu le
+str /_prefs/whatis/3:bon voy rim cas
+str /_prefs/whatis/4:inc van tit age cbt cok
+str /_prefs/whatis/5:an rom tea bi
+9 properties listed.
+
+    to show up in wi #find searches
+  wi #searchable
+-- WhatIsZ Extended V1.0.0.1 WF ----------------------------[ Set searchable ]
+You will now show up in #find searches.
+-------------------------------------------------------- by K'T/AnnonyMouse --
+
+    to NOT show up in wi #find searches
+  wi #!searchable
+-- WhatIsZ Extended V1.0.0.1 WF ----------------------------[ Set searchable ]
+You will no longer show up in #find searches.
+-------------------------------------------------------- by K'T/AnnonyMouse --
+
+    to get descriptions for all flags
+  wi #whatisall
+-- WhatIsZ Extended V1.0.0.1 WF ----------------------------[ Describe flags ]
+>   !: no - The flag following is disliked. Used in the verbose mode.
+>   a: available - Available either for sexual play or relationships.
+>  ag: anything-goes - Willing to do most anything.
+> age: ageplay - Roleplay involving underage characters.
+>  an: anal - Anal penetration
+>  ap: avian-preferred - Preference for birds and other avians.
+>  aq: aquatic - Preference for aquatic species.
+>  bi: bisexual - Sexually attracted to both genders.
+> bit: biting - May range from nipping to damaging.
+> blo: blood - Scenes involving bloodletting.
+> bod: body-modification - Permanent changes to the body, such as tattooing, piercing, scarring, etc.
+> bon: bondage - Restraints.
+> bot: bottom - Receiving in S/M type scenes.
+> brc: breath-control - Breath being controlled by another.
+> brd: breeding - Roleplaying impregnation.
+>  bt: boots - Worshiping boots.
+> cas: castration - Removal of the testicles.
+> cbt: C&BT - Cock & Ball Torture or Cunt & Breast Torture
+>  ch: chemical - Mood or mind altering drugs.
+> cha: chastity - Forced denial of sexual pleasure.
+> cin: cinfo - See CINFO for more information.
+> clv: cunt-loving - Self Explanatory
+> cmc: cum-covered - Semen covering parts of the body.
+> cml: cum-loving - Self Explanatory
+> cok: cock-worshipping - Self Explanatory
+> con: consensual-only - Play requires direct consent. (Default for the MUCK.)
+> crx: crossdresser - Dressing in the other gender's clothing.
+> cws: cunt-worshiping - Self Explanatory
+>   d: dominant - Position of power in a D/s relationship.
+> dia: diapers - Wearing diapers.
+> dir: dirty-talk - Sexually explicit or crude talk.
+> dis: disobedient - Submissive who is intentionally disobedient to receive punishment.
+> dsc: discipline - Scenes with formal discipline.
+> dye: dyes - Fur or flesh colored by dyes.
+> edi: edible - Bottom in Vore scenes.
+>  el: electrical - Used for S/M or other sexual uses.
+> ema: emasculation - Removal of the penis.
+>  en: enema - Cleaning of the rectum with water.
+>  ex: exhibitionist - Makes sexual displays in public.
+> exp: experienced - Self Explanatory
+>  fe: female-biased - Preference for females.
+> fea: fear - Scenes involving fear or helplessness.
+>  ff: foot-fetish - Self Explanatory
+> fmz: feminization - Forced and unforced feminization refers to the sexually-charged practice of transforming a given gender into a stereotypical female. Sometimes called 'sissifying' this practice typically involves crossdressing, behavior modification play, and aspects of S&M discipline. Feminization does not, in the real world, involve any physical change in "equipment."
+>  fp: fur-preferred - Preference for furred characters over skin, scales, etc.
+> fsh: forcedshifting - Scenes that involve nonconsentual or controlled transformations.
+> fst: fisting - The insertion of the fist into the anus of vagina.
+> fud: food-fetish - Scenes that use food as an element, such as chocolate syrup on the genitals.
+> fuk: fuckable - Receiving of penetrative sex.
+> gay: homosexual - Exclusive preference for the same gender.
+> gen: gendershifting - Character can change genders.
+> gro: group-sex - Self Explanatory
+> het: heterosexual - Exclusive preference for the opposite gender.
+> hmb: herm-biased - Preference for hermaphrodites.
+> hor: horny - Self Explanatory
+>  hu: humiliation - Scenes that involve Humiliation.
+> hum: humor-and-comedy - Sex that involves humor.
+> hyp: hypnosis - Specific form of mind control.
+>   i: inexperienced - Self Explanatory
+>  ic: Always-IC - Character is IC unless explicitly stated otherwise.
+>  if: inflation - Enlargement of the body through inflation.
+> iht: in-heat - Self Explanatory
+> inc: incest - Sexual relations between family.
+> inf: infantilist - Infantile behavior during a scene.
+> int: intelligence-biased - Self Explanatory
+>  jo: masturbating - Scenes that involve masturbation.
+>   l: lecherous - Given to excessive indulgence in sexual activity.
+>  la: large - Character is "large".
+> lac: lactate - Scenes that involve lactation (milk from the breast).
+> lat: latex - Preference for latex clothing.
+>  le: leather - Preference for leather clothing.
+> lea: leashable - Character is leashable.
+> les: lesbian - Exclusive preference for the same sex.
+> loo: loose - [ No description assigned ]
+>  ma: male-biased - [ No description assigned ]
+> mac: macrophile - [ No description assigned ]
+> mag: magic-sex - [ No description assigned ]
+> mas: masochist - [ No description assigned ]
+> mat: mated - [ No description assigned ]
+> mic: microphile - [ No description assigned ]
+> mnd: mind-control - [ No description assigned ]
+> mon: monogamous - [ No description assigned ]
+> mum: mummification - [ No description assigned ]
+>  no: non-morphic - [ No description assigned ]
+> non: nonconsensual - [ No description assigned ]
+>  ns: non-sexual - [ No description assigned ]
+>  nt: nipple-torture - [ No description assigned ]
+>null: nullification - [ No description assigned ]
+>  od: orgasm-denial - [ No description assigned ]
+> ooc: Always-OOC - [ No description assigned ]
+> ora: oral - [ No description assigned ]
+>  ow: owned - [ No description assigned ]
+> owc: owner-consent - [ No description assigned ]
+> pax: no-pages - [ No description assigned ]
+> pet: pet - [ No description assigned ]
+> pie: piercing - [ No description assigned ]
+> plt: plants - [ No description assigned ]
+> plu: plushophile - [ No description assigned ]
+> ply: polyamorous - [ No description assigned ]
+>  pp: public-property - [ No description assigned ]
+> prd: predator - [ No description assigned ]
+> prg: pregnophile - [ No description assigned ]
+> pri: private - [ No description assigned ]
+> pry: prey - [ No description assigned ]
+> pty: panty-fetish - [ No description assigned ]
+> pub: public - [ No description assigned ]
+> rim: rimming - [ No description assigned ]
+> rom: romantic - [ No description assigned ]
+> sad: sadist - [ No description assigned ]
+>  sc: scat - [ No description assigned ]
+>  sh: shapeshifting - [ No description assigned ]
+> sha: shaving - [ No description assigned ]
+> shy: shy - [ No description assigned ]
+> siz: size-queen - [ No description assigned ]
+> slu: slutty - [ No description assigned ]
+> slv: slave - [ No description assigned ]
+>  sm: small - [ No description assigned ]
+> smc: sex-machines - [ No description assigned ]
+> snu: snuff - [ No description assigned ]
+>  sp: scale-preferred - [ No description assigned ]
+> spk: spanking - [ No description assigned ]
+>  su: submissive - [ No description assigned ]
+>  sw: switch - [ No description assigned ]
+> sxd: sex-doll - [ No description assigned ]
+> tan: tantric - [ No description assigned ]
+> tat: tattoo(ing) - [ No description assigned ]
+> tea: teasing - [ No description assigned ]
+> ten: tentacles - [ No description assigned ]
+> tik: tickling - [ No description assigned ]
+> tit: breast-loving - [ No description assigned ]
+> top: top - [ No description assigned ]
+> toy: toys - [ No description assigned ]
+> tra: trainable - [ No description assigned ]
+>  tz: transformation - [ No description assigned ]
+>  un: unavailable - [ No description assigned ]
+> unb: unbirthing - [ No description assigned ]
+>  up: uppity - Applicable to submissive/bottoms only, 'uppity' implies a certain mischievousness, impish behavior, or playfully disrespectful behavior (in the context of the D/s relationship) designed to provoke the dominant/top. It is not the same as "topping from the bottom" insofar as uppity is fun or playful, and "topping from the bottom" is a phrase usually intended to imply passive-aggressive manipulation.
+> vam: vampirism - [ No description assigned ]
+> van: vanilla - [ No description assigned ]
+>  vi: virgin - [ No description assigned ]
+> vor: vorarephile - [ No description assigned ]
+> voy: voyeur - [ No description assigned ]
+>  wa: watersports - [ No description assigned ]
+> wet: wet-and-messy - [ No description assigned ]
+> whx: no-whispers - Do not use the whisper command with this character.
+>  xp: xeno-preferred - Preference for xeromorphs (aliens).
+> yif: yiffy - Horny, but implies submissive.
+> zoo: zoophile - Sexual relations between animals a
+-------------------------------------------------------- by K'T/AnnonyMouse --
+
+
+
+
+mode to automatically do WS when you enter a room that has contents, and it replaces the names in the contents list with the WS. i.e. it shows WS as normal and then goes back and REMOVES names it finds in Contents that are in the WS, so all that is left are items
+
+WS: default, colrome, sodom, plaza, goldenlash
+Name____________ Idle Sex______ Species________________________________________
+Dagon                 male      anthro ice dragon
+Gonaiden          2m  shemale   Anime Elf
+Tess              3m  Female    Little Vixen
+Giggle            2m  girl      striped hyena
+XGS-003               Herm      Artificial German Shepherd
+Aeseri            8m  Female    Dingo
+Demessa               female    BIG Vixen
+Biley                 male      Vampiric Wolf <Ventrue>
+Hermione         19m  Female    Ocelot
+Carfax           10m  Male      Warhorse - Shire
+Mernis                female    fox
+Garonna               female    12-foot-tall Spotted dairy hyena
+Acratin           2m  male      panther
+Draene                Female    young Drow Elf
+Bahati                female    Spotted Hyena Mercenary
+Raleshderi       10m  Female    Iberian Lynx
+Serekhan          4m  male      Equine
+Emanon           36m  Female    Jackal
+Karissa           5m  female    Elf
+Pavlov                male      white tiger
+Coltie           11m  Filly?    Crossdressing Colt
+Hai_Lee          59m  Male      Cheetiger
+Jerhevon              Male      Stegosaurus
+Bander           34m  male      Snow Wolf
+Fleet             1h  male      Cheetah
+Jinken                Female    Panda
+Tenkai                Male      Panda
+Rakana            2m  female    domestic feline
+Sadie-Clark           female    dalmatian
+Yang             10m  female    Siberian Lynx
+Gaug              9m  male      Slink hexapod
+Badiah            7m  Male      Siberian Tiger
+Anali                 Female    Common Tree Frog
+Tivarion          1h  male      unicorn
+Tetsuro          20m  male      Gryphon
+WhiteWolf             male      Wolf
+Tyarlal           4h  female    spotted hyena
+Banz              4h  female    Vixen
+Mono             13m  Male      Eastern Dragon
+Ethean           10m  male      A playful lion
+Mills             3h  male      weasel
+-- Total: 41 ------------------------------------------------------------------
+
+WS mystic stables
+______________________________________________________________________________
+Name_________________Idle__Gender_____Species_______________Role________Flags_
+Dagon                      male       anthro ice dragon                      
+Andalus              18m   Male       Teen crimson dragon.                   
+______________________________________________________________________________
+Flags: (F)ile (H)erd (B)arnWi                                        Awake:2  
+
+
+
+
+Dagon's Tower(#139581R)
+    This is a large circular room that looks to be part of a castle tower, the walls being dark stone, smooth with age. The ceiling is a slightly domed 15 feet, black stucco braced by huge, dark oak beams. Three archways spaced evenly around the room let light in through gauzy purple curtains blowing open in the gently crossbreeze. They lead out to stone railed balconies, looking /out/ over a forested landscape. Heavy wood doors stand open at the archways, and can be closed to keep out unwanted guests, weather, light, and by the size of them, small armies.
+    A huge 4 post /bed/ sits on one of the balconies, taking up the archway almost completely. Beside the bed is a large four drawer oak /dresser/. Opposite the bed, the stone wall curves inwards to frame the huge /fireplace/, always crackling away with a large wood fire, warming the air and filling the tower with the smell of cedar and pine. The only other furniture is an old oak /desk/ against the wall beside the fireplace, with a big comfy chair. A matching /bookcase/ flanks the other side of the fireplace.
+    To make the castle a bit cozier he has hung warm tapestries of wildlife posed in picturesque landscapes of trees and streams, purple curtains help cover more of the dark grey stone. A few of his favorite swords, spears, and bows remain, displayed nicely. An ornate wood sign up on a wall reads "Abandon all clothes, ye who enter here."
+    Most of the room is carpeted by thick black carpeting so soft beneath toes and bodies. Near the archways and the fireplace the carpet lets the smooth stone floor show through. In the center of the floor is a private teleport pattern, purple stone runes cut through the carpet. Scattered around the room are black leather beanbag chairs of varying sizes; the only seating aside from the bed, and home to his three coffee tables: Xero the fluffy fox, Sola the sexy kitty, and Werel the not quite so fluffy as sir Xero, wuff. Hugging a wall are heavy oak steps leading up to the next floor and down to a basement.
+(summary: Big round stone castle room, black carpet, big bed, big fireplace, beanbag chairs, 3 balconies, no doors)
+[ Obvious exits:  up, down, out.  Check out anything in /these/ to take a closer look. ]
+Contents:
+OOC: You must be at least this eloquent to interact with me.(#128205S)
+Note: Idle until proven active. (see: cinfo dagon idle)(#123692)
+Werel
+CBP Bottle(#147889)
+A Short Rope With Two Knots One On Either End Like For Tugs of War(#133194C)
+Item: Hoverball(#147885S)
+Item: YiffGlide Lube(#140116S)
+Item: Dragon Juice(#147887)
+Name____________ Idle Sex______ Species________________________________________
+Dagon                 male      anthro ice dragon
+Werel            -S-  male      AnthroWolf
+-- Total: 2 -------------------------------------------------------------------

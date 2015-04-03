@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C7D00BBD-294A-432C-B8FE-F393F4AF316A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DagMU</RootNamespace>
+    <AssemblyName>DagMU</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <StartupObject>DagMU.Program</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="aLogViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="aLogViewer.Designer.cs">
+      <DependentUpon>aLogViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\BuilderWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\BuilderWindow.Designer.cs">
+      <DependentUpon>BuilderWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\CInfoHelperWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\CInfoHelperWindow.Designer.cs">
+      <DependentUpon>CInfoHelperWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\CInfoHelperWindowField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\CInfoHelperWindowField.Designer.cs">
+      <DependentUpon>CInfoHelperWindowField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\DebugWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\DebugWindow.Designer.cs">
+      <DependentUpon>DebugWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldWindows\LogSettingsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\LogSettingsWindow.Designer.cs">
+      <DependentUpon>LogSettingsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldWindows\InputTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\MorphHelperWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\MorphHelperWindow.Designer.cs">
+      <DependentUpon>MorphHelperWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\WhoHelperWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\WhoHelperWindow.Designer.cs">
+      <DependentUpon>WhoHelperWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\WIHelperWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\WIHelperWindow.Designer.cs">
+      <DependentUpon>WIHelperWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldWindows\Box.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Connection.cs" />
+    <Compile Include="HelperWindows\DescEditorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\DescEditorWindow.Designer.cs">
+      <DependentUpon>DescEditorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fur.cs" />
+    <Compile Include="HelperWindows\ConsoleWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\ConsoleWindow.Designer.cs">
+      <DependentUpon>ConsoleWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\HelperWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\HelperWindow.Designer.cs">
+      <DependentUpon>HelperWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldWindows\InputBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldWindows\InputBoxBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\InputBoxBox.Designer.cs">
+      <DependentUpon>InputBoxBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\FontsColorsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\FontsColorsWindow.Designer.cs">
+      <DependentUpon>FontsColorsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldWindows\MuckPropertyTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\MuckPropertyTextBox.Designer.cs">
+      <DependentUpon>MuckPropertyTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User32.dll.cs" />
+    <Compile Include="WorldWindows\RideModeDropdown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\WF.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\WF.Designer.cs">
+      <DependentUpon>WF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldWindows\World.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorldWindows\WorldToolStripMenuItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WorldWindows\WorldToolStripMenuItem.Designer.cs">
+      <DependentUpon>WorldToolStripMenuItem.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="aLogViewer.resx">
+      <DependentUpon>aLogViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\BuilderWindow.resx">
+      <DependentUpon>BuilderWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\CInfoHelperWindow.resx">
+      <DependentUpon>CInfoHelperWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\CInfoHelperWindowField.resx">
+      <DependentUpon>CInfoHelperWindowField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\DebugWindow.resx">
+      <DependentUpon>DebugWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\LogSettingsWindow.resx">
+      <DependentUpon>LogSettingsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\InputTextBox.resx">
+      <DependentUpon>InputTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\DescEditorWindow.resx">
+      <DependentUpon>DescEditorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\ConsoleWindow.resx">
+      <DependentUpon>ConsoleWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\HelperWindow.resx">
+      <DependentUpon>HelperWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\MorphHelperWindow.resx">
+      <DependentUpon>MorphHelperWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\WhoHelperWindow.resx">
+      <DependentUpon>WhoHelperWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\WIHelperWindow.resx">
+      <DependentUpon>WIHelperWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\InputBoxBox.resx">
+      <DependentUpon>InputBoxBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\MuckPropertyTextBox.resx">
+      <DependentUpon>MuckPropertyTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\FontsColorsWindow.resx">
+      <DependentUpon>FontsColorsWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\RideModeDropdown.resx">
+      <DependentUpon>RideModeDropdown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\WF.resx">
+      <DependentUpon>WF.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldWindows\World.resx">
+      <DependentUpon>World.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="WorldWindows\WorldToolStripMenuItem.resx">
+      <DependentUpon>WorldToolStripMenuItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="WorldWindows\World.ProcLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <None Include="WorldWindows\_WorldParts.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="WorldWindows\World.Functions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\lightning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\application_xp_terminal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\cog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\cog_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\cog_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\cog_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\cog_error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\cog_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\lightning_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\pencil_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\Silk\pencil_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="icons\Silk\pencil_go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\Notepad.png" />
+    <Content Include="icons\NotepadOpen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

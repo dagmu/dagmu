@@ -1,0 +1,7 @@
+To see another player's formatted pages:     'page #formatted'
+To prepend a format string to other's pages: 'page #prepend'
+To set your prepended format string:         'page #prepend <formatstr>'
+To force other's pages to a standard format: 'page #standard'
+To set the standard format you receive in:   'page #standard <formatstr>'
+To set a format that you see when paging:    'page #format <fmtname>=<fmt>'
+To set a format that others receive:         'page #oformat <fmtname>=<fmt>'

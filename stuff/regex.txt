@@ -1,0 +1,3 @@
+https://www.debuggex.com/
+^([A-Za-z0-9_\-]+) (?:has ((?:dis|re|)connected|left|arrived)|(goes home)|(?:concentrates on a distant place, and )(fades from sight)|(?:(?:is )(taken home)(?: to sleep by the local police))).$
+^Somewhere on the muck, ([A-Za-z0-9_\-]+) has ((?:|re|dis)connected).$

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="textbox.Text" xml:space="preserve">
+    <value>0 properties listed.
+str /redesc#/1:    Kael is a strange fox, an unusual wolf, and an even stranger jackal. His heritage is a mix amongst the three, though heavy on the wolf and light on the fox. His frontside is a soft muddy grey and the rest of him varies from dark grey to black. His back is a ruddy charcoal with black scorch marks almost like a GSD. 
+str /redesc#/2:    He stands around 5'5" on plantigrade paws, though unusually long ears make him appear taller, thanks to the bit of jackal in his family line.
+str /redesc#/3:    He wears snug fitting and tough looking dark bluish grey cargos with integral kneepads and a sturdy metal waistline that betrays the pants to be half of a Suit. His hips, thighs, and calves are decorated with small pockets both functional and numerous, but don't obscure his slender legs beneath. The cuffs of his pants are linked to rugged voidwalker boots over plantigrade feet.
+str /redesc#/4:    Hiding his torso is an open grey vest over a partially transparent black cling tee. His arms past the tee are bare and show dark grey fur and then the subdued shadow of a fox's gloves wrapping his forearms. Well worn black fingerless actual gloves protect his hands while leaving his fingertips free for delicate work.
+str /redesc#/5:    The tight shirt across his torso reveals the shape of a very slim and shapely jackal. Beneath the short dark fur there is tone revealing his wiry muscles are quite strong from working frequently with heavy things in low gravity. The tone keeps him from looking scrawny, which might be easy because his tight shirt reveals no fat.
+str /redesc#/6:    His tail shows the same ghosted shadows from his fox ancestry along its tip, while the fur is a bit thicker than a wolf's, but not quite bushy enough to be called a fox's.
+str /redesc#/7:    The wolf wears blue tinted goggles, sometimes pushed up onto his forehead's short natural headfur to reveal striking amber eyes.
+str /redesc#/8:( http://www.furaffinity.net/full/1015570/ )
+8 properties listed.
+str /sex:male
+1 property listed.
+str /_scent:The wolf smells like wolf, that's for certain. He may be of mixed heritidge, but he's all canine, and his lupine side has taken over his scent. His fur is clean though, at least within a few days.
+1 property listed.
+str /species:anthro dark wolf
+1 property listed.
+&gt; Character Info for: Dagon
+Preference: ++dragons/equines/bigcats, --prey/orcs/monkeys/roo's/bears.   If you pose well (creative, readable, quick) you will gain my respect quickly.    If you're a male player with a female character, I'd like to know, if we're to play around.  http://www.f-list.net/c/dagon
+Roleplay: Yesplease. Dagon has a story, but hasn't played much with it lately. I most enjoy playing little 1-2 scene stories with people, making up an interesting (usually sex based) scene to play for a night that may or may not carry on.
+&gt; Miscellaneous fields: 40k, alts, anatomy, battlefield2, disclaimer, dom, dragonproportions, dvorak, elves, games, height, idle, magic, muckclient, power, secondlife, stallions, stmarys, tapsguide, turnoffs, turnons and whispers
+&gt; "cinfo Dagon &lt;field&gt;" to display.
+&gt; Done.</value>
+  </data>
+</root>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DagMUWPF.Model.Fur">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Fur.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMUWPF.Model.Muck">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAAAAAAAAAAAAAAQACAAAAAACgAAAAAAAAAA=</HashCode>
+      <FileName>Model\Muck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMUWPF.Model.World">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\World.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMUWPF.MuckFlags">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="DagMUWPF.MuckFlags.Flag">
+        <TypeIdentifier>
+          <NewMemberFileName>Flags.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="DagMUWPF.MuckFlags.FlagProperty">
+        <TypeIdentifier>
+          <NewMemberFileName>Flags.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="DagMUWPF.MuckFlags.FlagType">
+        <TypeIdentifier>
+          <NewMemberFileName>Flags.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="DagMUWPF.MuckFlags.ObjectType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Flags.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAABAAAAAAAAAAAAAAQAAAAAAAAAAEAA=</HashCode>
+      <FileName>Flags.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

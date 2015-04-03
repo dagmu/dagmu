@@ -1,0 +1,8 @@
+-maybe: on history up or down, make sure inputbox text equals history current before moving. so if user edits text by accident and then presses ctrl-up again that text will be restored?
+
+-on history up/down if there is text in the box, spawn a new box for the history and move focus to that?
+
+-on enter
+if line = lastline don't put in history
+else put line in history as last line
+

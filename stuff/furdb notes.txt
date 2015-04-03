@@ -1,0 +1,14 @@
+view modes:
+
+checkboxes:
+show groups / don't show groups
+show offline furs / don't show offline furs
+
+dropdown:
+list, [small] icons, details
+
+
+
+
+note that 'small icons' and 'details' use groups, but 'list' just dumps them all out as one
+so when selecting 'list' there won't be distinction for offline furs

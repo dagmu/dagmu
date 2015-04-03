@@ -1,0 +1,34 @@
+﻿DWM API stuff
+
+"Custom Window Frame Using DWM"
+Microsoft, http://msdn.microsoft.com/en-us/library/bb688195(VS.85).aspx
+Unmanaged win32api way to what I was trying to do in C#. The end result is the same functions, all called through .NET interop stuff
+
+"Drawing smooth text and pictures on the extended glass area of your WinForm in Windows Vista"
+Pang Wu, http://www.codeproject.com/KB/vista/textonglass.aspx
+A very messy implimentation of DrawThemeTextEx, which I needed
+- I made the class static like it should be
+- Consolidated all the functions from the Form code to the static class, like it should have been
+- Removed redundant and stupid code
+
+"Vista Aero ToolStrip on Non-Client Area"
+Jose M. Menendez Poó, http://www.codeproject.com/KB/dialog/AeroNonClientAreaButtons.aspx
+A nice implimentation of DWM API, WM_NCHITTEST, and all that, but without DrawThemeTextEx
+This code had ToolStripProfessionalRenderer to give the toolstip a glass background, I'd not seen that before
+Taught me about native interop with marshaling, and about renderers
+Taught me about WndProc overriding
+It uses drawpath to draw text, with a fuzzy and unsat result with no background glow, making it illegable on glass
+
+"GlassLib"
+Stanimir Stoyanov, http://www.stoyanoff.info/blog/code/glasslib/
+Promising tutorial at first, and a good example of DWM wrapping, but I didn't use anything from it.
+
+
+I made:
+Override label that draws safely on glass with DrawThemeTextEx
+Override ToolStrip buttons and text items to draw with a simple glowy ellipse behind them because I couldn't figure out how to use DWM's fancy glow well
+Combined my foldy form into a version of Jose's app in a Form override
+
+
+Need to:
+inventory and consolidate public glass api functions, hiding private stuff

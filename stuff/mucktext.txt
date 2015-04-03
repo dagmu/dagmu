@@ -1,0 +1,41 @@
+## Preparing to dump database. Two minute warning! ##
+## Pausing to save database. This may take a while... ##
+## ...or not. ##
+
+wf #list:
+	Currently watching for: Badiah Calsen Dagon Grei KajiFox Kajito Thor
+
+
+> Dagon would like you to teleport to them.
+> Type "mjoin Dagon" to go to them.
+
+this fires AFTER the desc of the room that triggers it is complete
+## You have entered the Unlinked Building zone.
+
+
+> Character Info for: ________
+	blahblah
+> Miscellaneous fields: alts, battlefield2, disclaimer, idle, inthezoo and whispers
+> Done.
+
+
+> Character Info for: _____, Miscellaneous field: _____
+> blahblah
+
+
+<______ just looked at you>
+
+
+
+	grey these a bit:
+_____ concentrates on a distant place, and fades from sight.
+____ has left.
+____ takes _____ with him.
+____ takes ____ with her.
+______ steps out of the teleport booth.
+____ goes home.
+____ has left.
+
+
+
+## Policies updated to 2.1.0. Please read them, and comment on the forums at: http://www.fur.com/tapestries/forum/

@@ -1,0 +1,35 @@
+Somewhere on the muck, Zuchter has connected.
+Players online for whom you are watching:
+Spitfire          Talin             Zuchter           
+Done.
+Somewhere on the muck, Zuchter has reconnected.
+Somewhere on the muck, Zuchter has reconnected.
+Somewhere on the muck, Zuchter has reconnected.
+Somewhere on the muck, Zuchter has disconnected.
+Somewhere on the muck, Zuchter has reconnected.
+Somewhere on the muck, Zuchter has reconnected.
+Somewhere on the muck, Zuchter has disconnected.
+Somewhere on the muck, Zuchter has disconnected.
+Somewhere on the muck, Zuchter has disconnected.
+Somewhere on the muck, Zuchter has disconnected.
+Players online for whom you are watching:
+Spitfire          Talin             Zuchter           
+Done.
+
+
+lesson: every 'connected' or 'reconnected' adds 1 to the person ('s quantity)
+	every 'disconnected' removes 1
+	if person = 0 then they're gone
+	if person > 1 then they're probably online
+	the only problem is if YOU connect in-between the 'connected' and 'reconnected', the person will be set to 1, and when the 'disconnected' rolls around the client will knock them off the list. a manual WF will put them back on though. this is fine because that's what you have to do anyway when that happens, and in the client there's a WF button for convenience.
+
+'public'
+string name	"Zuchter"	// taps character name
+string group	"Horses"	// for sorting contacts, primarily for the WF display
+string altof "Krahnos"	// this character is an alt of ____, should be grouped in the WF?
+int timezone;	PST		// gmt offset factor
+date birthday;			// for birthday reminders and age calculation
+date whenmet;			// when did you meet this fur
+string notes;	"real name is Jason Saunders"
+string notes; // optional misc notes saved in the database 'private'
+integer quantity; 1		// how many of this character is online, a simple boolean is not sufficient

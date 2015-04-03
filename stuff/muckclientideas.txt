@@ -1,0 +1,51 @@
+The default mode will be to support only one open connection per instance, open another copy of the client to have two mucks open at once
+
+mIRC-style simple mouse-drag copying
+
+URL highlighting/linking
+
+Process
+ ## saving changes should be put on statusbar or flash over main text window
+ ws should be taken into a seperate list menu
+ wf should be taken to a specific WF window with assignable notes per fur and priority ordering
+
+Clean log: checkboxes for each:
+ no "## Saving changes"
+ change "You speak" to "Dagon speaks"
+ line break between poses (only)
+ no WF
+ condensed WS
+
+Alerts:
+ when a certain fur logs in
+ when idling and someone <Looked at you>
+
+Page/Whisper interception: the default will be page interception with whispers handled the normal muck way:
+ pages are intercepted into IM'like windows with timestamps, and no need to type p = before each line!
+
+Coloring: since the muck has no color, the client will inject color:
+ <look/smell tags>
+ greyed muckspam to highlight poses from room descriptions and movement text
+
+Collapse room descriptions if you leave and nothing was said or posed (was just movement spam)
+
+Flexible log:
+ show log brackets, whats in the bracket gets logged, can unselect lines or groups of lines to edit out unwanted spam before the log is even complete
+
+Timestamps!
+ timestamps can be displayed in the normal way, or in 'countdown' mode where current time is zero and all timestamps above count away from it, so you can see how long ago a certain line was spoken
+
+Time statistics, time per word, time between poses, displayed in the statusbar. Pose calculator will use this data to give you an estimated number of poses remaining before time X, good for planning the end of a scene when time is limited.
+
+Unlimited buffer.
+
+Window backgrounds!
+Window transparency!
+
+Minimal mode:
+ autohiding editbox
+ timestamps hovering off to the left of the text window autohiding
+
+Extra exitbox! Clicking a special button beside the editbox creates a SECOND editbox that you can use normally. This is for when you are writing a long pose and want to respond to something. You no longer have to cut your pose to clipboard to respond while in mid-pose.
+
+Viewable Console: this will look exactly like a normal muck window, unprocessed, for troubleshooting, and things that the client does not process correctly

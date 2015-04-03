@@ -1,0 +1,9 @@
+<    Welcome to the list editor.  You can get help by entering '.h'     >
+< '.end' will exit and save the list.  '.abort' will abort any changes. >
+<    To save changes to the list, and continue editing, use '.save'     >
+< Insert at line 6 >
+< Edit aborted. >
+< list not saved. >
+< Editor exited. >
+< list saved. >
+< deleting 1 lines starting at line 6  (Now current line) >

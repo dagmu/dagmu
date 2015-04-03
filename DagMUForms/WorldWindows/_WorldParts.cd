@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="DagMU.MainWindow">
+    <Position X="9.75" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAEAkAACAAAIEFIACCAQoCBCBDEAAAAAwAAAQAAAU=</HashCode>
+      <FileName>WorldWindows\MainWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.Program" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.User32">
+    <Position X="9.75" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAACgQRIQAAAABGAIAAAAABAEQAQBAAEADAgAIBA=</HashCode>
+      <FileName>User32.dll.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.Properties.Resources" Collapsed="true">
+    <Position X="9.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIgAkCSACAABAAAAAABEQAAAQAAEAAAABEgAAAAAoA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.Properties.Settings" Collapsed="true">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAACQAgAaAAAAAARAAAAAAAAAAACQAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.Connection">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="DagMU.Connection.ConnectedStatus" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="DagMU.Connection.SendStatus" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Delegate Name="DagMU.Connection.ConnectEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="DagMU.Connection.ReadEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="DagMU.Connection.SendEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Class Name="DagMU.Connection.sendObject" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection.Functions.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgAAAQACAAEEAQIAACACAAQwCBAJABAEAAAA=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.WF">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="DagMU.WF.HiddenEnum" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\WF.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACQgQDBIAECAAAADAAAAAEgCAAAAIAQAAUA=</HashCode>
+      <FileName>WorldWindows\WF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.HelperWindows.InputBoxBox">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAEAAAAMACAEAAAAIACAAQQCAEAgAAAAAAAAIAAAACA=</HashCode>
+      <FileName>WorldWindows\InputBoxBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.HelperWindows.InputBox">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="DagMU.HelperWindows.InputBox.TextMessage" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>InputBox.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="DagMU.HelperWindows.InputBox.RefMessage" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>InputBox.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="DagMU.HelperWindows.InputBox.ScrollMessage" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\InputBox.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Enum Name="DagMU.HelperWindows.InputBox.Status" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>InputBox.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Delegate Name="DagMU.HelperWindows.InputBox.InputMsgDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>InputBox.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QAgAAAABACAAQAgAAAGAEAACAIYigRACBggCgAARAoA=</HashCode>
+      <FileName>WorldWindows\InputBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.MuckPropertyTextBox">
+    <Position X="5.75" Y="5.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Protected" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAACCAEEihAACAABADEABAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>WorldWindows\MuckPropertyTextBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DagMU.World">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="DagMU.World.WorldSettings" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\World.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="DagMU.World.WorldPrefs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\World.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Enum Name="DagMU.World.MuckStatus" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\World.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Delegate Name="DagMU.World.StringDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\World.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="DagMU.World.NullDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\World.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="DagMU.World.WorldIndexMessage" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>WorldWindows\World.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ciSgGP3IBKWC0UBUcUiBgMgTNFqmgRi0AceyFQGnhAI=</HashCode>
+      <FileName>WorldWindows\World.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

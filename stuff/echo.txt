@@ -1,0 +1,5 @@
+@action dagmuecho=me
+@link dagmuecho=$nothing
+@succ dagmuecho={null:{tell:{&arg},{name:me}}}
+
+thanks to Ascha for Echo help
