@@ -31,7 +31,7 @@ namespace DagMU
         private void InitializeComponent()
         {
 			this.cbFlash = new System.Windows.Forms.CheckBox();
-			this.menu = new ToolStrip();
+			this.menu = new System.Windows.Forms.ToolStrip();
 			this.tbnConnect = new System.Windows.Forms.ToolStripDropDownButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnForce = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,7 +39,6 @@ namespace DagMU
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnSites = new System.Windows.Forms.ToolStripMenuItem();
 			this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.tbnTapsKael = new System.Windows.Forms.ToolStripMenuItem();
 			this.menu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -75,7 +74,6 @@ namespace DagMU
 			this.tbnConnect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator1,
             this.tbnForce,
-            this.tbnTapsKael,
             this.tbnTaps,
             this.toolStripSeparator2,
             this.tbnSites,
@@ -97,7 +95,7 @@ namespace DagMU
 			this.tbnForce.Image = global::DagMU.Properties.Resources.lightning;
 			this.tbnForce.Name = "tbnForce";
 			this.tbnForce.Size = new System.Drawing.Size(152, 22);
-			this.tbnForce.Text = "Force";
+			this.tbnForce.Text = "Local";
 			this.tbnForce.Click += new System.EventHandler(this.tbnForceLocal_Click);
 			// 
 			// tbnTaps
@@ -125,14 +123,6 @@ namespace DagMU
 			this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
 			this.addNewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.addNewToolStripMenuItem.Text = "Add New";
-			// 
-			// tbnTapsKael
-			// 
-			this.tbnTapsKael.Image = global::DagMU.Properties.Resources.lightning;
-			this.tbnTapsKael.Name = "tbnTapsKael";
-			this.tbnTapsKael.Size = new System.Drawing.Size(152, 22);
-			this.tbnTapsKael.Text = "Taps Kael";
-			this.tbnTapsKael.Click += new System.EventHandler(this.tbnTapsKael_Click);
 			// 
 			// MainWindow
 			// 
@@ -165,6 +155,5 @@ namespace DagMU
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem tbnSites;
 		private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem tbnTapsKael;
 	}
 }
