@@ -78,6 +78,7 @@ namespace DagMU.HelperWindows
 					listView.Items.Remove(i);
 				}
 			}
+			Show();
 		}
 
 		/// <summary>

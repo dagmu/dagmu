@@ -723,7 +723,6 @@ namespace DagMU
 						procline(s);
 
 					WIHelper.adddone();
-					WIHelper.Show();
 					return;
 
 				case MuckStatus.intercepting_morph:
@@ -795,10 +794,8 @@ namespace DagMU
 
 					// any other text gets recycled back to procline and we get out of this intercept trap
 					newstatus(MuckStatus.intercepting_normal);
-					//boxprint("leaving intercept morph");
 					//procline(s); // don't recycle to eat the last ' '
 					MorphHelper.addMorphDone();
-					MorphHelper.Show();
 					return;
 
 					#endregion

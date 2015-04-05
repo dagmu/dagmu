@@ -55,6 +55,7 @@ namespace DagMU.HelperWindows
 			}
 			text.Clear();//free up ram
 			text.ClearUndo();//free up a little ram maybe
+			Show();
 		}
 
 		public void updatecustom(string data)
