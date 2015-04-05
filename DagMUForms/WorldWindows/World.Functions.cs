@@ -221,14 +221,8 @@ namespace DagMU
 			}
 
 			Log(s);
-			boxofmucktext.AppendText("\n" + s);
 
-			// TODO pause autoscrolling if something is selected, so user can copy at his leisure
-			//      don't autoscroll if scrolled up (how to detect this??)
-			if (boxofmucktext.SelectionLength > 0)
-				return; // TODO make muckclient'ish scroll boxofmucktext come up in corner?
-			// if boxofmucktext is scrolled up, return?
-			boxofmucktext.ScrollToCaret();
+			boxofmucktext.Add(s);
 		}
 
 		void newstatus(MuckStatus newstatus, string message = null)
