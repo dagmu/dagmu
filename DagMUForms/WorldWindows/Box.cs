@@ -1,24 +1,78 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace DagMU
 {
 	class Box : RichTextBox
 	{
-		public void Add(string s)
-		{
-			//if something is selected or if scrolled up, else autoscroll
-			bool autoscroll = this.SelectionLength == 0 && IsAtMaxScroll();
+		public Box() {
+			stuffToMatch = new List<TextMatch>() {
+				new TextMatch("page", Color.DarkRed),
+				new TextMatch("whisper", Color.DarkBlue),
+				new TextMatch("Dagon", Color.MediumPurple),
+				new TextMatch("Yko", Color.Yellow),
+				new TextMatch("Mkosi", Color.Orange),
+				new TextMatch(new Regex(@"^([A-Za-z0-9_\-]+) (?:has ((?:dis|re|)connected|left|arrived)|(goes home)|(?:concentrates on a distant place, and )(fades from sight)|(?:(?:is )(taken home)(?: to sleep by the local police))).$"), Color.Gray),
+				new TextMatch(new Regex(@"^Somewhere on the muck, ([A-Za-z0-9_\-]+) has ((?:|re|dis)connected).$"), Color.Gray),
+			};
 
-			//if (!autoscroll) this.SuspendPainting();
-			this.AppendText("\n" + s);
-			//if (!autoscroll) this.ResumePainting();
-
-			this.ScrollToCaret();
+			this.ReadOnly = true;
 		}
 
+		public class TextMatch
+		{
+			public TextMatch(string value, Color color) : this(color) { Match = value; }
+			public TextMatch(Regex regex, Color color) : this(color) { Regex = regex; }
+			public TextMatch(Color color) { this.Color = color; }
+
+			public String Match {
+				get { return match; }
+				set { regex = null; match = value; }
+			}
+
+			public Regex Regex {
+				get { if (regex == null) regex = new Regex(@"\b" + match + @"\b"); return regex; }
+				set { regex = value; }
+			}
+
+			public Color Color;
+
+			Regex regex = null;
+			string match;
+		}
+
+		public struct TextMatchPlace
+		{
+			public int Index, Length;
+			public Color Color;
+		}
+
+		public void Add(string s, Color? color = null)
+		{
+			bool autoScroll = this.SelectionLength == 0 && IsAtMaxScroll && !mouseDown;
+			List<TextMatchPlace> placesToColor = GetColorPlaces(s);
+
+			this.SuspendPainting();
+			this.SelectionStart = this.TextLength;
+			this.AppendText("\n");
+			int startIndex = this.TextLength;
+			this.AppendText(s);
+			foreach (TextMatchPlace place in placesToColor) {
+				this.Select(startIndex + place.Index, place.Length);
+				this.SelectionColor = place.Color;
+			}
+			this.SelectionLength = 0;
+			this.SelectionColor = this.ForeColor;
+			this.ResumePainting();
+
+			if (autoScroll) ScrollToBottom();
+		}
+
+		public List<TextMatch> stuffToMatch { get; set; }
 		public event EventHandler ScrolledToBottom;
 
 		//thanks to http://stackoverflow.com/a/6550415/3320154 for Suspend/ResumePainting for stealth mode appendtext
@@ -30,6 +84,7 @@ namespace DagMU
 		IntPtr _EventMask;
 		int _SuspendIndex = 0;
 		int _SuspendLength = 0;
+		bool mouseDown = false;
 
 		public int VerticalScroll
 		{
@@ -66,20 +121,41 @@ namespace DagMU
 			}
 		}
 
-		public bool IsAtMaxScroll()
+		public bool IsAtMaxScroll
 		{
-			int minScroll, maxScroll;
-			VerticalScrollRange(out minScroll, out maxScroll);
+			get
+			{
+				int minScroll, maxScroll;
+				VerticalScrollRange(out minScroll, out maxScroll);
 
-			Point rtfPoint = Point.Empty;
-			SendMessage(this.Handle, EM_GETSCROLLPOS, 0, ref rtfPoint);
-			return (rtfPoint.Y + this.ClientSize.Height >= maxScroll);
+				Point rtfPoint = Point.Empty;
+				SendMessage(this.Handle, EM_GETSCROLLPOS, 0, ref rtfPoint);
+				return (rtfPoint.Y + this.ClientSize.Height >= maxScroll);
+			}
 		}
 
 		protected virtual void OnScrolledToBottom(EventArgs e)
 		{
 			if (ScrolledToBottom != null)
 				ScrolledToBottom(this, e);
+		}
+
+		protected override void OnMouseDown(MouseEventArgs e)
+		{
+			this.mouseDown = true;
+			base.OnMouseDown(e);
+		}
+
+		protected override void OnMouseUp(MouseEventArgs mevent)
+		{
+			if (this.SelectionLength > 0) {
+				Clipboard.SetText(this.SelectedText);
+				this.SelectionLength = 0;
+				Refocus();
+			}
+
+			this.mouseDown = false;
+			base.OnMouseUp(mevent);
 		}
 
 		protected override void OnKeyUp(KeyEventArgs e)
@@ -97,15 +173,38 @@ namespace DagMU
 			base.WndProc(ref m);
 		}
 
+		private void Refocus()
+		{
+			//send event to refocus inputbox
+		}
+
+		private List<TextMatchPlace> GetColorPlaces(string s)
+		{
+			List<TextMatchPlace> placesToColor = new List<TextMatchPlace>();
+			foreach (TextMatch textMatch in stuffToMatch) {
+				foreach (Match match in textMatch.Regex.Matches(s)) {
+					TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
+					placesToColor.Add(blah);
+				}
+			}
+			return placesToColor;
+		}
+
+		private void ScrollToBottom()
+		{
+			this.SelectionStart = this.TextLength;
+			this.ScrollToCaret();
+		}
+
 		private void NotSureIfScrolled()
 		{
-			bool isAtMaxScroll = IsAtMaxScroll();
+			bool isAtMaxScroll = IsAtMaxScroll;
 			int minScroll, curScroll, maxScroll;
 			curScroll = this.VerticalScroll;
 			VerticalScrollRange(out minScroll, out maxScroll);
 
 			if (isAtMaxScroll) OnScrolledToBottom(EventArgs.Empty);
-			Console.WriteLine("scroll " + String.Join(" ", new int[] { minScroll, curScroll, maxScroll }));
+			//Console.WriteLine("scroll " + String.Join(" ", new int[] { minScroll, curScroll, maxScroll, isAtMaxScroll ? 1 : 0 }));
 		}
 
 		[DllImport("user32.dll")]

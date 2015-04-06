@@ -1,9 +1,6 @@
 C# WinForms
 
 	done
-window transparency
-ontop option
-minimal interface stays out of the way of your experience
 multiple input boxes
 mousewheel anywhere scrolls the main window
 
@@ -12,7 +9,8 @@ mousewheel anywhere scrolls the main window
 last intercept makes newlines
 multiline poses don't scroll to bottom correctly, only scrolls to start of line
 when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
-
+richtextbox sees // as clickable link, override underlying win32 control with http://www.codeproject.com/Articles/9196/Links-with-arbitrary-text-in-a-RichTextBox or disable DetectURL and parse manually
+resize doesn't keep bottom line in view
 
 	not done
 world library
@@ -50,13 +48,12 @@ muck command integration
 	description editor
 	morph editor
 	room builder
+multiple connections, ctrl+tab switch
 WI helper needs a preview, some polish
 window
-	resize doesn't keep bottom line in view
+	background images for the world window
 	window transparency
 	ontop option
-	minimal interface stays out of the way of your experience
-	background images for the world window
 tabbed pages (untabbable with a click)
 tabbed whispers
 WS interception to sidebar
