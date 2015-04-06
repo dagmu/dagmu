@@ -55,7 +55,6 @@ namespace DagMU
 			not_connected,
 			intercepting_connecting,	// socket established, receiving welcome screen 1
 			intercepting_connecting2,	// logged in, receive login success or failure message 2
-			intercepting_connecting3,	// motd and login stuff 3
 			intercepting_normal,	// >>> normal user interaction mode <<< 4
 			intercepting_wf,			// receiving WF list
 			intercepting_ws,			// receiving WS list
@@ -492,7 +491,7 @@ namespace DagMU
 
 		void debugwindow_EStatusReset()
 		{
-			newstatus(MuckStatus.intercepting_normal);
+			newStatus(MuckStatus.intercepting_normal);
 		}
 
 		void debugwindow_ESend(string s)

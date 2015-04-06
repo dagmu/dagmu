@@ -106,14 +106,14 @@ namespace DagMU
 		{
 			switch (status) {
 				case MuckConnection.ConnectEvent.Connected:
-					newstatus(MuckStatus.intercepting_connecting, message);
+					newStatus(MuckStatus.intercepting_connecting, message);
 					EConnected(this);
 					break;
 
 				case MuckConnection.ConnectEvent.Got_Disconnected:
 				case MuckConnection.ConnectEvent.Error_Connecting:
 					EDisconnected(this);
-					newstatus(MuckStatus.not_connected, message);
+					newStatus(MuckStatus.not_connected, message);
 					break;
 			}
 		}
@@ -193,10 +193,10 @@ namespace DagMU
 		{
 			connection.Disconnect();
 			EDisconnected(this);
-			newstatus(MuckStatus.not_connected);
+			newStatus(MuckStatus.not_connected);
 		}
 
-		public void Send(String line, InputBox ib)
+		public void Send(String line, InputBox ib = null)
 		{
 			if ((status != MuckStatus.intercepting_normal) && (ib == null)) return;//only send automatic stuff to the muck if we're in normal mode, so clicking buttons won't cause problems when the muck isn't ready for it
 
@@ -225,7 +225,7 @@ namespace DagMU
 			boxofmucktext.Add(s);
 		}
 
-		void newstatus(MuckStatus newstatus, string message = null)
+		void newStatus(MuckStatus newstatus, string message = null)
 		{
 			//debugwindow.Text = ((int)newstatus).ToString();
 
@@ -241,15 +241,15 @@ namespace DagMU
 				debugwindow.UpdateStatus(newstatus.ToString());
 		}
 
-		void boxecho(String s)
+		void Echo(String s)
 		{
-			connection.Send("dagmuecho dagmu_echo " + s, null);// should add a random number check here that we pick at startup
+			connection.Send("dagmuecho dagmu_echo " + s);// should add a random number check here that we pick at startup
 		}
 
 		bool isecho(String s)
 		{
 			// should add a random number check here that we pick at startup
-			// see boxecho()
+
 			if (s.StartsWith("dagmu_echo "))
 				return true;
 			return false;
@@ -268,7 +268,7 @@ namespace DagMU
 
 		void OnRideModeSelected(String ridemode)
 		{
-			Send("@set me=/ride/_mode:" + ridemode, null);//TAPS
+			Send("@set me=/ride/_mode:" + ridemode);//TAPS
 			refocus();
 		}
 	}

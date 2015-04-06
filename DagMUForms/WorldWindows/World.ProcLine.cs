@@ -37,9 +37,9 @@ namespace DagMU
 
 					// Ready to log in
 					if (prefs.sendOnConnect != null) {
-						connection.Send(prefs.sendOnConnect, null);
+						connection.Send(prefs.sendOnConnect);
 					}
-					newstatus(MuckStatus.intercepting_connecting2);
+					newStatus(MuckStatus.intercepting_connecting2);
 					// UNDONE newinputbox(3); // make a 3 line input box
 					return;
 				// end case intercepting_connecting
@@ -54,49 +54,33 @@ namespace DagMU
 						return;
 					}
 
-					// from here it is assumed login was successful
-					boxecho("LOGGEDIN");
+					Echo("LOGGEDIN");
 
-					newstatus(MuckStatus.intercepting_connecting3);
+					newStatus(MuckStatus.intercepting_normal);// from here it is assumed login was successful
 
 					// TODO check for invalid login messages
-					//boxprint("Login failed, check your password and name. Disconnecting.");
-					//disconnect();
 					return;
 				// end case intercepting_connecting2
-
-
-				case MuckStatus.intercepting_connecting3:
-					// MOTD and other login messages
-					boxprint(s);
-					if (isecho(s, "LOGGEDIN")) {
-						newstatus(MuckStatus.intercepting_normal);
-						boxofmucktext.Clear();
-						boxofmucktext.ClearUndo();
-
-						connection.Send("exa me=/_page/lastpaged", null);
-						//connection.Send("exa me=/_page/lastpager");
-						connection.Send("exa me=/_whisp/lastwhispered", null);
-						//connection.Send("exa me=/_whisp/lastwhisperer");
-						connection.Send("exa me=/ride/_mode", null);
-						connection.Send("wf #hidefrom", null);
-
-						// get character name on connect!
-						connection.Send("@mpi {name:me}", null);
-
-						// TODO see if echo works on connect
-
-						connection.Send("l", null);//TAPS
-						return;
-					}
-					return;
-				// end case intercepting_connecting3
 
 
 				case MuckStatus.intercepting_normal:
 					// This is where we enter streammodes to deal with multiple line blocks
 					// This is also where we deal with all the 1 line notices
 
+					if (isecho(s, "LOGGEDIN")) {
+						boxofmucktext.Clear();
+						boxofmucktext.ClearUndo();
+
+						connection.Send("exa me=/_page/lastpaged");
+						connection.Send("exa me=/_whisp/lastwhispered");
+						connection.Send("exa me=/ride/_mode");
+						connection.Send("wf #hidefrom");
+
+						connection.Send("@mpi {name:me}");//get character name on connect!
+
+						connection.Send("look");//TAPS
+						return;
+					}
 
 					if (s == "CharName set.")
 						return;
@@ -106,7 +90,7 @@ namespace DagMU
 
 					//  morph #list
 					if (s == "Morph Hammer V1.2 (C) 1994 by Triggur") {
-						newstatus(MuckStatus.intercepting_morph);
+						newStatus(MuckStatus.intercepting_morph);
 						morphsintercepted = 0;
 						MorphHelper.addMorphStarting();
 						return;
@@ -116,7 +100,7 @@ namespace DagMU
 
 					// WHO list, so huge we don't want it in our main window
 					if (s == "Name____________ Online__ Idle Doing___________________________________________") {//TAPS
-						newstatus(MuckStatus.intercepting_who);
+						newStatus(MuckStatus.intercepting_who);
 						who.Show();
 						who.starting();
 						return;
@@ -124,7 +108,7 @@ namespace DagMU
 
 					// WI #flags
 					if (s == "-- WhatIsZ Extended V1.0.0.1 WF --------------------------------[ List flags ]") {//TAPS
-						newstatus(MuckStatus.intercepting_wiflags);
+						newStatus(MuckStatus.intercepting_wiflags);
 						WIHelper.addstarting();
 						return;
 					}
@@ -132,7 +116,7 @@ namespace DagMU
 
 					// Email verification: infrequent but annoying
 					if (s == "### Please verify your email address!") {//TAPS
-						connection.Send("@email #verify yes", null); //TAPS
+						connection.Send("@email #verify yes"); //TAPS
 						boxprint("Email autoverified to the muck, please check console for correctness.");
 						return;
 					}
@@ -153,7 +137,7 @@ namespace DagMU
 
 					// Last
 					if (s == "Name              Laston             Last Connected    Last Disconnected") {//TAPS
-						newstatus(MuckStatus.intercepting_last);
+						newStatus(MuckStatus.intercepting_last);
 						boxprint(s);
 						return;
 					}
@@ -176,12 +160,12 @@ namespace DagMU
 
 								cinfointerceptingfieldname = s.Substring(s.IndexOf("field: ") + ("field: ").Length);
 
-								newstatus(MuckStatus.intercepting_cinfomisc);
+								newStatus(MuckStatus.intercepting_cinfomisc);
 								return;
 							}
 						} catch { return; }
 
-						newstatus(MuckStatus.intercepting_cinfo);
+						newStatus(MuckStatus.intercepting_cinfo);
 						return;
 					}
 					//> Miscellaneous field "bou" removed.
@@ -227,7 +211,7 @@ namespace DagMU
 
 					// WF: Master WF List, always correct
 					if (s == "Players online for whom you are watching:") {//TAPS
-						newstatus(MuckStatus.intercepting_wf);
+						newStatus(MuckStatus.intercepting_wf);
 						wf.UpdateFullStarting();
 						return;
 					}
@@ -318,7 +302,7 @@ namespace DagMU
 								linenum = int.Parse(s.Substring(0, colonindex));
 								DescEditor.updateDesc(s.Substring(colonindex + 1), linenum);
 							} catch {
-								newstatus(MuckStatus.intercepting_normal);
+								newStatus(MuckStatus.intercepting_normal);
 								return;
 							}
 							/*if (s.Substring(0,colonindex) == "1") {
@@ -529,7 +513,7 @@ namespace DagMU
 					//Arg:    {name:me}
 					//Result: Dagon
 					if (s == "Arg:    {name:me}") {
-						newstatus(MuckStatus.intercepting_charname);
+						newStatus(MuckStatus.intercepting_charname);
 						return;
 					}
 
@@ -557,13 +541,13 @@ namespace DagMU
 					else
 						procline(s);
 
-					newstatus(MuckStatus.intercepting_normal);
+					newStatus(MuckStatus.intercepting_normal);
 					return;
 
 
 				case MuckStatus.intercepting_cinfomisc:
 					if (!s.StartsWith("> ")) {
-						newstatus(MuckStatus.intercepting_normal);
+						newStatus(MuckStatus.intercepting_normal);
 						procline(s);
 						return;
 					}
@@ -574,7 +558,7 @@ namespace DagMU
 
 					CInfoHelperWindow cwind = FindMakeCInfoWindow(cinfointerceptingname);
 					cwind.UpdateField(cinfointerceptingfieldname, s, true);
-					newstatus(MuckStatus.intercepting_normal);
+					newStatus(MuckStatus.intercepting_normal);
 					return;
 
 
@@ -585,7 +569,7 @@ namespace DagMU
 					CInfoHelperWindow cwindd = FindMakeCInfoWindow(cinfointerceptingname);
 
 					if (s == "> Done.") {
-						newstatus(MuckStatus.intercepting_normal);
+						newStatus(MuckStatus.intercepting_normal);
 						cwindd.Show();
 						cwindd.BringToFront();
 						return;
@@ -616,7 +600,7 @@ namespace DagMU
 
 				case MuckStatus.intercepting_wf:
 					if (s == "Done.") {//TAPS
-						newstatus(MuckStatus.intercepting_normal);
+						newStatus(MuckStatus.intercepting_normal);
 						wf.UpdateFullDone(); // the wf should have all the names its gonna get now
 						return;
 					}
@@ -625,7 +609,7 @@ namespace DagMU
 					words = s.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 					// the names are space padded in collumns of 18, so we can do a quick check to make sure
 					if ((s.Length % 18) != 0) {
-						newstatus(MuckStatus.intercepting_normal);
+						newStatus(MuckStatus.intercepting_normal);
 						wf.UpdateFullAbort(); // tell the wf to take what it's got
 						return;
 					}
@@ -651,7 +635,7 @@ namespace DagMU
 
 					if (s.Length != 71) {
 						// line doesn't match our recognition test, recycle it into procline to escape this trap
-						newstatus(MuckStatus.intercepting_normal);
+						newStatus(MuckStatus.intercepting_normal);
 						procline(s);
 						return;
 					}
@@ -669,7 +653,7 @@ namespace DagMU
 						String tmpTime2 = s.Substring(55);		//55, -		10:04PM 08/31/08
 						boxprint("[" + tmpName + "]\n[" + tmpStatus + "]\n[" + tmpTime1 + "]\n[" + tmpTime2 + "]");
 					}
-					newstatus(MuckStatus.intercepting_normal);
+					newStatus(MuckStatus.intercepting_normal);
 					return;
 					// end case intercepting_last
 
@@ -685,7 +669,7 @@ namespace DagMU
 						// we don't actually need the total, but i want to make sure the who is working right
 						// and use for random useless statistics
 						who.done();
-						newstatus(MuckStatus.intercepting_normal);
+						newStatus(MuckStatus.intercepting_normal);
 					}
 					who.newline(s);
 					return;
@@ -717,7 +701,7 @@ namespace DagMU
 					}
 
 					// any other text gets recycled back to procline and we get out of this intercept trap
-					newstatus(MuckStatus.intercepting_normal);
+					newStatus(MuckStatus.intercepting_normal);
 
 					if (!s.StartsWith("----"))
 						procline(s);
@@ -793,7 +777,7 @@ namespace DagMU
 						return;
 
 					// any other text gets recycled back to procline and we get out of this intercept trap
-					newstatus(MuckStatus.intercepting_normal);
+					newStatus(MuckStatus.intercepting_normal);
 					//procline(s); // don't recycle to eat the last ' '
 					MorphHelper.addMorphDone();
 					return;

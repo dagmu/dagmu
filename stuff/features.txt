@@ -11,6 +11,8 @@ multiline poses don't scroll to bottom correctly, only scrolls to start of line
 when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
 richtextbox sees // as clickable link, override underlying win32 control with http://www.codeproject.com/Articles/9196/Links-with-arbitrary-text-in-a-RichTextBox or disable DetectURL and parse manually
 resize doesn't keep bottom line in view
+console needs to start a bit wider
+console needs to use richtextbox maybe, horizontal rezising is fucked
 
 	not done
 world library

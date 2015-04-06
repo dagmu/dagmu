@@ -112,7 +112,7 @@ namespace DagMU
 		/// </summary>
 		/// <param name="line">Text to send.</param>
 		/// <param name="sender">Optional object ref that will be returned to the parent's OnSend</param>
-		public void Send(String line, Object sender)
+		public void Send(String line, Object sender = null)
 		{
 			if (String.IsNullOrEmpty(line)) return;//can't send an empty line
 			if (!Connected) return;//not connected
