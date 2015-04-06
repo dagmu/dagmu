@@ -11,11 +11,12 @@ namespace DagMU
 	{
 		public Box() {
 			stuffToMatch = new List<TextMatch>() {
-				new TextMatch("page", Color.DarkRed),
-				new TextMatch("whisper", Color.DarkBlue),
+				new TextMatch("Shean", Color.Teal),
 				new TextMatch("Dagon", Color.MediumPurple),
 				new TextMatch("Yko", Color.Yellow),
 				new TextMatch("Mkosi", Color.Orange),
+				new TextMatch(new Regex("\bpage(s|(-pose))?\b"), Color.Red),
+				new TextMatch(new Regex("\bwhisper(s)?\b"), Color.Blue),
 				new TextMatch(new Regex(@"^([A-Za-z0-9_\-]+) (?:has ((?:dis|re|)connected|left|arrived)|(goes home)|(?:concentrates on a distant place, and )(fades from sight)|(?:(?:is )(taken home)(?: to sleep by the local police))).$"), Color.Gray),
 				new TextMatch(new Regex(@"^Somewhere on the muck, ([A-Za-z0-9_\-]+) has ((?:|re|dis)connected).$"), Color.Gray),
 			};
