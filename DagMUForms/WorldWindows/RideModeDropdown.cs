@@ -27,16 +27,16 @@ namespace DagMU.HelperWindows
 			SelectedIndex = index;
 		}
 
-		public event DagMU.World.StringDelegate ESelect;
+		public event EventHandler<string> ESelect;
 
 		private void RideModeDropdown_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			ESelect(Items[SelectedIndex].ToString());
+			ESelect(null, Items[SelectedIndex].ToString());
 		}
 
 		private void InitializeComponent()
 		{
-			this.SelectedIndexChanged += new EventHandler(RideModeDropdown_SelectedIndexChanged);
+			this.SelectedIndexChanged += RideModeDropdown_SelectedIndexChanged;
 		}
 	}
 }

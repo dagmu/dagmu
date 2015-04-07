@@ -71,23 +71,25 @@ namespace DagMU.HelperWindows
 			return newfield;
 		}
 
-		void newfield_EScroll(MouseEventArgs mouseeventargs)
+		void newfield_EScroll(object sender, MouseEventArgs e)
 		{
-			User32.SendMouseWheelEvent(flowLayoutPanel1, mouseeventargs.Delta);
+			User32.SendMouseWheelEvent(flowLayoutPanel1, e.Delta);
 		}
 
-		void newfield_ESaveField(CInfoHelperWindowField sender, string _fieldname, string _fieldtext)
+		void newfield_ESaveField(object cinfoHelperField, Tuple<string, string> field_Name_Text)
 		{
-			if (sender.MainNotMisc)
-				parent.Send("cinfo #set " + _fieldname + "=" + _fieldtext, null);// TAPS cinfo #set field=text
+			CInfoHelperWindowField field = cinfoHelperField as CInfoHelperWindowField;
+			string fieldName = field_Name_Text.Item1;
+			string fieldText = field_Name_Text.Item2;
+			if (field.MainNotMisc)
+				parent.Send("cinfo #set " + fieldName + "=" + fieldText, null);// TAPS cinfo #set field=text
 			else
-				parent.Send("cinfo #setmisc " + _fieldname + "=" + _fieldtext, null);// TAPS cinfo #setmisc field=text
+				parent.Send("cinfo #setmisc " + fieldName + "=" + fieldText, null);// TAPS cinfo #setmisc field=text
 		}
 
-		void newfield_ERequestField(CInfoHelperWindowField sender, string _fieldname, string _fieldtext)
+		void newfield_ERequestField(object cinfoHelperField, Tuple<string, string> field_Name_Text)
 		{
-			
-			parent.Send("cinfo " + CharName + " " + _fieldname, null);// TAPS cinfo dagon miscfield
+			parent.Send("cinfo " + CharName + " " + field_Name_Text.Item1, null);// TAPS cinfo dagon miscfield
 		}
 		
 		void buttonSave_Click(object sender, EventArgs e)

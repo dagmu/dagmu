@@ -14,11 +14,7 @@ namespace DagMU
 		{
 			// You do not need to be connected to send fake muck text to this for testing
 
-			// if we're in the wrong thread, pass the message to the right thread
-			if (this.InvokeRequired) {
-				this.Invoke(new StringDelegate(procline), s);
-				return;
-			}
+			if (InvokeRequired) { this.Invoke((Action)(() => procline(s))); return; }
 
 			String[] words;
 			int colonindex;

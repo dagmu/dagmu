@@ -42,17 +42,16 @@
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";
 			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBox1.Size = new System.Drawing.Size(759, 491);
+			this.textBox1.Size = new System.Drawing.Size(800, 491);
 			this.textBox1.TabIndex = 0;
 			this.textBox1.Text = "--------------------------------------------------------------------------------\r" +
     "\n";
-			this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
 			// 
 			// ConsoleWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(759, 491);
+			this.ClientSize = new System.Drawing.Size(800, 491);
 			this.Controls.Add(this.textBox1);
 			this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
 			this.Name = "ConsoleWindow";

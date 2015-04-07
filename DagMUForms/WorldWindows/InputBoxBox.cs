@@ -10,11 +10,11 @@ namespace DagMU.HelperWindows
 		public InputBoxBox()
 		{
 			InitializeComponent();
-			inputboxes = new List<InputBox>();
+			inputBoxes = new List<InputBox>();
 			MakeNewInputBox(defaultheight);
 		}
 
-		List<InputBox> inputboxes;
+		List<InputBox> inputBoxes;
 
 		public static int defaultheight = 3;
 
@@ -34,7 +34,7 @@ namespace DagMU.HelperWindows
 		/// </summary>
 		public void UpdateStatus(InputBox.Status newstatus)
 		{
-			foreach (InputBox box in inputboxes)
+			foreach (InputBox box in inputBoxes)
 			{
 				box.newstatus(newstatus);
 			}
@@ -46,17 +46,17 @@ namespace DagMU.HelperWindows
 
 			InputBox box = new InputBox(lineshigh);
 
-			box.Resize += new EventHandler(OnInputBoxResize);
-			box.Load += new EventHandler(OnInputBoxResize);
-			box.EClose += new InputBox.RefMessage(OnInputBoxWantsToClose);
-			box.ENew += new InputBox.RefMessage(OnInputBoxWantsNew);
-			box.ESend += new InputBox.TextMessage(OnInputBoxWantsToSend);
-			box.EScroll += new InputBox.ScrollMessage(OnInputBoxMouseWheel);
+			box.Resize += OnInputBoxResize;
+			box.Load += OnInputBoxResize;
+			box.EClose += OnInputBoxWantsToClose;
+			box.ENew += OnInputBoxWantsNew;
+			box.ESend += OnInputBoxWantsToSend;
+			box.EScroll += OnInputBoxMouseWheel;
 
 			box.Left = 0;
-			if (inputboxes.Count > 0)
+			if (inputBoxes.Count > 0)
 			{
-				box.Top = inputboxes.Last().Bottom;
+				box.Top = inputBoxes.Last().Bottom;
 				Height = box.Top + box.Height;
 			}
 			else
@@ -67,7 +67,7 @@ namespace DagMU.HelperWindows
 			box.Width = ClientRectangle.Width;
 			box.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 
-			inputboxes.Add(box); // add it to our list
+			inputBoxes.Add(box); // add it to our list
 
 			Controls.Add(box); // inputbox should trigger resize event soon
 
@@ -76,21 +76,21 @@ namespace DagMU.HelperWindows
 			OnInputBoxResize(null, null);
 		}
 
-		void OnInputBoxWantsNew(InputBox sender)
+		void OnInputBoxWantsNew(object sender, EventArgs e)
 		{
 			MakeNewInputBox(defaultheight);
 		}
 
-		void OnInputBoxWantsToClose(InputBox sender)
+		void OnInputBoxWantsToClose(object sender, EventArgs e)
 		{
-			inputboxes.Remove(sender);// remove boxofmucktext from list
-			Controls.Remove(sender);// remove boxofmucktext from controls
-			sender.Dispose();// dispose of inputbox
+			InputBox inputBox = sender as InputBox;
+			inputBoxes.Remove(inputBox);
+			Controls.Remove(inputBox);
+			inputBox.Dispose();
 
-			if (inputboxes.Count == 0) MakeNewInputBox(defaultheight);
+			if (inputBoxes.Count == 0) MakeNewInputBox(defaultheight);
 
-			// recompute size
-			OnInputBoxResize(null, null);
+			OnInputBoxResize(null, null);//recompute size
 		}
 
 		/// <summary>
@@ -105,7 +105,7 @@ namespace DagMU.HelperWindows
 			SuspendLayout();
 
 			int y = 0;
-			foreach (InputBox box in inputboxes)
+			foreach (InputBox box in inputBoxes)
 			{
 				box.Anchor = AnchorStyles.None;
 				box.Top = y+1;
@@ -114,7 +114,7 @@ namespace DagMU.HelperWindows
 
 			Height = y;
 
-			foreach (InputBox box in inputboxes)
+			foreach (InputBox box in inputBoxes)
 				box.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
 			ResumeLayout();
@@ -123,8 +123,8 @@ namespace DagMU.HelperWindows
 		/// <summary>
 		/// An inputbox has text to send to the muck
 		/// </summary>
-		public event InputBox.TextMessage EWantsToSend;
-		void OnInputBoxWantsToSend(InputBox sender, string msg)
+		public event EventHandler<string> EWantsToSend;
+		void OnInputBoxWantsToSend(object sender, string msg)
 		{
 			EWantsToSend(sender, msg);
 		}
@@ -132,10 +132,10 @@ namespace DagMU.HelperWindows
 		/// <summary>
 		/// Pass mousewheel messages from inputbox to main text window
 		/// </summary>
-		public event InputBox.ScrollMessage EScroll;
-		void OnInputBoxMouseWheel(MouseEventArgs e)
+		public event EventHandler<MouseEventArgs> EScroll;
+		void OnInputBoxMouseWheel(object sender, MouseEventArgs e)
 		{
-			EScroll(e);
+			EScroll(sender, e);
 		}
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace DagMU.HelperWindows
 		/// </summary>
 		public void refocus()
 		{
-			inputboxes[0].refocus();
+			inputBoxes[0].refocus();
 		}
 	}
 }

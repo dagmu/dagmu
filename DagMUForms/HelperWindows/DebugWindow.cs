@@ -16,8 +16,8 @@ namespace DagMU.HelperWindows
 			InitializeComponent();
 		}
 
-		public event World.StringDelegate ESend; // send text to muck
-		public event World.NullDelegate EStatusReset; // reset status to normal
+		public event EventHandler<string> ESend; // send text to muck
+		public event EventHandler EStatusReset; // reset status to normal
 
 		void textbox_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -29,9 +29,9 @@ namespace DagMU.HelperWindows
 
 				if (textbox.SelectionLength > 0)
 					foreach (String line in textbox.SelectedText.Split(new[]{'\n','\r'}, StringSplitOptions.RemoveEmptyEntries))
-						ESend(line);
+						ESend(null, line);
 				else
-					foreach (String line in textbox.Lines) ESend(line);
+					foreach (String line in textbox.Lines) ESend(null, line);
 
 				e.SuppressKeyPress = true;
 			}
@@ -39,15 +39,12 @@ namespace DagMU.HelperWindows
 
 		void buttonResetNormal_Click(object sender, EventArgs e)
 		{
-			EStatusReset();
+			EStatusReset(null, null);
 		}
 
 		public void UpdateStatus(String newstatus)
 		{
-			if (InvokeRequired) {
-				World.StringDelegate callback = new World.StringDelegate(UpdateStatus);
-				this.Invoke(callback, newstatus);
-			}
+			if (InvokeRequired) { this.Invoke((Action)(() => UpdateStatus(newstatus))); return; }
 
 			labelStatus.Text = newstatus;
 		}

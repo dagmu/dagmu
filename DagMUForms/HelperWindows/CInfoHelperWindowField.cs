@@ -34,24 +34,24 @@ namespace DagMU.HelperWindows
 
 		bool updating;
 
-		String fieldname;
+		String fieldName;
 		public String FieldName
 		{
-			get { return fieldname; }
+			get { return fieldName; }
 			set {
-				fieldname = value;
+				fieldName = value;
 				//updatebox();
 			}
 		}
 
-		String fieldtext;
+		String fieldText;
 		public String FieldText
 		{
-			get { return fieldtext; }
+			get { return fieldText; }
 			set {
 				if (Owned)
 					textbox.ReadOnly = false;
-				fieldtext = value;
+				fieldText = value;
 				updatebox();
 			}
 		}
@@ -90,8 +90,8 @@ namespace DagMU.HelperWindows
 			updating = true;
 			textbox.Font = labelFontNormal.Font;
 			updating = true;
-			textbox.Text = fieldname + ": " + fieldtext;
-			textbox.Select(0, fieldname.Length);
+			textbox.Text = fieldName + ": " + fieldText;
+			textbox.Select(0, fieldName.Length);
 			updating = true;
 			textbox.SelectionFont = labelFontBold.Font;
 			textbox.Select(cursorposition, 0);
@@ -107,79 +107,64 @@ namespace DagMU.HelperWindows
 			String newfieldname = null;
 			String newfieldtext = null;
 
-			if (textbox.Text.Length > 0)
-			{
+			if (textbox.Text.Length > 0) {
 				// check field name for validity, changes
 				String[] words;
 				Char[] delimbadnamechars = { ' ' };
 				Char[] delimspace = { ' ' };
 				int colonpos = textbox.Text.IndexOf(':');
-				if (colonpos == -1)
-				{
-					MessageBox.Show("Field: " + fieldname + ", Keep the : between field name and text");
+				if (colonpos == -1) {
+					MessageBox.Show("Field: " + fieldName + ", Keep the : between field name and text");
 					return;
 				}
 				newfieldname = textbox.Text.Substring(0, colonpos);
-				if (newfieldname.Length > 0)
-				{
+				if (newfieldname.Length > 0) {
 					words = newfieldname.Split(delimbadnamechars, StringSplitOptions.RemoveEmptyEntries);
-					if (words.Length > 1)
-					{
-						MessageBox.Show("Field: " + fieldname + ", Bad character detected in field name. No spaces allowed.");
+					if (words.Length > 1) {
+						MessageBox.Show("Field: " + fieldName + ", Bad character detected in field name. No spaces allowed.");
 						return;
 					}
 					newfieldname = words[0];
-					if (newfieldname != fieldname)
-					{
+					if (newfieldname != fieldName)
 						renaming = true;
-					}
-				}
-				else
+				} else
 					deleting = true;
 
-				// check field text for content
-				if (textbox.Text.Length - colonpos == 0)
-				{
+				if (textbox.Text.Length - colonpos == 0) {//check field text for content
 					deleting = true;
-				}
-				else
-				{
+				} else {
 					newfieldtext = textbox.Text.Substring(colonpos + 1, textbox.Text.Length - colonpos - 1);
 					words = newfieldtext.Split(delimspace, StringSplitOptions.RemoveEmptyEntries);
-					if (words.Length == 0)
-					{
+					if (words.Length == 0) {
 						deleting = true;
 					}
 					while (newfieldtext.StartsWith(" "))
 						newfieldtext = newfieldtext.Substring(1);
 				}
-			}
-			else
+			} else {
 				deleting = true;
+			}
 
-			// handle renaming and deleting
-			if (renaming || deleting)
-			{
+			if (renaming || deleting) {
 				// erase old field
 				// for renaming, field is readded by next part
-				ESaveField(this, fieldname, String.Empty);
+				ESaveField(this, new Tuple<string, string>(fieldName, String.Empty));
 			}
-			if (deleting)
-			{
+
+			if (deleting) {
 				if (!MainNotMisc)
-					fieldname = newfieldname = null;
-				fieldtext = newfieldtext = null;
+					fieldName = newfieldname = null;
+				fieldText = newfieldtext = null;
 				return;
 			}
 
+			fieldName = newfieldname;
+			fieldText = newfieldtext;
 
-			fieldname = newfieldname;
-			fieldtext = newfieldtext;
-	
 			// update field text to muck
 			//cinfo #set <field>=<text>
 			//cinfo #setmisc <fieldname>=<text>
-			ESaveField(this, fieldname, fieldtext);
+			ESaveField(this, new Tuple<string, string>(fieldName, fieldText));
 
 			Dirty = false;
 		}
@@ -188,14 +173,11 @@ namespace DagMU.HelperWindows
 		{
 			int cursorpos;
 
-			if (updating)
-			{
+			if (updating) {
 				updating = false;
 				Dirty = false;
 				return;
-			}
-			else
-			{
+			} else {
 				Dirty = true;
 			}
 
@@ -216,13 +198,12 @@ namespace DagMU.HelperWindows
 			Size textsize = TextRenderer.MeasureText(textbox.Text, textbox.Font);
 			int textlines = (int)(Math.Ceiling((double)(textsize.Width) / (double)(textbox.ClientSize.Width)));
 			int prefheight = textbox.PreferredHeight;
-			if (textlines != lines)
-			{
+			if (textlines != lines) {
 				lines = textlines;
 				if (Dirty)
 					lines++;
 				SuspendLayout();
-				textbox.Height = lines*prefheight;
+				textbox.Height = lines * prefheight;
 				Height = textbox.Top + textbox.Height + textbox.Margin.Top + textbox.Margin.Bottom;
 				ResumeLayout();
 			}
@@ -231,9 +212,8 @@ namespace DagMU.HelperWindows
 		void textbox_Click(object sender, EventArgs e)
 		{
 			// if not expanded, expand first of all
-			if (fieldtext == null)
-			{
-				ERequestField(this, fieldname, null);
+			if (fieldText == null) {
+				ERequestField(this, new Tuple<string, string>(fieldName, null));
 				return;
 			}
 
@@ -248,16 +228,23 @@ namespace DagMU.HelperWindows
 			// pass click through to textbox
 		}
 
-		public delegate void TwoTextMessage(CInfoHelperWindowField sender, String _fieldname, String _fieldtext);
-		public event TwoTextMessage ERequestField; // request custom field text for an unexpanded field
-		public event TwoTextMessage ESaveField; // submit updated field to the muck
+		/// <summary>
+		/// request custom field text for an unexpanded field
+		/// CInfoHelperWindowField sender, String _fieldname, String _fieldtext
+		/// </summary>
+		public event EventHandler<Tuple<string, string>> ERequestField;
 
-		public delegate void ScrollMessage(MouseEventArgs mouseeventargs);
-		public event ScrollMessage EScroll; // pass mousewheel messages to main window
+		/// <summary>
+		/// submit updated field to the muck
+		/// CInfoHelperWindowField sender, String _fieldname, String _fieldtext
+		/// </summary>
+		public event EventHandler<Tuple<string, string>> ESaveField;
+
+		public event EventHandler<MouseEventArgs> EScroll; // pass mousewheel messages to main window
 
 		void textbox_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			EScroll(e);
+			EScroll(sender, e);
 		}
 
 		void textbox_LinkClicked(object sender, LinkClickedEventArgs e)

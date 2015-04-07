@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
+using System.IO;
 
 using DagMU.HelperWindows;
 
@@ -327,7 +329,7 @@ namespace DagMU
 			this.tbnRideMode.Name = "tbnRideMode";
 			this.tbnRideMode.Size = new System.Drawing.Size(75, 25);
 			this.tbnRideMode.ToolTipText = "Current Ride Mode";
-			this.tbnRideMode.ESelect += new DagMU.World.StringDelegate(this.tbnRideMode_ESelect);
+			this.tbnRideMode.ESelect += tbnRideMode_ESelect;
 			// 
 			// toolStripSeparator3
 			// 
@@ -364,7 +366,7 @@ namespace DagMU
 			this.boxofinputboxes.Name = "boxofinputboxes";
 			this.boxofinputboxes.Size = new System.Drawing.Size(773, 57);
 			this.boxofinputboxes.TabIndex = 1;
-			this.boxofinputboxes.EScroll += new DagMU.HelperWindows.InputBox.ScrollMessage(this.boxofinputboxes_EScroll);
+			this.boxofinputboxes.EScroll += boxofinputboxes_EScroll;
 			// 
 			// boxofmucktext
 			// 
@@ -384,7 +386,7 @@ namespace DagMU
 			this.boxofmucktext.Size = new System.Drawing.Size(773, 449);
 			this.boxofmucktext.TabIndex = 0;
 			this.boxofmucktext.Text = "";
-			this.boxofmucktext.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.boxofmucktext_LinkClicked);
+			this.boxofmucktext.LinkClicked += boxofmucktext_LinkClicked;
 			// 
 			// World
 			// 
@@ -407,13 +409,10 @@ namespace DagMU
 			}
 		}
 
-		void boxofinputboxes_EScroll(System.Windows.Forms.MouseEventArgs mouseeventargs)
+		void boxofinputboxes_EScroll(object sender, MouseEventArgs e)
 		{
-			User32.SendMouseWheelEvent(boxofmucktext, mouseeventargs.Delta);
+			User32.SendMouseWheelEvent(boxofmucktext, e.Delta);
 		}
-
-		public delegate void StringDelegate(String s);
-		public delegate void NullDelegate();
 
 		void HelperWindowShow(HelperWindows.HelperWindow hw)
 		{
@@ -429,7 +428,7 @@ namespace DagMU
 			if (connection.Connected)
 				Disconnect();
 
-			EClosing(this);
+			EClosing(this, null);
 		}
 
 		void tbnWF_Click(object sender, EventArgs e)
@@ -489,12 +488,12 @@ namespace DagMU
 			debugwindow.BringToFront();
 		}
 
-		void debugwindow_EStatusReset()
+		void debugwindow_EStatusReset(object sender, EventArgs e)
 		{
 			newStatus(MuckStatus.intercepting_normal);
 		}
 
-		void debugwindow_ESend(string s)
+		void debugwindow_ESend(object sender, string s)
 		{
 			procline(s);
 		}
@@ -530,27 +529,23 @@ namespace DagMU
 		}
 		int index;
 
-		public delegate void WorldIndexMessage(World world);
-		public event WorldIndexMessage EConnected;
-		public event WorldIndexMessage EDisconnected;
-		public event WorldIndexMessage EClosing;
+		public event EventHandler EConnected;
+		public event EventHandler EDisconnected;
+		public event EventHandler EClosing;
 
 		#region logging
 		public bool Logging
 		{
-			get
-			{
-				return (LoggingTo != null);
-			}
-			set
-			{
-				if (value)
-					LoggingQuickStart();
-				else
-					LoggingStop();
+			get { return (LoggingTo != null); }
+			set {
+				if (value) LoggingQuickStart();
+				else LoggingStop();
 			}
 		}
+
 		String loggingto;
+		StreamWriter LoggingStream;
+
 		public String LoggingTo
 		{
 			get
@@ -585,6 +580,7 @@ namespace DagMU
 				ResumeLayout();
 			}
 		}
+
 		String LoggingPath
 		{
 			get
@@ -592,6 +588,7 @@ namespace DagMU
 				return Properties.Settings.Default.LogDir + System.IO.Path.DirectorySeparatorChar;
 			}
 		}
+
 		String LoggingExtension
 		{
 			get
@@ -599,11 +596,12 @@ namespace DagMU
 				return ".txt";
 			}
 		}
+
 		String LogDate(DateTime now)
 		{
 			return now.ToString("yyyy.MM.dd");
 		}
-		System.IO.StreamWriter LoggingStream;
+
 		void LoggingQuickStart()
 		{
 			DateTime offsetday = DateTime.Now.AddHours(-1 * (double)Properties.Settings.Default.LogOffset);
@@ -623,10 +621,12 @@ namespace DagMU
 			// now we have a filename that will work
 			LoggingStart(filename, true);
 		}
+
 		void LoggingSaveHistory()
 		{
 			boxofmucktext.SaveFile(LoggingStream.BaseStream, System.Windows.Forms.RichTextBoxStreamType.PlainText);
 		}
+
 		void LoggingStart(String logfilename, bool includehistory)
 		{
 			loggingto = logfilename;
@@ -644,6 +644,7 @@ namespace DagMU
 			tbnLogName.Enabled = true;
 			ResumeLayout();
 		}
+
 		void LoggingStop()
 		{
 			if (!Logging)
@@ -653,11 +654,13 @@ namespace DagMU
 			tbnLogName.Clear();
 			tbnLogName.Enabled = false;
 		}
+
 		void Log(String s)
 		{
 			if (!Logging) return;
 			LoggingStream.WriteLine(s + Environment.NewLine);
 		}
+
 		void tbnLogging_ButtonClick(object sender, EventArgs e)
 		{
 			if (Logging)
@@ -665,6 +668,7 @@ namespace DagMU
 			else
 				LoggingQuickStart();
 		}
+
 		void tbnLog_MouseEnter(object sender, EventArgs e)
 		{
 			if (Logging)
@@ -678,19 +682,22 @@ namespace DagMU
 				tbnLog.Image = ((System.Drawing.Image)(Properties.Resources.pencil_add));
 			}
 		}
+
 		void tbnLog_MouseLeave(object sender, EventArgs e)
 		{
 			if (Logging)
-				tbnLog.Image = ((System.Drawing.Image)(Properties.Resources.pencil_go));
+				tbnLog.Image = ((Image)(Properties.Resources.pencil_go));
 			else
-				tbnLog.Image = ((System.Drawing.Image)(Properties.Resources.pencil));
+				tbnLog.Image = ((Image)(Properties.Resources.pencil));
 		}
+
 		void tbnLogName_Leave(object sender, EventArgs e)
 		{
 			System.Windows.Forms.MessageBox.Show(LoggingTo + " " + tbnLogName.Text);
 			LoggingTo = tbnLogName.Text;
 		}
-		void tbnLogName_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+
+		void tbnLogName_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == System.Windows.Forms.Keys.Enter)
 			{
@@ -700,12 +707,12 @@ namespace DagMU
 		}
 #endregion
 
-		void tbnRideMode_ESelect(string s)
+		void tbnRideMode_ESelect(object sender, string s)
 		{
 			Send("@set me=/ride/_mode:" + s, null);//TAPS
 		}
 
-		void boxofmucktext_LinkClicked(object sender, System.Windows.Forms.LinkClickedEventArgs e)
+		void boxofmucktext_LinkClicked(object sender, LinkClickedEventArgs e)
 		{
 			System.Diagnostics.Process.Start(e.LinkText);
 		}

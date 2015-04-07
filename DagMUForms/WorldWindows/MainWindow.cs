@@ -64,32 +64,33 @@ namespace DagMU
 			w.Resize += new EventHandler(OnWorldResize);
 			Controls.Add(w);
 
-			w.EClosing += new World.WorldIndexMessage(OnWorldClosing);
-			w.EConnected += new World.WorldIndexMessage(OnWorldConnected);
-			w.EDisconnected += new World.WorldIndexMessage(OnWorldDisconnected);
+			w.EClosing += OnWorldClosing;
+			w.EConnected += OnWorldConnected;
+			w.EDisconnected += OnWorldDisconnected;
 
 			w.Connect();
 		}
 
-		void OnWorldDisconnected(World world)
+		void OnWorldDisconnected(object sender, EventArgs e)
 		{
-			if(world == currentworld)
+			if (sender as World == currentworld)
 				tbnConnectEnabled(true);
 		}
 
-		void OnWorldConnecting(World world)
+		void OnWorldConnecting(object sender, EventArgs e)
 		{
 		}
 
-		void OnWorldConnected(World world)
+		void OnWorldConnected(object sender, EventArgs e)
 		{
-			if (world == currentworld)
+			if (sender as World == currentworld)
 				tbnConnectEnabled(false);
 		}
 
-		void OnWorldClosing(World world)
+		void OnWorldClosing(object sender, EventArgs e)
 		{
-			if(world == currentworld)
+			World world = sender as World;
+			if (world == currentworld)
 				tbnConnectEnabled(true);
 			world.Hide();
 			Controls.Remove(world);
@@ -155,7 +156,7 @@ namespace DagMU
 
 		void tbnConnectEnabled(bool value)
 		{
-			Invoke(new Action(() => { tbnConnect.Enabled = value; }));
+			Invoke((Action)(() => tbnConnect.Enabled = value ));
 		}
     }
 }

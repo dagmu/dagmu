@@ -24,20 +24,18 @@ namespace DagMU
 		/// <summary>
 		/// Connection status update: Connect error, connect success, disconnected
 		/// </summary>
-		public event ConnectEventHandler EConnect;
-		public delegate void ConnectEventHandler(ConnectEvent status, string message);
+		public event EventHandler<ConnectEventArgs> EConnect;
 
 		/// <summary>
 		/// Receive line from muck
 		/// </summary>
-		public event ReadEventHandler ERead;
-		public delegate void ReadEventHandler(string text);
+		public event EventHandler<string> ERead;
 
 		/// <summary>
 		/// Sent line or send error
+		/// object inputbox, SendStatus status, string errarMessage
 		/// </summary>
-		public event SendEventHandler ESend;
-		public delegate void SendEventHandler(SendStatus status, object inputbox, string errarMessage);
+		public event EventHandler<Tuple<SendStatus, string>> ESend;
 
 		/// <summary>
 		/// Attempt to connect to the server.
@@ -57,7 +55,7 @@ namespace DagMU
 			try {
 				tcp = new TcpClient(address, port);
 			} catch (Exception e) {
-				EConnect(ConnectEvent.Error_Connecting, e.Message);
+				EConnect(null, new ConnectEventArgs(ConnectEventArgs.StatusEnum.Error_Connecting, e.Message));
 				return;
 			}
 
@@ -82,10 +80,10 @@ namespace DagMU
 				reader = new StreamReader(stream, Encoding.ASCII);
 				writer = new StreamWriter(stream, Encoding.ASCII) { AutoFlush = true };
 			} catch (Exception e) {
-				EConnect(ConnectEvent.Error_Connecting, e.Message);
+				EConnect(null, new ConnectEventArgs(ConnectEventArgs.StatusEnum.Error_Connecting, e.Message));
 				return;
 			}
-			EConnect(ConnectEvent.Connected, null);
+			EConnect(null, new ConnectEventArgs(ConnectEventArgs.StatusEnum.Connected, null));
 
 			//read until disconnected
 			while (true) {
@@ -93,18 +91,18 @@ namespace DagMU
 				try {
 					line = await reader.ReadLineAsync();
 				} catch (Exception e) {
-					Disconnect(ConnectEvent.Error_Connecting, e.Message);
+					Disconnect(ConnectEventArgs.StatusEnum.Error_Connecting, e.Message);
 					break;
 				}
-				ERead(line);
+				ERead(null, line);
 			}
 		}
 
-		public void Disconnect(ConnectEvent? reason = null, string message = null)
+		public void Disconnect(ConnectEventArgs.StatusEnum? reason = null, string message = null)
 		{
 			if (tcp != null && tcp.Connected) tcp.Close();
 
-			EConnect(ConnectEvent.Got_Disconnected, message ?? "Got disconnected.");
+			EConnect(null, new ConnectEventArgs(reason ?? ConnectEventArgs.StatusEnum.Got_Disconnected, message ?? "Got disconnected."));
 		}
 
 		/// <summary>
@@ -119,18 +117,27 @@ namespace DagMU
 
 			try {
 				writer.WriteLine(line);
-				ESend(SendStatus.sent, sender, null);
+				ESend(sender, new Tuple<SendStatus,string>(SendStatus.sent, null));
 			} catch (Exception e) {
-				ESend(SendStatus.send_error, null, e.Message);
+				ESend(null, new Tuple<SendStatus,string>(SendStatus.send_error, e.Message));
 				Disconnect();
 			}
 		}
 
-		public enum ConnectEvent
+		public class ConnectEventArgs : EventArgs
 		{
-			Error_Connecting,
-			Connected,
-			Got_Disconnected
+			public ConnectEventArgs(StatusEnum status, string message) {
+				this.Status = status;
+				this.Message = message;
+			}
+			public StatusEnum Status;
+			public string Message;
+
+			public enum StatusEnum {
+				Error_Connecting,
+				Connected,
+				Got_Disconnected
+			}
 		}
 
 		public enum SendStatus

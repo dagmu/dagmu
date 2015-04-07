@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DagMU.HelperWindows;
+using System.Threading.Tasks;
 
 namespace DagMU
 {
@@ -14,17 +15,17 @@ namespace DagMU
 			charname = null;
 
 			connection = new MuckConnection();
-			connection.EConnect += new MuckConnection.ConnectEventHandler(OnConnect);
-			connection.ERead += new MuckConnection.ReadEventHandler(OnRead);
-			connection.ESend += new MuckConnection.SendEventHandler(OnSend);
+			connection.EConnect += OnConnect;
+			connection.ERead += OnRead;
+			connection.ESend += OnSend;
 
 			InitializeComponent();
 
 			boxofinputboxes.Resize += OnInputBoxesResize;
-			boxofinputboxes.EWantsToSend += new InputBox.TextMessage(OnInputBoxesHasTextToSend);
+			boxofinputboxes.EWantsToSend += OnInputBoxesHasTextToSend;
 			OnInputBoxesResize(null, null);
 
-			tbnRideMode.ESelect += new StringDelegate(OnRideModeSelected);
+			tbnRideMode.ESelect += OnRideModeSelected;
 
 			HelperWindows = new List<HelperWindow>();
 			CInfoHelperWindows = new List<CInfoHelperWindow>();
@@ -74,9 +75,9 @@ namespace DagMU
 
 		List<CInfoHelperWindow> CInfoHelperWindows;
 
-		void OnInputBoxesHasTextToSend(InputBox sender, string msg)
+		void OnInputBoxesHasTextToSend(object sender, string msg)
 		{
-			Send(msg, sender);
+			Send(msg, sender as InputBox);
 		}
 
 		/// <summary>
@@ -102,18 +103,18 @@ namespace DagMU
 			ResumeLayout();
 		}
 
-		void OnConnect(MuckConnection.ConnectEvent status, string message)
+		void OnConnect(object sender, MuckConnection.ConnectEventArgs args)
 		{
-			switch (status) {
-				case MuckConnection.ConnectEvent.Connected:
-					newStatus(MuckStatus.intercepting_connecting, message);
-					EConnected(this);
+			switch (args.Status) {
+				case MuckConnection.ConnectEventArgs.StatusEnum.Connected:
+					newStatus(MuckStatus.intercepting_connecting, args.Message);
+					EConnected(this, null);
 					break;
 
-				case MuckConnection.ConnectEvent.Got_Disconnected:
-				case MuckConnection.ConnectEvent.Error_Connecting:
-					EDisconnected(this);
-					newStatus(MuckStatus.not_connected, message);
+				case MuckConnection.ConnectEventArgs.StatusEnum.Got_Disconnected:
+				case MuckConnection.ConnectEventArgs.StatusEnum.Error_Connecting:
+					EDisconnected(this, null);
+					newStatus(MuckStatus.not_connected, args.Message);
 					break;
 			}
 		}
@@ -153,29 +154,29 @@ namespace DagMU
 			CInfoHelperWindows.Remove((CInfoHelperWindow)sender);
 		}
 
-		void OnRead(string text)
+		void OnRead(object sender, string text)
 		{
 			procline(text);
 			Console.Print(text + '\n');
 		}
 
-		void OnSend(MuckConnection.SendStatus status, object inputbox, string errarMessage = null)
+		void OnSend(object inputbox, Tuple<MuckConnection.SendStatus, string> status_errarMessage)
 		{
-			switch (status)
+			switch (status_errarMessage.Item1)
 			{
 				case MuckConnection.SendStatus.send_error:
-					boxprint("Send errar! " + errarMessage ?? "");
-					if (inputbox != null) ((InputBox)inputbox).newstatus(InputBox.Status.Disconnected);
+					boxprint("Send errar! " + status_errarMessage.Item2 ?? "");
+					if (inputbox != null) (inputbox as InputBox).newstatus(InputBox.Status.Disconnected);
 					Disconnect();
 					break;
 
 				case MuckConnection.SendStatus.sent:
-					if (inputbox != null) ((InputBox)inputbox).newstatus(InputBox.Status.Sent);
+					if (inputbox != null) (inputbox as InputBox).newstatus(InputBox.Status.Sent);
 					break;
 			}
 		}
 
-		public async void Connect()
+		public async Task Connect()
 		{
 			if (connection.Connected)
 				return;
@@ -192,7 +193,7 @@ namespace DagMU
 		public void Disconnect()
 		{
 			connection.Disconnect();
-			EDisconnected(this);
+			EDisconnected(this, null);
 			newStatus(MuckStatus.not_connected);
 		}
 
@@ -206,19 +207,12 @@ namespace DagMU
 
 		public void boxprint(String s)
 		{
+			if (boxofmucktext.InvokeRequired) { this.Invoke((Action)(() => boxprint(s))); return; }
+
 			if (this.ParentForm == null) return;
 
 			if (!this.ParentForm.Visible)
 				User32.FlashWindow(this.ParentForm.Handle, true);
-
-			// if we're in the wrong thread, pass the message to the right thread
-			if ( boxofmucktext.InvokeRequired ) {
-				StringDelegate callback = new StringDelegate(boxprint);
-				try {
-					this.Invoke(callback, s); // have the world invoke it on the right thread, calling callback(s) doesn't come back on the right thread
-				} catch { }
-				return;
-			}
 
 			Log(s);
 
@@ -266,7 +260,7 @@ namespace DagMU
 			return false;
 		}
 
-		void OnRideModeSelected(String ridemode)
+		void OnRideModeSelected(object sender, String ridemode)
 		{
 			Send("@set me=/ride/_mode:" + ridemode);//TAPS
 			refocus();

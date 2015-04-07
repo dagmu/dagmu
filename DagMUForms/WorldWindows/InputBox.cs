@@ -60,14 +60,10 @@ namespace DagMU.HelperWindows
 			this.input.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Properties.Settings.Default, "Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 		}
 
-		public delegate void TextMessage(InputBox sender, string msg);
-		public delegate void RefMessage(InputBox sender);
-		public delegate void ScrollMessage(MouseEventArgs mouseeventargs);
-
-		public event TextMessage ESend; // send text to muck
-		public event RefMessage ENew; // make new inputbox
-		public event RefMessage EClose; // close this inputbox
-		public event ScrollMessage EScroll; // pass mousewheel messages to main window
+		public event EventHandler<string> ESend;//send text to muck
+		public event EventHandler ENew; // make new inputbox
+		public event EventHandler EClose; // close this inputbox
+		public event EventHandler<MouseEventArgs> EScroll;//pass scroll messages to main box
 
 		public enum Status
 		{
@@ -82,16 +78,9 @@ namespace DagMU.HelperWindows
 			input.Focus();
 		}
 
-		public delegate void InputMsgDelegate(Status msg);
 		public void newstatus(Status msg)
 		{
-			// if we're in the wrong thread, pass the message to the right thread
-			if (input.InvokeRequired)
-			{
-				InputMsgDelegate callback = new InputMsgDelegate(newstatus);
-				this.Invoke(callback, msg);
-				return;
-			}
+			if (input.InvokeRequired) { this.Invoke((Action)(() => newstatus(msg) )); return; }
 
 			switch (msg)
 			{
@@ -171,7 +160,7 @@ namespace DagMU.HelperWindows
 
 		void buttonClose_Click(object sender, EventArgs e)
 		{
-			EClose(this);
+			EClose(this, e);
 		}
 
 		void buttonSmaller_Click(object sender, EventArgs e)
@@ -188,14 +177,13 @@ namespace DagMU.HelperWindows
 
 		void buttonMore_Click(object sender, EventArgs e)
 		{
-			ENew(null);
+			ENew(sender, e);
 		}
 #endregion
 
 		void input_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			// pass mousewheel events to the main text window
-			EScroll(e);
+			EScroll(sender, e);//pass mousewheel events to the main text window
 		}
 
 		void input_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
@@ -203,12 +191,12 @@ namespace DagMU.HelperWindows
 			switch (e.KeyCode) {
 				case Keys.PageUp:
 					e.SuppressKeyPress = true;
-					EScroll(new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, 3));
+					EScroll(sender, new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, 3));
 					break;
 
 				case Keys.PageDown:
 					e.SuppressKeyPress = true;
-					EScroll(new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, -3));
+					EScroll(sender, new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, -3));
 					break;
 
 				case Keys.Up:
