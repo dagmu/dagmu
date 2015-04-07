@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DagMU.HelperWindows
 {
 	public partial class InputBox : System.Windows.Forms.UserControl
 	{
+		const int bufferSize = 500;
+
 		int lines; // height of this textbox in lines of text
 		public int Lines
 		{
@@ -19,7 +22,7 @@ namespace DagMU.HelperWindows
 		}
 
 		List<String> history;
-		int historycurrent;  // this is the last thing the user had in the inputbox
+		int historyCurrent;  // this is the last thing the user had in the inputbox
 
 		// Constructors
 		public InputBox()
@@ -197,168 +200,67 @@ namespace DagMU.HelperWindows
 
 		void input_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
-			// TODO inputbox code to convert
-/*
-	//if (e->keycode == Keys:
-
-	// F2 debug test key hack
-	//if (e->KeyCode == Keys::F2) {
-	//	for each( String^ word in history )
-	//		input->Text += word + " ";
-	//	return;
-	//}
-
-	// PAGEUP/PAGEDOWN to scroll main window
-	if (e->KeyCode == Keys::PageUp)
-	{
-		SendScrollEvent((RichTextBox^)parent->box, SB_PAGEUP);
-		e->SuppressKeyPress = true;
-		return;
-	}
-	if (e->KeyCode == Keys::PageDown)
-	{
-		SendScrollEvent((RichTextBox^)parent->box, SB_PAGEDOWN);
-		e->SuppressKeyPress = true;
-		return;
-	}
-	//PAGEUP/PAGEDOWN
-
-	// TAB
-	// Note: I was going to make the tab key put a few spaces into the input box,
-	// but spaces are stripped out by mucks, I think..
-	// TODO use TAB for name autocompletion
-	if (e->KeyCode == Keys::Tab) {
-		e->SuppressKeyPress = true;
-		return;
-	}//TAB
-
-	//= keypress for detecting "p =" and "w ="
-	if (e->KeyCode == Keys::Oemplus)//'='
-	{
-		// TODO check for "p =" and "w =" in the middle of multiple lines
-		// p =
-		if ((input->Text == "p ") || (input->Text == "page "))
-		{
-			input->Text = "p " + parent->lastpaged;
-			input->Select(input->Text->Length,0);
-			return;
-		}
-		// wh =
-		if ((input->Text == "w ") || (input->Text == "wh ") || (input->Text == "whisp "))
-		{
-			input->Text = "wh " + parent->lastwhispered;
-			input->Select(input->Text->Length,0);
-			return;
-		}
-	}
-	//= keypress for detecting "p =" and "w ="
-
-	// CTRL+UP = go up(back) in command history
-	if ((e->Control) && (e->KeyCode == Keys::Up))
-	{
-		if (history.Count == 0)
-			return;
-
-		if (historycurrent > 0)
-			historycurrent--;
-		else return; // reached end
-
-		input->Text = history[historycurrent];
-		input->SelectionStart = input->Text->Length; // select all text
-
-		return;
-	}//CTRL+UP
-
-	// CTRL+DOWN = go down(forward) in command history
-	if ((e->Control) && (e->KeyCode == Keys::Down))
-	{
-		if (history.Count == 0)
-			return;
-
-		if (historycurrent < history.Count)
-			historycurrent++;
-
-		if (historycurrent == history.Count) { // user reached end of history and went one more forward
-			// maybe wrap to beginning?.. nah
-			input->Text = "";
-			return;
-		}
-
-		input->Text = history[historycurrent];
-		input->SelectionStart = input->Text->Length; // select all text
-
-		return;
-	}//CTRL+DOWN
-*/
-			// ENTER
-			if ((!e.Control) && (e.KeyCode == Keys.Enter))
-			{
-				// UNDONE enable force mode with input
-				// if we're in debug mode, pass input line straight to procline
-				/*if (force) {
-					array<String^> ^ delims = {"\r\n"};
-					array<String^> ^ strings = input->Text->Split(delims,StringSplitOptions::None);
-					for each (String^ s in strings) {
-						parent->procline(s);
-					}
-					input->Clear();
-					e->SuppressKeyPress = true;
-					return;
-				}*/
-
-				if (input.Text == "") {
+			switch (e.KeyCode) {
+				case Keys.PageUp:
 					e.SuppressKeyPress = true;
-					input.Clear();
-					return;
-				}
+					EScroll(new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, 3));
+					break;
 
-				// post the event to send text
-				ESend(this, input.Text);
+				case Keys.PageDown:
+					e.SuppressKeyPress = true;
+					EScroll(new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, -3));
+					break;
 
-				// add this line to history
-				if (history.Count == 0) { // start new history
-					history.Add( input.Text );
-					historycurrent = 0;
-				}
-				else { // add to existing history list
-					if (input.Text != history[history.Count - 1]) { // avoid duplicate consecutive history entries
-						history.Add( input.Text );
-						historycurrent++;
+				case Keys.Up:
+					if (history.Count == 0) break;
+					if (historyCurrent > 0) historyCurrent--;
+					else break;//reached end of history
+					input.Text = history[historyCurrent];
+					input.SelectionStart = input.TextLength;
+					break;
+
+				case Keys.Down:
+					if (history.Count == 0) return;
+					if (historyCurrent < history.Count) historyCurrent++;
+					input.Text = history[historyCurrent];
+					input.SelectionStart = input.TextLength;
+					break;
+
+				case Keys.Oemplus:
+					if (input.Text == "p " || input.Text == "page ") {
+						//input.Text = "p " + lastPagedName + "=";//insert last paged name
+						input.SelectionStart = input.TextLength;
+						e.SuppressKeyPress = true;
 					}
-				}
+					else if (input.Text == "w " || input.Text == "wh ") {
+						//input.Text = "p " + lastWhisperedName + "=";//insert last paged name
+						input.SelectionStart = input.TextLength;
+						e.SuppressKeyPress = true;
+					}
+					break;
 
-				historycurrent = history.Count;
-
-				e.SuppressKeyPress = true;
-
-				return;
-
-			}//ENTER
+				case Keys.Enter:
+					if (e.Control) break;
+					string trimmed = input.Text.Trim();
+					if (trimmed.Length == 0) { e.SuppressKeyPress = true; break; }
+					ESend(this, trimmed);
+					if (history.Count == 0) { history.Add(trimmed); historyCurrent = 0; }
+					else if (trimmed != history[history.Count - 1]) { history.Add(trimmed); historyCurrent++; }
+					e.SuppressKeyPress = true;
+					break;
+			}
 		}
 
 		void input_TextChanged(object sender, EventArgs e)
 		{
-			// TODO convert code for buffer length warning
-/*
-	// warning when we approach send buffer length
-	// this should be per line, not per total inputboxtext
-	int x = parent->sendbuffersize - 1 - input->Text->Length;
-	if (x < 50)
-	{
-		this->SuspendLayout();
-		warning->Text = x.ToString();
-		warning->ForeColor = Color::DarkRed;
-		//warning->Font->Bold = false;
-		if (x < 10) {
-			warning->ForeColor = Color::Red;
-			//warning->Font->Bold = true;
-		}
-		warning->Visible = true;
-		this->ResumeLayout();
-	}
-	else
-		warning->Visible = false;
-*/
+			if (input.TextLength > bufferSize) {
+				int carat = input.SelectionStart;
+				input.Select(0, bufferSize);
+				input.SelectionColor = input.ForeColor;
+				input.Select(bufferSize, input.TextLength);
+				input.SelectionColor = Color.Red;
+				input.SelectionStart = carat;
+			}
 		}
 	}
 }
