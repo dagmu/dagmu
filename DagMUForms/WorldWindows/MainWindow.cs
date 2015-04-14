@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DagMU.HelperWindows;
+using DagMU.Forms.HelperWindows;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	public partial class MainWindow : Form//DagGlassLib.GlassForm
 	{
@@ -36,13 +36,13 @@ namespace DagMU
 
 		void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			DagMU.Properties.Settings.Default.MainLastSize = this.Size;
-			DagMU.Properties.Settings.Default.Save();
+			DagMU.Forms.Properties.Settings.Default.MainLastSize = this.Size;
+			DagMU.Forms.Properties.Settings.Default.Save();
 		}
 
 		void MainWindow_Load(object sender, EventArgs e)
 		{
-			this.Size = DagMU.Properties.Settings.Default.MainLastSize;
+			this.Size = DagMU.Forms.Properties.Settings.Default.MainLastSize;
 
 			tbnForceLocal_Click(null, null);// HACK 
 		}

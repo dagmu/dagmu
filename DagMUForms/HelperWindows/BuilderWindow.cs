@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DagMU.HelperWindows
+namespace DagMU.Forms.HelperWindows
 {
 	public partial class BuilderWindow : Form
 	{

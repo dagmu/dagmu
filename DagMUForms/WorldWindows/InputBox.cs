@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DagMU.HelperWindows
+namespace DagMU.Forms.HelperWindows
 {
 	public partial class InputBox : System.Windows.Forms.UserControl
 	{
@@ -50,14 +50,14 @@ namespace DagMU.HelperWindows
 
 		void InputBoxSetBindings()
 		{
-			this.input.BackColor = global::DagMU.Properties.Settings.Default.InputBackColor;
-			this.input.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Properties.Settings.Default, "InputBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.input.BackColor = global::DagMU.Forms.Properties.Settings.Default.InputBackColor;
+			this.input.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Forms.Properties.Settings.Default, "InputBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 
-			this.input.ForeColor = global::DagMU.Properties.Settings.Default.InputForeColor;
-			this.input.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::DagMU.Properties.Settings.Default, "InputForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.input.ForeColor = global::DagMU.Forms.Properties.Settings.Default.InputForeColor;
+			this.input.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::DagMU.Forms.Properties.Settings.Default, "InputForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 
-			this.input.Font = global::DagMU.Properties.Settings.Default.Font;
-			this.input.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Properties.Settings.Default, "Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.input.Font = global::DagMU.Forms.Properties.Settings.Default.Font;
+			this.input.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Forms.Properties.Settings.Default, "Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 		}
 
 		public event EventHandler<string> ESend;//send text to muck

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace DagMU
+namespace DagMU.Forms
 {
     partial class MainWindow
     {
@@ -78,7 +78,7 @@ namespace DagMU
             this.toolStripSeparator2,
             this.tbnSites,
             this.addNewToolStripMenuItem});
-			this.tbnConnect.Image = global::DagMU.Properties.Resources.lightning;
+			this.tbnConnect.Image = global::DagMU.Forms.Properties.Resources.lightning;
 			this.tbnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnConnect.Name = "tbnConnect";
 			this.tbnConnect.Size = new System.Drawing.Size(29, 22);
@@ -92,7 +92,7 @@ namespace DagMU
 			// 
 			// tbnForce
 			// 
-			this.tbnForce.Image = global::DagMU.Properties.Resources.lightning;
+			this.tbnForce.Image = global::DagMU.Forms.Properties.Resources.lightning;
 			this.tbnForce.Name = "tbnForce";
 			this.tbnForce.Size = new System.Drawing.Size(152, 22);
 			this.tbnForce.Text = "Local";
@@ -100,7 +100,7 @@ namespace DagMU
 			// 
 			// tbnTaps
 			// 
-			this.tbnTaps.Image = global::DagMU.Properties.Resources.lightning;
+			this.tbnTaps.Image = global::DagMU.Forms.Properties.Resources.lightning;
 			this.tbnTaps.Name = "tbnTaps";
 			this.tbnTaps.Size = new System.Drawing.Size(152, 22);
 			this.tbnTaps.Text = "Taps";
@@ -113,7 +113,7 @@ namespace DagMU
 			// 
 			// tbnSites
 			// 
-			this.tbnSites.Image = global::DagMU.Properties.Resources.cog_edit;
+			this.tbnSites.Image = global::DagMU.Forms.Properties.Resources.cog_edit;
 			this.tbnSites.Name = "tbnSites";
 			this.tbnSites.Size = new System.Drawing.Size(152, 22);
 			this.tbnSites.Text = "Sites";
@@ -131,8 +131,8 @@ namespace DagMU
 			this.ClientSize = new System.Drawing.Size(746, 292);
 			this.Controls.Add(this.menu);
 			this.Controls.Add(this.cbFlash);
-			this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::DagMU.Properties.Settings.Default, "MainLastLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.Location = global::DagMU.Properties.Settings.Default.MainLastLocation;
+			this.DataBindings.Add(new System.Windows.Forms.Binding("Location", global::DagMU.Forms.Properties.Settings.Default, "MainLastLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.Location = global::DagMU.Forms.Properties.Settings.Default.MainLastLocation;
 			this.Name = "MainWindow";
 			this.Text = "DagMU";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DagMU.WorldWindows
+namespace DagMU.Forms.WorldWindows
 {
 	public partial class WorldToolStripMenuItem : UserControl
 	{

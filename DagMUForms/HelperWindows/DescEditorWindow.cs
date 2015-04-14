@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Linq;
 
-namespace DagMU.HelperWindows
+namespace DagMU.Forms.HelperWindows
 {
-	public partial class DescEditorWindow : DagMU.HelperWindows.HelperWindow
+	public partial class DescEditorWindow : DagMU.Forms.HelperWindows.HelperWindow
 	{
 		public DescEditorWindow()
 		{

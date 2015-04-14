@@ -1,4 +1,4 @@
-﻿namespace DagMU.HelperWindows
+﻿namespace DagMU.Forms.HelperWindows
 {
 	partial class MorphHelperWindow
 	{

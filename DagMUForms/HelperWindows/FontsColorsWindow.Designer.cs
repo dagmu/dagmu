@@ -1,4 +1,4 @@
-﻿namespace DagMU.HelperWindows
+﻿namespace DagMU.Forms.HelperWindows
 {
 	partial class FontsColorsWindow
 	{
@@ -29,10 +29,10 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FontsColorsWindow));
-			this.btnAsh = new DagMU.HelperWindows.FontsColorsWindow.PresetButton();
-			this.btnNotepad = new DagMU.HelperWindows.FontsColorsWindow.PresetButton();
-			this.btnTerminal = new DagMU.HelperWindows.FontsColorsWindow.PresetButton();
-			this.btnChill = new DagMU.HelperWindows.FontsColorsWindow.PresetButton();
+			this.btnAsh = new DagMU.Forms.HelperWindows.FontsColorsWindow.PresetButton();
+			this.btnNotepad = new DagMU.Forms.HelperWindows.FontsColorsWindow.PresetButton();
+			this.btnTerminal = new DagMU.Forms.HelperWindows.FontsColorsWindow.PresetButton();
+			this.btnChill = new DagMU.Forms.HelperWindows.FontsColorsWindow.PresetButton();
 			this.label1 = new System.Windows.Forms.Label();
 			this.rbFontLucidaConsole = new System.Windows.Forms.RadioButton();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -351,8 +351,8 @@
 			// 
 			// btnBoxFore
 			// 
-			this.btnBoxFore.BackColor = global::DagMU.Properties.Settings.Default.BoxForeColor;
-			this.btnBoxFore.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Properties.Settings.Default, "BoxForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.btnBoxFore.BackColor = global::DagMU.Forms.Properties.Settings.Default.BoxForeColor;
+			this.btnBoxFore.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Forms.Properties.Settings.Default, "BoxForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.btnBoxFore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnBoxFore.Location = new System.Drawing.Point(52, 26);
 			this.btnBoxFore.Name = "btnBoxFore";
@@ -363,11 +363,11 @@
 			// 
 			// btnBoxBack
 			// 
-			this.btnBoxBack.BackColor = global::DagMU.Properties.Settings.Default.BoxBackColor;
-			this.btnBoxBack.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Properties.Settings.Default, "BoxFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.btnBoxBack.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Properties.Settings.Default, "BoxBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.btnBoxBack.BackColor = global::DagMU.Forms.Properties.Settings.Default.BoxBackColor;
+			this.btnBoxBack.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Forms.Properties.Settings.Default, "BoxFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.btnBoxBack.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Forms.Properties.Settings.Default, "BoxBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.btnBoxBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnBoxBack.Font = global::DagMU.Properties.Settings.Default.Font;
+			this.btnBoxBack.Font = global::DagMU.Forms.Properties.Settings.Default.Font;
 			this.btnBoxBack.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.btnBoxBack.Location = new System.Drawing.Point(6, 48);
 			this.btnBoxBack.Name = "btnBoxBack";
@@ -391,8 +391,8 @@
 			// 
 			// btnInputFore
 			// 
-			this.btnInputFore.BackColor = global::DagMU.Properties.Settings.Default.InputForeColor;
-			this.btnInputFore.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Properties.Settings.Default, "InputForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.btnInputFore.BackColor = global::DagMU.Forms.Properties.Settings.Default.InputForeColor;
+			this.btnInputFore.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Forms.Properties.Settings.Default, "InputForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.btnInputFore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnInputFore.Location = new System.Drawing.Point(52, 26);
 			this.btnInputFore.Name = "btnInputFore";
@@ -403,8 +403,8 @@
 			// 
 			// btnInputBack
 			// 
-			this.btnInputBack.BackColor = global::DagMU.Properties.Settings.Default.InputBackColor;
-			this.btnInputBack.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Properties.Settings.Default, "InputBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.btnInputBack.BackColor = global::DagMU.Forms.Properties.Settings.Default.InputBackColor;
+			this.btnInputBack.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Forms.Properties.Settings.Default, "InputBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.btnInputBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnInputBack.Location = new System.Drawing.Point(6, 48);
 			this.btnInputBack.Name = "btnInputBack";
@@ -431,12 +431,12 @@
 			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox1.BackColor = global::DagMU.Properties.Settings.Default.BoxBackColor;
-			this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Properties.Settings.Default, "Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Properties.Settings.Default, "BoxBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::DagMU.Properties.Settings.Default, "BoxForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-			this.textBox1.Font = global::DagMU.Properties.Settings.Default.Font;
-			this.textBox1.ForeColor = global::DagMU.Properties.Settings.Default.BoxForeColor;
+			this.textBox1.BackColor = global::DagMU.Forms.Properties.Settings.Default.BoxBackColor;
+			this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Forms.Properties.Settings.Default, "Font", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Forms.Properties.Settings.Default, "BoxBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::DagMU.Forms.Properties.Settings.Default, "BoxForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.textBox1.Font = global::DagMU.Forms.Properties.Settings.Default.Font;
+			this.textBox1.ForeColor = global::DagMU.Forms.Properties.Settings.Default.BoxForeColor;
 			this.textBox1.Location = new System.Drawing.Point(12, 289);
 			this.textBox1.Multiline = true;
 			this.textBox1.Name = "textBox1";

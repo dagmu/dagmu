@@ -2,7 +2,7 @@
 using System.Net;
 using System.Windows.Forms;
 
-namespace DagMU
+namespace DagMU.Forms
 {
     static partial class Program
     {

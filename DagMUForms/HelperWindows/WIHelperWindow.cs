@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DagMU.HelperWindows
+namespace DagMU.Forms.HelperWindows
 {
-	public partial class WIHelperWindow : DagMU.HelperWindows.HelperWindow
+	public partial class WIHelperWindow : DagMU.Forms.HelperWindows.HelperWindow
     {
         public WIHelperWindow()
         {

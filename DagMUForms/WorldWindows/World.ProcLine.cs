@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using DagMU.HelperWindows;
+using DagMU.Forms.HelperWindows;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	partial class World
 	{

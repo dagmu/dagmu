@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Text;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	partial class MuckConnection
 	{

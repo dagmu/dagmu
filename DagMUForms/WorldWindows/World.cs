@@ -3,9 +3,9 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
 
-using DagMU.HelperWindows;
+using DagMU.Forms.HelperWindows;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	public partial class World : System.Windows.Forms.UserControl
 	{
@@ -143,12 +143,12 @@ namespace DagMU
 			this.tbnWI = new System.Windows.Forms.ToolStripButton();
 			this.tbnWF = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.tbnRideMode = new DagMU.HelperWindows.RideModeDropdown();
+			this.tbnRideMode = new DagMU.Forms.HelperWindows.RideModeDropdown();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnDebug = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonConsole = new System.Windows.Forms.ToolStripButton();
-			this.boxofinputboxes = new DagMU.HelperWindows.InputBoxBox();
-			this.boxofmucktext = new DagMU.Box();
+			this.boxofinputboxes = new DagMU.Forms.HelperWindows.InputBoxBox();
+			this.boxofmucktext = new DagMU.Forms.Box();
 			this.menu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -183,7 +183,7 @@ namespace DagMU
 			// tbnDisconnect
 			// 
 			this.tbnDisconnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.tbnDisconnect.Image = global::DagMU.Properties.Resources.lightning_delete;
+			this.tbnDisconnect.Image = global::DagMU.Forms.Properties.Resources.lightning_delete;
 			this.tbnDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnDisconnect.Name = "tbnDisconnect";
 			this.tbnDisconnect.Size = new System.Drawing.Size(23, 22);
@@ -198,7 +198,7 @@ namespace DagMU
 			// tbnFonts
 			// 
 			this.tbnFonts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.tbnFonts.Image = global::DagMU.Properties.Resources.font;
+			this.tbnFonts.Image = global::DagMU.Forms.Properties.Resources.font;
 			this.tbnFonts.Name = "tbnFonts";
 			this.tbnFonts.Size = new System.Drawing.Size(23, 22);
 			this.tbnFonts.Text = "Fonts and Colors";
@@ -210,7 +210,7 @@ namespace DagMU
 			this.tbnSettingsDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator5});
 			this.tbnSettingsDropDown.Enabled = false;
-			this.tbnSettingsDropDown.Image = global::DagMU.Properties.Resources.cog_go;
+			this.tbnSettingsDropDown.Image = global::DagMU.Forms.Properties.Resources.cog_go;
 			this.tbnSettingsDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnSettingsDropDown.Name = "tbnSettingsDropDown";
 			this.tbnSettingsDropDown.Size = new System.Drawing.Size(29, 22);
@@ -229,7 +229,7 @@ namespace DagMU
             this.tbnLogName,
             this.toolStripSeparator6,
             this.tbnLogSettings});
-			this.tbnLog.Image = global::DagMU.Properties.Resources.pencil;
+			this.tbnLog.Image = global::DagMU.Forms.Properties.Resources.pencil;
 			this.tbnLog.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnLog.Name = "tbnLog";
 			this.tbnLog.Size = new System.Drawing.Size(32, 22);
@@ -339,7 +339,7 @@ namespace DagMU
 			// tbnDebug
 			// 
 			this.tbnDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.tbnDebug.Image = global::DagMU.Properties.Resources.cog_error;
+			this.tbnDebug.Image = global::DagMU.Forms.Properties.Resources.cog_error;
 			this.tbnDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnDebug.Name = "tbnDebug";
 			this.tbnDebug.Size = new System.Drawing.Size(23, 22);
@@ -349,7 +349,7 @@ namespace DagMU
 			// toolStripButtonConsole
 			// 
 			this.toolStripButtonConsole.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.toolStripButtonConsole.Image = global::DagMU.Properties.Resources.application_xp_terminal;
+			this.toolStripButtonConsole.Image = global::DagMU.Forms.Properties.Resources.application_xp_terminal;
 			this.toolStripButtonConsole.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButtonConsole.Name = "toolStripButtonConsole";
 			this.toolStripButtonConsole.Size = new System.Drawing.Size(23, 22);

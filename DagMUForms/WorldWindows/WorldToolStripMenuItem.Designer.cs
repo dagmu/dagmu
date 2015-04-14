@@ -1,4 +1,4 @@
-﻿namespace DagMU.WorldWindows
+﻿namespace DagMU.Forms.WorldWindows
 {
 	partial class WorldToolStripMenuItem
 	{
@@ -36,7 +36,7 @@
 			// 
 			// btnConnection
 			// 
-			this.btnConnection.Image = global::DagMU.Properties.Resources.lightning;
+			this.btnConnection.Image = global::DagMU.Forms.Properties.Resources.lightning;
 			this.btnConnection.Location = new System.Drawing.Point(4, 4);
 			this.btnConnection.Name = "btnConnection";
 			this.btnConnection.Size = new System.Drawing.Size(28, 23);

@@ -1,4 +1,4 @@
-﻿namespace DagMU
+﻿namespace DagMU.Forms
 {
 	partial class MuckPropertyTextBox
 	{

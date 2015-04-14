@@ -1,4 +1,4 @@
-﻿namespace DagMU.HelperWindows
+﻿namespace DagMU.Forms.HelperWindows
 {
 	partial class InputBox
 	{
@@ -30,7 +30,7 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.input = new DagMU.InputTextBox();
+			this.input = new DagMU.Forms.InputTextBox();
 			this.buttonMore = new System.Windows.Forms.Button();
 			this.buttonBigger = new System.Windows.Forms.Button();
 			this.buttonSmaller = new System.Windows.Forms.Button();
@@ -168,7 +168,7 @@
 		#endregion
 
 		private System.Windows.Forms.SplitContainer splitContainer1;
-		private DagMU.InputTextBox input;
+		private DagMU.Forms.InputTextBox input;
 		private System.Windows.Forms.Button buttonMore;
 		private System.Windows.Forms.Button buttonBigger;
 		private System.Windows.Forms.Button buttonSmaller;

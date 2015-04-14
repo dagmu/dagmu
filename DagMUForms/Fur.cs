@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	[Serializable]
 	public class Fur

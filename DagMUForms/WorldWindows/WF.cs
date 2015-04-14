@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	public partial class WF : UserControl
 	{
-		public WF(DagMU.World parentworld)
+		public WF(DagMU.Forms.World parentworld)
 		{
 			InitializeComponent(); 
 			parent = parentworld;

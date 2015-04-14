@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using FlagNameT = System.Char;
-using FlagTypeT = DagMUWPF.MuckFlags.FlagType;
+using FlagTypeT = DagMU.WPF.MuckFlags.FlagType;
 
-namespace DagMUWPF
+namespace DagMU.WPF
 {
 	public class MuckFlags
 	{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DagMU
+namespace DagMU.Forms
 {
     sealed class User32
     {

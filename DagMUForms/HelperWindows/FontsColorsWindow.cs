@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DagMU.HelperWindows
+namespace DagMU.Forms.HelperWindows
 {
-	public partial class FontsColorsWindow : DagMU.HelperWindows.HelperWindow
+	public partial class FontsColorsWindow : DagMU.Forms.HelperWindows.HelperWindow
 	{
 		public FontsColorsWindow()
 		{
@@ -20,13 +20,13 @@ namespace DagMU.HelperWindows
 
 		void btnCancel_Click(object sender, EventArgs e)
 		{
-			DagMU.Properties.Settings.Default.Reload();
+			DagMU.Forms.Properties.Settings.Default.Reload();
 			Close();
 		}
 
 		void btnApply_Click(object sender, EventArgs e)
 		{
-			DagMU.Properties.Settings.Default.Save();
+			DagMU.Forms.Properties.Settings.Default.Save();
 			Close();
 		}
 		class PresetButton : Button

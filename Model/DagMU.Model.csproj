@@ -7,7 +7,7 @@
     <ProjectGuid>{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DagMU.Model</RootNamespace>
+    <RootNamespace>DagMU.Forms.Model</RootNamespace>
     <AssemblyName>Model</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

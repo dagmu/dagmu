@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	public partial class LogSettingsWindow : Form
 	{

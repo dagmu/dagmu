@@ -28,7 +28,8 @@ logging
 inputbox
 	command history with up/down arrows
 	tab-key autocompletion of names/objects that are in the same room or in your WF list
-	spellcheck on the fly
+	spellcheck using WPF is easy: https://msdn.microsoft.com/en-us/library/system.windows.controls.spellcheck.aspx https://msdn.microsoft.com/en-us/library/bb613557.aspx
+	spellcheck in Forms with ElementHost: http://stackoverflow.com/questions/4024798/trying-to-use-the-c-sharp-spellcheck-class
 	autocompletion of 'p =' and 'w =' to reduce mavs
 world window
 	colors/fonts settings

@@ -1,7 +1,7 @@
-﻿<Window x:Class="DagMUWPF.winMain"
+﻿<Window x:Class="DagMU.WPF.winMain"
 				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-				xmlns:local="clr-namespace:DagMUWPF"
+				xmlns:local="clr-namespace:DagMU.WPF"
 				x:Name="main"
 				Title="MainWindow" Height="350" Width="525">
 	<Window.Resources>

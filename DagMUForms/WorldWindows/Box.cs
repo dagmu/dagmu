@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	class Box : RichTextBox
 	{

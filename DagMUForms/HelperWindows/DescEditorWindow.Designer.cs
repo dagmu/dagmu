@@ -1,4 +1,4 @@
-﻿namespace DagMU.HelperWindows
+﻿namespace DagMU.Forms.HelperWindows
 {
 	partial class DescEditorWindow
 	{
@@ -28,12 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.muckSpecies = new DagMU.MuckPropertyTextBox();
-			this.muckScent = new DagMU.MuckPropertyTextBox();
-			this.muckGender = new DagMU.MuckPropertyTextBox();
-			this.muckDesc = new DagMU.MuckPropertyTextBox();
-			this.muckSay = new DagMU.MuckPropertyTextBox();
-			this.muckOSay = new DagMU.MuckPropertyTextBox();
+			this.muckSpecies = new DagMU.Forms.MuckPropertyTextBox();
+			this.muckScent = new DagMU.Forms.MuckPropertyTextBox();
+			this.muckGender = new DagMU.Forms.MuckPropertyTextBox();
+			this.muckDesc = new DagMU.Forms.MuckPropertyTextBox();
+			this.muckSay = new DagMU.Forms.MuckPropertyTextBox();
+			this.muckOSay = new DagMU.Forms.MuckPropertyTextBox();
 			this.buttonRefresh = new System.Windows.Forms.Button();
 			this.buttonTest = new System.Windows.Forms.Button();
 			this.buttonSave = new System.Windows.Forms.Button();
@@ -42,8 +42,8 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.labelName = new System.Windows.Forms.Label();
-			this.muckLongName = new DagMU.MuckPropertyTextBox();
-			this.muckActionText = new DagMU.MuckPropertyTextBox();
+			this.muckLongName = new DagMU.Forms.MuckPropertyTextBox();
+			this.muckActionText = new DagMU.Forms.MuckPropertyTextBox();
 			this.buttonMorph = new System.Windows.Forms.Button();
 			this.buttonQMorph = new System.Windows.Forms.Button();
 			this.SuspendLayout();

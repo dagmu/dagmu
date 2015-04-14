@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DagMU.HelperWindows;
+using DagMU.Forms.HelperWindows;
 using System.Threading.Tasks;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	partial class World
 	{
@@ -61,14 +61,14 @@ namespace DagMU
 				w.Hide();
 			}
 
-			boxofmucktext.BackColor = global::DagMU.Properties.Settings.Default.BoxForeColor;
-			boxofmucktext.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::DagMU.Properties.Settings.Default, "BoxForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			boxofmucktext.BackColor = global::DagMU.Forms.Properties.Settings.Default.BoxForeColor;
+			boxofmucktext.DataBindings.Add(new System.Windows.Forms.Binding("ForeColor", global::DagMU.Forms.Properties.Settings.Default, "BoxForeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 	
-			boxofmucktext.BackColor = global::DagMU.Properties.Settings.Default.BoxBackColor;
-			boxofmucktext.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Properties.Settings.Default, "BoxBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			boxofmucktext.BackColor = global::DagMU.Forms.Properties.Settings.Default.BoxBackColor;
+			boxofmucktext.DataBindings.Add(new System.Windows.Forms.Binding("BackColor", global::DagMU.Forms.Properties.Settings.Default, "BoxBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 
-			boxofmucktext.Font = global::DagMU.Properties.Settings.Default.Font;
-			boxofmucktext.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Properties.Settings.Default, "BoxFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			boxofmucktext.Font = global::DagMU.Forms.Properties.Settings.Default.Font;
+			boxofmucktext.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Forms.Properties.Settings.Default, "BoxFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 		}
 
 		List<HelperWindow> HelperWindows;

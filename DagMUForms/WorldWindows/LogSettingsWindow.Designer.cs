@@ -1,4 +1,4 @@
-﻿namespace DagMU
+﻿namespace DagMU.Forms
 {
 	partial class LogSettingsWindow
 	{
@@ -59,23 +59,23 @@
 			// 
 			// numLogOffset
 			// 
-			this.numLogOffset.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DagMU.Properties.Settings.Default, "LogOffset", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.numLogOffset.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::DagMU.Forms.Properties.Settings.Default, "LogOffset", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.numLogOffset.Location = new System.Drawing.Point(12, 83);
 			this.numLogOffset.Name = "numLogOffset";
 			this.numLogOffset.Size = new System.Drawing.Size(120, 20);
 			this.numLogOffset.TabIndex = 3;
-			this.numLogOffset.Value = global::DagMU.Properties.Settings.Default.LogOffset;
+			this.numLogOffset.Value = global::DagMU.Forms.Properties.Settings.Default.LogOffset;
 			// 
 			// txtLogDir
 			// 
-			this.txtLogDir.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DagMU.Properties.Settings.Default, "LogDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+			this.txtLogDir.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::DagMU.Forms.Properties.Settings.Default, "LogDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 			this.txtLogDir.Location = new System.Drawing.Point(12, 28);
 			this.txtLogDir.Margin = new System.Windows.Forms.Padding(2);
 			this.txtLogDir.Name = "txtLogDir";
 			this.txtLogDir.ReadOnly = true;
 			this.txtLogDir.Size = new System.Drawing.Size(349, 20);
 			this.txtLogDir.TabIndex = 1;
-			this.txtLogDir.Text = global::DagMU.Properties.Settings.Default.LogDir;
+			this.txtLogDir.Text = global::DagMU.Forms.Properties.Settings.Default.LogDir;
 			// 
 			// label2
 			// 

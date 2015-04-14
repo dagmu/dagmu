@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace DagMU
+namespace DagMU.Forms
 {
 	public partial class aLogViewer : Form
 	{

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DagMUWPF
+namespace DagMU.WPF
 {
 	class Utils
 	{
