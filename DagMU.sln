@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMU.Forms", "DagMUForms\DagMU.Forms.csproj", "{C7D00BBD-294A-432C-B8FE-F393F4AF316A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMU.Forms", "DagMU.Forms\DagMU.Forms.csproj", "{C7D00BBD-294A-432C-B8FE-F393F4AF316A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogViewerWPF", "LogViewerWPF\LogViewerWPF.csproj", "{E5C00F0E-1B0B-44C4-AC38-F9A271A8B687}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMU.WPF", "DagMUWPF\DagMU.WPF.csproj", "{0AB16579-3BE6-4FBF-B057-5641138FAA9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMU.WPF", "DagMU.WPF\DagMU.WPF.csproj", "{0AB16579-3BE6-4FBF-B057-5641138FAA9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMU.Model", "Model\DagMU.Model.csproj", "{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMU.Model", "DagMU.Model\DagMU.Model.csproj", "{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

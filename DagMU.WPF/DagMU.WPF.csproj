@@ -1119,7 +1119,7 @@
     <Resource Include="icons\zoom_out.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\DagMU.Model.csproj">
+    <ProjectReference Include="..\DagMU.Model\DagMU.Model.csproj">
       <Project>{57b2bbe5-681c-4e8b-b1f3-3af0f54ec73e}</Project>
       <Name>DagMU.Model</Name>
     </ProjectReference>
