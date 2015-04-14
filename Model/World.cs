@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace DagMUWPF.Model
+namespace DagMU.Model
 {
 	[Serializable]
 	public class World
 	{
 		#region construction
 		public World() { Name = String.Empty; }
-		public World(String one) { Name = one; }
+		public World(String value) { Name = value; }
 		#endregion
 
 		public Muck Muck { get; set; }

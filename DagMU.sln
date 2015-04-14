@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogViewerWPF", "LogViewerWP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMUWPF", "DagMUWPF\DagMUWPF.csproj", "{0AB16579-3BE6-4FBF-B057-5641138FAA9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DagMU.Model", "Model\DagMU.Model.csproj", "{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,18 @@ Global
 		{0AB16579-3BE6-4FBF-B057-5641138FAA9C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0AB16579-3BE6-4FBF-B057-5641138FAA9C}.Release|Win32.ActiveCfg = Release|Any CPU
 		{0AB16579-3BE6-4FBF-B057-5641138FAA9C}.Release|x86.ActiveCfg = Release|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Release|Win32.ActiveCfg = Release|Any CPU
+		{57B2BBE5-681C-4E8B-B1F3-3AF0F54EC73E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

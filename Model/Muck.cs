@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DagMUWPF.Model
+namespace DagMU.Model
 {
 	[Serializable]
 	public class Muck

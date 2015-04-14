@@ -56,14 +56,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="InputBoxBox.cs" />
-    <Compile Include="Model\Fur.cs" />
-    <Compile Include="Model\Muck.cs" />
     <Compile Include="Flags.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="winWorlds.xaml.cs">
       <DependentUpon>winWorlds.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\World.cs" />
     <Compile Include="viewmodelWorld.cs" />
     <Page Include="winMain.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -1121,7 +1118,12 @@
     <Resource Include="icons\zoom_in.png" />
     <Resource Include="icons\zoom_out.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Model\DagMU.Model.csproj">
+      <Project>{57b2bbe5-681c-4e8b-b1f3-3af0f54ec73e}</Project>
+      <Name>DagMU.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
