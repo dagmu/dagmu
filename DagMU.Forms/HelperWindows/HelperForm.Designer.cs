@@ -1,6 +1,6 @@
 ﻿namespace DagMU.Forms.HelperWindows
 {
-	partial class HelperWindow
+	partial class HelperForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -51,7 +51,7 @@
 			this.Controls.Add(this.checkBoxOnTop);
 			this.Name = "HelperWindow";
 			this.Text = "HelperWindow";
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HelperWindow_FormClosing);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HelperForm_FormClosing);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

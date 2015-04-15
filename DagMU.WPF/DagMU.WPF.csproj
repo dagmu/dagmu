@@ -58,10 +58,17 @@
     <Compile Include="InputBoxBox.cs" />
     <Compile Include="Flags.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="winConsole.xaml.cs">
+      <DependentUpon>winConsole.xaml</DependentUpon>
+    </Compile>
     <Compile Include="winWorlds.xaml.cs">
       <DependentUpon>winWorlds.xaml</DependentUpon>
     </Compile>
     <Compile Include="viewmodelWorld.cs" />
+    <Page Include="winConsole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="winMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

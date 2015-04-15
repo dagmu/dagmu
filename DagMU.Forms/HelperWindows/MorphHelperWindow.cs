@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DagMU.Forms.HelperWindows
 {
-	public partial class MorphHelperWindow : DagMU.Forms.HelperWindows.HelperWindow
+	public partial class MorphHelperWindow : DagMU.Forms.HelperWindows.HelperForm
 	{
 		public MorphHelperWindow()
 		{

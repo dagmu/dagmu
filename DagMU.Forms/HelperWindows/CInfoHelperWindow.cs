@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DagMU.Forms.HelperWindows
 {
-	public partial class CInfoHelperWindow : HelperWindow
+	public partial class CInfoHelperWindow : HelperForm
 	{
 		public CInfoHelperWindow(String _charactername, bool _owned)
 		{

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DagMU.Forms.HelperWindows
 {
-	public partial class DebugWindow : HelperWindow
+	public partial class DebugWindow : HelperForm
 	{
 		public DebugWindow()
 		{

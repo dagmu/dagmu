@@ -96,8 +96,8 @@ namespace DagMU.Forms
 		DebugWindow debugwindow;
 		LogSettingsWindow logsettings;
 
-		HelperWindows.ConsoleWindow Console;
-		public HelperWindows.DescEditorWindow DescEditor;
+		DagMU.WPF.winConsole Console;
+		HelperWindows.DescEditorWindow DescEditor;
 		HelperWindows.MorphHelperWindow MorphHelper;
 		HelperWindows.FontsColorsWindow FontsColors;
 		HelperWindows.WIHelperWindow WIHelper;
@@ -414,13 +414,9 @@ namespace DagMU.Forms
 			User32.SendMouseWheelEvent(boxofmucktext, e.Delta);
 		}
 
-		void HelperWindowShow(HelperWindows.HelperWindow hw)
+		void HelperShow(IHelper hw)
 		{
 			hw.Show();
-			if (hw.WindowState == System.Windows.Forms.FormWindowState.Minimized)
-				hw.WindowState = System.Windows.Forms.FormWindowState.Normal;
-			hw.Activate();
-			hw.parent = this;
 		}
 
 		void tbnDisconnect_Click(object sender, EventArgs e)
@@ -439,23 +435,23 @@ namespace DagMU.Forms
 
 		void tbnDesc_Click(object sender, EventArgs e)
 		{
-			HelperWindowShow(DescEditor);
+			HelperShow(DescEditor);
 			DescEditor.DescMode = true;
 		}
 
 		void tbnFonts_Click(object sender, EventArgs e)
 		{
-			HelperWindowShow(FontsColors);
+			HelperShow(FontsColors);
 		}
 
 		void tbnWI_Click(object sender, EventArgs e)
 		{
-			HelperWindowShow(WIHelper);
+			HelperShow(WIHelper);
 		}
 
 		void tbnMorphs_Click(object sender, EventArgs e)
 		{
-			HelperWindowShow(MorphHelper);
+			HelperShow(MorphHelper);
 		}
 
 		void tbnCInfo_Click(object sender, EventArgs e)
@@ -475,7 +471,7 @@ namespace DagMU.Forms
 
 		void toolStripButtonConsole_Click(object sender, EventArgs e)
 		{
-			HelperWindowShow(Console);
+			HelperShow(Console);
 		}
 
 		void tbnSettingsDropDown_Click(object sender, EventArgs e)

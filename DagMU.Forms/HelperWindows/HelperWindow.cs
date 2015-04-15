@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DagMU.Forms.HelperWindows
 {
-	public partial class HelperWindow : Form
+	public class HelperWindow : IHelper
 	{
-		public HelperWindow()
+		void IHelper.Show()
 		{
-			InitializeComponent();
+			throw new NotImplementedException();
 		}
+	}
 
-		public World parent;
-
-		void HelperWindow_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			Hide();
-			e.Cancel = true;
-		}
-
-		void checkBoxOnTop_CheckedChanged(object sender, EventArgs e)
-		{
-			TopMost = checkBoxOnTop.Checked;
-		}
+	public interface IHelper
+	{
+		void Show();
 	}
 }

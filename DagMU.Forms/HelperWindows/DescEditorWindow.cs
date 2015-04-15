@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DagMU.Forms.HelperWindows
 {
-	public partial class DescEditorWindow : DagMU.Forms.HelperWindows.HelperWindow
+	public partial class DescEditorWindow : DagMU.Forms.HelperWindows.HelperForm
 	{
 		public DescEditorWindow()
 		{

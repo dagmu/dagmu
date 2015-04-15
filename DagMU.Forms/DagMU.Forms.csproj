@@ -102,6 +102,13 @@
     <Compile Include="HelperWindows\DebugWindow.Designer.cs">
       <DependentUpon>DebugWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperWindows\HelperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperWindows\HelperForm.Designer.cs">
+      <DependentUpon>HelperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelperWindows\HelperWindow.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="WorldWindows\LogSettingsWindow.cs">
       <SubType>Form</SubType>
@@ -146,12 +153,6 @@
     </Compile>
     <Compile Include="HelperWindows\ConsoleWindow.Designer.cs">
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HelperWindows\HelperWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HelperWindows\HelperWindow.Designer.cs">
-      <DependentUpon>HelperWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="WorldWindows\InputBox.cs">
       <SubType>UserControl</SubType>
@@ -219,6 +220,9 @@
     <EmbeddedResource Include="HelperWindows\DebugWindow.resx">
       <DependentUpon>DebugWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelperWindows\HelperForm.resx">
+      <DependentUpon>HelperForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WorldWindows\LogSettingsWindow.resx">
       <DependentUpon>LogSettingsWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,9 +234,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HelperWindows\ConsoleWindow.resx">
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\HelperWindow.resx">
-      <DependentUpon>HelperWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelperWindows\MorphHelperWindow.resx">
       <DependentUpon>MorphHelperWindow.cs</DependentUpon>
@@ -378,6 +379,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DagMU.Model\DagMU.Model.csproj">
+      <Project>{57b2bbe5-681c-4e8b-b1f3-3af0f54ec73e}</Project>
+      <Name>DagMU.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DagMU.WPF\DagMU.WPF.csproj">
+      <Project>{0ab16579-3be6-4fbf-b057-5641138faa9c}</Project>
+      <Name>DagMU.WPF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

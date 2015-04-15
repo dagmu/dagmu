@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DagMU.Forms.HelperWindows;
 using System.Threading.Tasks;
+using DagMU.Forms.HelperWindows;
 
 namespace DagMU.Forms
 {
@@ -27,10 +27,10 @@ namespace DagMU.Forms
 
 			tbnRideMode.ESelect += OnRideModeSelected;
 
-			HelperWindows = new List<HelperWindow>();
+			HelperWindows = new List<HelperForm>();
 			CInfoHelperWindows = new List<CInfoHelperWindow>();
 
-			Console = new HelperWindows.ConsoleWindow();
+			Console = new WPF.winConsole();
 			HelperWindows.Add(Console);
 			Console.Show();
 
@@ -55,7 +55,7 @@ namespace DagMU.Forms
 			FontsColors = new FontsColorsWindow();
 			HelperWindows.Add(FontsColors);
 
-			foreach (HelperWindow w in HelperWindows)
+			foreach (HelperForm w in HelperWindows)
 			{
 				w.parent = this;
 				w.Hide();
@@ -71,7 +71,7 @@ namespace DagMU.Forms
 			boxofmucktext.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Forms.Properties.Settings.Default, "BoxFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 		}
 
-		List<HelperWindow> HelperWindows;
+		List<HelperForm> HelperWindows;
 
 		List<CInfoHelperWindow> CInfoHelperWindows;
 

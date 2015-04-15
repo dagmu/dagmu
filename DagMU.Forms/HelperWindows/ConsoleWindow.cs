@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DagMU.Forms.HelperWindows
 {
-	public partial class ConsoleWindow : HelperWindow
+	public partial class ConsoleWindow : HelperForm
 	{
 		public ConsoleWindow()
 		{
