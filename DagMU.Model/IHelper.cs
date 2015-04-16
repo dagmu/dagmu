@@ -10,6 +10,5 @@ namespace DagMU.Model
 	{
 		void Show();
 		void Hide();
-		void SetIndex(int i);
 	}
 }

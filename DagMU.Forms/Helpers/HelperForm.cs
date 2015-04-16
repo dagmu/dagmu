@@ -11,12 +11,12 @@ namespace DagMU.Forms.Helpers
 			InitializeComponent();
 		}
 
-		internal WorldVM parent { get; set; }
-		internal int index { get; set; }
+		internal WorldVM parent;
+		internal int index;
 
-		void IHelper.SetIndex(int i)
+		void SetParent(WorldVM parent)
 		{
-			index = i;
+			this.parent = parent;
 		}
 
 		void HelperForm_FormClosing(object sender, FormClosingEventArgs e)

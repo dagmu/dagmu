@@ -10,11 +10,5 @@ namespace DagMUWPF.Windows
 {
 	public abstract class Helper : Window, IHelper
 	{
-		internal int index;
-
-		void IHelper.SetIndex(int i)
-		{
-			index = i;
-		}
 	}
 }

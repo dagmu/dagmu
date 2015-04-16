@@ -58,7 +58,7 @@ namespace DagMU.Forms
 
 			foreach (IHelper w in Helpers)
 			{
-				w.SetIndex(index);
+				if (w is HelperForm) (w as HelperForm).parent = this;
 				w.Hide();
 			}
 
