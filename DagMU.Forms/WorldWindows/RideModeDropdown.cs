@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DagMU.Forms.HelperWindows
+namespace DagMU.Forms.Helpers
 {
 	class RideModeDropdown : ToolStripComboBox
 	{

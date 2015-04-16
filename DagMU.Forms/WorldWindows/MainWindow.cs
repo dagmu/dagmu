@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DagMU.Forms.HelperWindows;
+using DagMU.Forms.Helpers;
 
 namespace DagMU.Forms
 {
 	public partial class MainWindow : Form//DagGlassLib.GlassForm
 	{
-		List<World> worlds = new List<World>(); // Collection of worlds
-		World currentworld; // Index of currently selected world in worlds
+		List<WorldVM> worlds = new List<WorldVM>(); // Collection of worlds
+		WorldVM currentworld; // Index of currently selected world in worlds
 		int worldindex = 0; // primary key for worlds
 
 		public MainWindow()
@@ -19,7 +19,7 @@ namespace DagMU.Forms
 
 		void OnWorldResize(object sender, EventArgs e)
 		{
-			World w = (World)sender;
+			WorldVM w = (WorldVM)sender;
 
 			SuspendLayout();
 
@@ -47,14 +47,14 @@ namespace DagMU.Forms
 			tbnForceLocal_Click(null, null);// HACK 
 		}
 
-		void WorldAdd(World.WorldSettings settings, World.WorldPrefs prefs)
+		void WorldVMAdd(WorldVM.WorldSettings settings, WorldVM.WorldPrefs prefs)
 		{
-			World w = new World(worldindex++);
+			WorldVM w = new WorldVM(worldindex++);
 			worlds.Add(w);
 			currentworld = w;
 
 			w.settings = settings;
-			w.prefs = prefs ?? new World.WorldPrefs();
+			w.prefs = prefs ?? new WorldVM.WorldPrefs();
 
 			w.Left = 0;
 			w.Top = 0;
@@ -73,7 +73,7 @@ namespace DagMU.Forms
 
 		void OnWorldDisconnected(object sender, EventArgs e)
 		{
-			if (sender as World == currentworld)
+			if (sender as WorldVM == currentworld)
 				tbnConnectEnabled(true);
 		}
 
@@ -83,13 +83,13 @@ namespace DagMU.Forms
 
 		void OnWorldConnected(object sender, EventArgs e)
 		{
-			if (sender as World == currentworld)
+			if (sender as WorldVM == currentworld)
 				tbnConnectEnabled(false);
 		}
 
 		void OnWorldClosing(object sender, EventArgs e)
 		{
-			World world = sender as World;
+			WorldVM world = sender as WorldVM;
 			if (world == currentworld)
 				tbnConnectEnabled(true);
 			world.Hide();
@@ -97,12 +97,12 @@ namespace DagMU.Forms
 			worlds.Remove(world);
 		}
 
-		World CurrentWorld { get { return worlds.SingleOrDefault(x => x == currentworld); } }
+		WorldVM CurrentWorld { get { return worlds.SingleOrDefault(x => x == currentworld); } }
 
 		void tbnForceLocal_Click(object sender, EventArgs e)
 		{
-			WorldAdd(
-				new World.WorldSettings() {
+			WorldVMAdd(
+				new WorldVM.WorldSettings() {
 					Address = "localhost",
 					Port = 2069,
 					NameFull = "Localhost",
@@ -110,23 +110,23 @@ namespace DagMU.Forms
 					sendbuffersize = 4096,
 					sendQUITstring = "QUIT",
 				},
-				new World.WorldPrefs() {
+				new WorldVM.WorldPrefs() {
 				}
 			);
 		}
 
 		void tbnTaps_Click(object sender, EventArgs e)
 		{
-			WorldAdd(
+			WorldVMAdd(
 				tapsSettings(),
-				new World.WorldPrefs() {
+				new WorldVM.WorldPrefs() {
 				}
 			);
 		}
 
-		World.WorldSettings tapsSettings()
+		WorldVM.WorldSettings tapsSettings()
 		{
-			return new World.WorldSettings() {
+			return new WorldVM.WorldSettings() {
 				//connection settings
 				Address = "tapestries.fur.com",
 				Port = 6699,//ssl
@@ -145,7 +145,7 @@ namespace DagMU.Forms
 
 		void tbnConnect_Click(object sender, EventArgs e)
 		{
-			World w = CurrentWorld;
+			WorldVM w = CurrentWorld;
 
 			if (w == null)
 				return;

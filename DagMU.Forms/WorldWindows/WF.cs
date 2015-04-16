@@ -5,7 +5,7 @@ namespace DagMU.Forms
 {
 	public partial class WF : UserControl
 	{
-		public WF(DagMU.Forms.World parentworld)
+		public WF(DagMU.Forms.WorldVM parentworld)
 		{
 			InitializeComponent(); 
 			parent = parentworld;
@@ -13,7 +13,7 @@ namespace DagMU.Forms
 			HiddenFor = 0;
 		}
 
-		private World parent;
+		private WorldVM parent;
 
 		// Hidey stuff
 		#region Hidey stuff

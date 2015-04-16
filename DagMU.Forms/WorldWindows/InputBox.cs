@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DagMU.Forms.HelperWindows
+namespace DagMU.Forms.Helpers
 {
 	public partial class InputBox : System.Windows.Forms.UserControl
 	{

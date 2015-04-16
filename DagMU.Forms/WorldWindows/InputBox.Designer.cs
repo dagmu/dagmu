@@ -1,4 +1,4 @@
-﻿namespace DagMU.Forms.HelperWindows
+﻿namespace DagMU.Forms.Helpers
 {
 	partial class InputBox
 	{

@@ -54,11 +54,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -70,6 +71,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aLogViewer.cs">
@@ -78,37 +81,36 @@
     <Compile Include="aLogViewer.Designer.cs">
       <DependentUpon>aLogViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\BuilderWindow.cs">
+    <Compile Include="Helpers\BuilderWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\BuilderWindow.Designer.cs">
+    <Compile Include="Helpers\BuilderWindow.Designer.cs">
       <DependentUpon>BuilderWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\CInfoHelperWindow.cs">
+    <Compile Include="Helpers\CInfoHelperWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\CInfoHelperWindow.Designer.cs">
+    <Compile Include="Helpers\CInfoHelperWindow.Designer.cs">
       <DependentUpon>CInfoHelperWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\CInfoHelperWindowField.cs">
+    <Compile Include="Helpers\CInfoHelperWindowField.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HelperWindows\CInfoHelperWindowField.Designer.cs">
+    <Compile Include="Helpers\CInfoHelperWindowField.Designer.cs">
       <DependentUpon>CInfoHelperWindowField.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\DebugWindow.cs">
+    <Compile Include="Helpers\DebugWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\DebugWindow.Designer.cs">
+    <Compile Include="Helpers\DebugWindow.Designer.cs">
       <DependentUpon>DebugWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\HelperForm.cs">
+    <Compile Include="Helpers\HelperForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\HelperForm.Designer.cs">
+    <Compile Include="Helpers\HelperForm.Designer.cs">
       <DependentUpon>HelperForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\HelperWindow.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="WorldWindows\LogSettingsWindow.cs">
       <SubType>Form</SubType>
@@ -119,39 +121,39 @@
     <Compile Include="WorldWindows\InputTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HelperWindows\MorphHelperWindow.cs">
+    <Compile Include="Helpers\MorphHelperWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\MorphHelperWindow.Designer.cs">
+    <Compile Include="Helpers\MorphHelperWindow.Designer.cs">
       <DependentUpon>MorphHelperWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\WhoHelperWindow.cs">
+    <Compile Include="Helpers\WhoHelperWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\WhoHelperWindow.Designer.cs">
+    <Compile Include="Helpers\WhoHelperWindow.Designer.cs">
       <DependentUpon>WhoHelperWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\WIHelperWindow.cs">
+    <Compile Include="Helpers\WIHelperWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\WIHelperWindow.Designer.cs">
+    <Compile Include="Helpers\WIHelperWindow.Designer.cs">
       <DependentUpon>WIHelperWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="WorldWindows\Box.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Connection.cs" />
-    <Compile Include="HelperWindows\DescEditorWindow.cs">
+    <Compile Include="Helpers\DescEditorWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\DescEditorWindow.Designer.cs">
+    <Compile Include="Helpers\DescEditorWindow.Designer.cs">
       <DependentUpon>DescEditorWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Fur.cs" />
-    <Compile Include="HelperWindows\ConsoleWindow.cs">
+    <Compile Include="Helpers\ConsoleWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\ConsoleWindow.Designer.cs">
+    <Compile Include="Helpers\ConsoleWindow.Designer.cs">
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="WorldWindows\InputBox.cs">
@@ -166,10 +168,10 @@
     <Compile Include="WorldWindows\InputBoxBox.Designer.cs">
       <DependentUpon>InputBoxBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="HelperWindows\FontsColorsWindow.cs">
+    <Compile Include="Helpers\FontsColorsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HelperWindows\FontsColorsWindow.Designer.cs">
+    <Compile Include="Helpers\FontsColorsWindow.Designer.cs">
       <DependentUpon>FontsColorsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="WorldWindows\MuckPropertyTextBox.cs">
@@ -188,7 +190,7 @@
     <Compile Include="WorldWindows\WF.Designer.cs">
       <DependentUpon>WF.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorldWindows\World.cs">
+    <Compile Include="WorldWindows\WorldVM.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="WorldWindows\MainWindow.cs">
@@ -208,19 +210,19 @@
     <EmbeddedResource Include="aLogViewer.resx">
       <DependentUpon>aLogViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\BuilderWindow.resx">
+    <EmbeddedResource Include="Helpers\BuilderWindow.resx">
       <DependentUpon>BuilderWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\CInfoHelperWindow.resx">
+    <EmbeddedResource Include="Helpers\CInfoHelperWindow.resx">
       <DependentUpon>CInfoHelperWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\CInfoHelperWindowField.resx">
+    <EmbeddedResource Include="Helpers\CInfoHelperWindowField.resx">
       <DependentUpon>CInfoHelperWindowField.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\DebugWindow.resx">
+    <EmbeddedResource Include="Helpers\DebugWindow.resx">
       <DependentUpon>DebugWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\HelperForm.resx">
+    <EmbeddedResource Include="Helpers\HelperForm.resx">
       <DependentUpon>HelperForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorldWindows\LogSettingsWindow.resx">
@@ -229,19 +231,19 @@
     <EmbeddedResource Include="WorldWindows\InputTextBox.resx">
       <DependentUpon>InputTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\DescEditorWindow.resx">
+    <EmbeddedResource Include="Helpers\DescEditorWindow.resx">
       <DependentUpon>DescEditorWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\ConsoleWindow.resx">
+    <EmbeddedResource Include="Helpers\ConsoleWindow.resx">
       <DependentUpon>ConsoleWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\MorphHelperWindow.resx">
+    <EmbeddedResource Include="Helpers\MorphHelperWindow.resx">
       <DependentUpon>MorphHelperWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\WhoHelperWindow.resx">
+    <EmbeddedResource Include="Helpers\WhoHelperWindow.resx">
       <DependentUpon>WhoHelperWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\WIHelperWindow.resx">
+    <EmbeddedResource Include="Helpers\WIHelperWindow.resx">
       <DependentUpon>WIHelperWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorldWindows\InputBox.resx">
@@ -263,7 +265,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="HelperWindows\FontsColorsWindow.resx">
+    <EmbeddedResource Include="Helpers\FontsColorsWindow.resx">
       <DependentUpon>FontsColorsWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -274,8 +276,8 @@
       <DependentUpon>WF.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="WorldWindows\World.resx">
-      <DependentUpon>World.cs</DependentUpon>
+    <EmbeddedResource Include="WorldWindows\WorldVM.resx">
+      <DependentUpon>WorldVM.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -286,7 +288,7 @@
     <EmbeddedResource Include="WorldWindows\WorldToolStripMenuItem.resx">
       <DependentUpon>WorldToolStripMenuItem.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="WorldWindows\World.ProcLine.cs">
+    <Compile Include="WorldWindows\WorldVM.ProcLine.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <None Include="WorldWindows\_WorldParts.cd" />
@@ -299,7 +301,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="WorldWindows\World.Functions.cs">
+    <Compile Include="WorldWindows\WorldVM.Functions.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
@@ -385,9 +387,9 @@
       <Project>{57b2bbe5-681c-4e8b-b1f3-3af0f54ec73e}</Project>
       <Name>DagMU.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DagMU.WPF\DagMU.WPF.csproj">
+    <ProjectReference Include="..\DagMU.WPF\DagMUWPF.csproj">
       <Project>{0ab16579-3be6-4fbf-b057-5641138faa9c}</Project>
-      <Name>DagMU.WPF</Name>
+      <Name>DagMUWPF</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

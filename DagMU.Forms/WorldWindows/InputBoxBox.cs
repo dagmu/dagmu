@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DagMU.Forms.HelperWindows
+namespace DagMU.Forms.Helpers
 {
 	public partial class InputBoxBox : UserControl
 	{

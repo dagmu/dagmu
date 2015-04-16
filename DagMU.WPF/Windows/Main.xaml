@@ -1,0 +1,73 @@
+﻿<Window x:Class="DagMUWPF.Windows.Main"
+				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				xmlns:ctr ="clr-namespace:DagMUWPF.Controls"
+				xmlns:win="clr-namespace:DagMUWPF.Windows"
+				x:Name="main"
+				Title="MainWindow" Height="350" Width="525">
+	<Window.Resources>
+		<CollectionViewSource x:Key="RideModeSource" Source="{Binding Path=RideModes}" />
+	</Window.Resources>
+	<DockPanel>
+		<TabControl>
+			<!--<TabControl.ItemsSource>
+				<CompositeCollection>
+					<CollectionContainer Collection="{Binding Source={StaticResource WorldsSource}}"/>
+					<TabItem>
+						<Button>Add new world</Button>
+					</TabItem>
+				</CompositeCollection>
+			</TabControl.ItemsSource>-->
+			<TabItem>
+				<TabItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="icons/lightning.png"/>
+						<TextBlock Margin="2,0,0,0">Lightning</TextBlock>
+					</StackPanel>
+				</TabItem.Header>
+				<DockPanel LastChildFill="True">
+
+					<ToolBarTray DockPanel.Dock="Top">
+						<ToolBar x:Name="toolbarWorld">
+							<Button>hi</Button>
+							<Button>hi</Button>
+						</ToolBar>
+						<ToolBar x:Name="toolbarRidemode" >
+							<ComboBox x:Name="dropdownRideMode" Width="100" ItemsSource="{Binding Path=RideModes}"/>
+						</ToolBar>
+					</ToolBarTray>
+
+					<ctr:InputBoxBox x:Name="InputBoxBox" Height="Auto" DockPanel.Dock="Bottom">
+						<TextBox x:Name="InputBox" Height="66" />
+						<TextBox/>
+					</ctr:InputBoxBox>
+
+					<TextBox x:Name="WorldBox">
+						<TextBox.Background>
+							<LinearGradientBrush>
+								<GradientStop Color="LightBlue" Offset="0" />
+								<GradientStop Color="White" Offset="1" />
+							</LinearGradientBrush>
+						</TextBox.Background>
+					</TextBox>
+
+				</DockPanel>
+			</TabItem>
+			<TabItem x:Name="New" MouseDown="New_MouseDown">
+				<TabItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="icons/cog.png"/>
+						<TextBlock Margin="2,0,0,0">more</TextBlock>
+					</StackPanel>
+				</TabItem.Header>
+				<TabItem.Background>
+					<LinearGradientBrush>
+						<GradientStop Color="Gray" Offset="0" />
+						<GradientStop Color="Red" Offset="1" />
+					</LinearGradientBrush>
+				</TabItem.Background>
+				rar
+			</TabItem>
+		</TabControl>
+	</DockPanel>
+</Window>

@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DagMU.WPF
+namespace DagMUWPF
 {
-	class Utils
+	internal static class Utils
 	{
-		static public String AssemblyDirectory
+		internal static String AssemblyDirectory
 		{
 			get
 			{

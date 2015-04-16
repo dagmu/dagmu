@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DagMU.Model;
 
-namespace DagMU.WPF
+namespace DagMUWPF
 {
 	class viewmodelWorld : World
 	{
