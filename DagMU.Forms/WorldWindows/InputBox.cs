@@ -210,7 +210,11 @@ namespace DagMU.Forms.Helpers
 				case Keys.Down:
 					if (history.Count == 0) return;
 					if (historyCurrent < history.Count) historyCurrent++;
-					input.Text = history[historyCurrent];
+					if (historyCurrent != history.Count) {
+						input.Text = history[historyCurrent];
+					} else {
+						input.Text = String.Empty;
+					}
 					input.SelectionStart = input.TextLength;
 					break;
 
@@ -232,7 +236,7 @@ namespace DagMU.Forms.Helpers
 					string trimmed = input.Text.Trim();
 					if (trimmed.Length == 0) { e.SuppressKeyPress = true; break; }
 					ESend(this, trimmed);
-					if (history.Count == 0) { history.Add(trimmed); historyCurrent = 0; }
+					if (history.Count == 0) { history.Add(trimmed); historyCurrent = 1; }
 					else if (trimmed != history[history.Count - 1]) { history.Add(trimmed); historyCurrent++; }
 					e.SuppressKeyPress = true;
 					break;
