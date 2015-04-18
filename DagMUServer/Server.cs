@@ -8,10 +8,12 @@ namespace DagMUServer
 {
 	class Server
 	{
-		TcpListener listener;
-		Dictionary<string, Client> clients = new Dictionary<string, Client>();
+		public async Task Start()
+		{
+			await Start(IPAddress.Any);
+		}
 
-		public async void Start(IPAddress ipAddress, int port)
+		public async Task Start(IPAddress ipAddress, int port = 2069)
 		{
 			Log(typeof(Program).Assembly.GetName().Name);
 			listener = new TcpListener(port);
@@ -22,17 +24,20 @@ namespace DagMUServer
 			}
 		}
 
+		private TcpListener listener;
+		private Dictionary<string, Client> clients = new Dictionary<string, Client>();
+
 		private async Task acceptClient()
 		{
 			var client = await listener.AcceptTcpClientAsync();
 			var id = Guid.NewGuid().ToString();
-			Log("Accepted client {0}.", id);
+			Log("{0} connected", id);
 			clients.Add(id, new Client(client, clientReceived, clientClosed, id));
 		}
 
-		public void clientReceived(string msg, string id)
+		private void clientReceived(string msg, string id)
 		{
-			Log(msg);
+			Log(msg, id);
 			Client client = clients[id];
 
 			switch (msg) {
@@ -51,14 +56,14 @@ namespace DagMUServer
 			}
 		}
 
-		public void clientClosed(string id)
+		private void clientClosed(string id)
 		{
-			Log("Client {0} disconnected.", id);
+			Log("{0} disconnected", id);
 			clients[id].client.Close();
 			clients.Remove(id);
 		}
 
-		public static void Log(string msg, params object[] args)
+		private static void Log(string msg, params object[] args)
 		{
 			Console.WriteLine(msg, args);
 		}
