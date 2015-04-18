@@ -7,13 +7,12 @@ namespace DagMUServer
 {
 	class Client
 	{
-		private readonly TcpClient client;
+		internal readonly TcpClient client;
 
-		private readonly Action<string> callbackClosed;
-		private readonly Action<string, string> callbackReceive;
-
-		private readonly StreamReader reader;
-		private readonly StreamWriter writer;
+		readonly Action<string> callbackClosed;
+		readonly Action<string, string> callbackReceive;
+		readonly StreamReader reader;
+		readonly StreamWriter writer;
 
 		private readonly string id;
 		public string Id { get { return id; } }
@@ -34,14 +33,17 @@ namespace DagMUServer
 		public async void StartReceive()
 		{
 			while (true) {
-				var message = await reader.ReadLineAsync();
+				string line; 
+				try {
+					line = await reader.ReadLineAsync();
+				} catch (ObjectDisposedException) { return; }
 
-				if (String.IsNullOrEmpty(message)) {
-					await Task.Run(() => callbackClosed(id));
+				if (String.IsNullOrEmpty(line)) {
+					callbackClosed(id);
 					return;
 				}
 
-				callbackReceive(message, id);
+				callbackReceive(line, id);
 			}
 		}
 

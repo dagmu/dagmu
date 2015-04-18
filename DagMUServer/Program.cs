@@ -7,15 +7,12 @@ namespace DagMUServer
 	{
 		const int port = 2069;
 
-		//much mess
-		//needs more https://msdn.microsoft.com/en-us/magazine/dn605876.aspx
 		static void Main(string[] args)
 		{
-			IPAddress ipAddress = Dns.GetHostEntry("localhost").AddressList[0];
+			IPAddress IPv4 = IPAddress.Any;
+			//IPAddress IPv6 = Dns.GetHostEntry("127.0.0.1").AddressList[0];
+			new Server().Start(IPv4, port);
 
-			var server = new Server();
-			server.Start(ipAddress, port);
-			Console.WriteLine(String.Format("Listening on {0}:{1}", ipAddress.ToString(), port));
 			Console.ReadLine();
 		}
 	}
