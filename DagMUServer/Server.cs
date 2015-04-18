@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DagMUServer
 {
-	class Server
+	public class Server
 	{
 		public async Task Start()
 		{
@@ -24,10 +24,10 @@ namespace DagMUServer
 			}
 		}
 
-		private TcpListener listener;
-		private Dictionary<string, Client> clients = new Dictionary<string, Client>();
+		TcpListener listener;
+		Dictionary<string, Client> clients = new Dictionary<string, Client>();
 
-		private async Task acceptClient()
+		async Task acceptClient()
 		{
 			var client = await listener.AcceptTcpClientAsync();
 			var id = Guid.NewGuid().ToString();
@@ -35,7 +35,7 @@ namespace DagMUServer
 			clients.Add(id, new Client(client, clientReceived, clientClosed, id));
 		}
 
-		private void clientReceived(string msg, string id)
+		void clientReceived(string msg, string id)
 		{
 			Log(msg, id);
 			Client client = clients[id];
@@ -56,14 +56,14 @@ namespace DagMUServer
 			}
 		}
 
-		private void clientClosed(string id)
+		void clientClosed(string id)
 		{
 			Log("{0} disconnected", id);
 			clients[id].client.Close();
 			clients.Remove(id);
 		}
 
-		private static void Log(string msg, params object[] args)
+		static void Log(string msg, params object[] args)
 		{
 			Console.WriteLine(msg, args);
 		}

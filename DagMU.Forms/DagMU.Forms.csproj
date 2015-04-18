@@ -391,6 +391,10 @@
       <Project>{0ab16579-3be6-4fbf-b057-5641138faa9c}</Project>
       <Name>DagMUWPF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DagMUServer\DagMUServer.csproj">
+      <Project>{d2010492-c33e-4920-a8d0-63edc4e8316f}</Project>
+      <Name>DagMUServer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

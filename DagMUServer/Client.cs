@@ -14,10 +14,9 @@ namespace DagMUServer
 		readonly StreamReader reader;
 		readonly StreamWriter writer;
 
-		private readonly string id;
-		public string Id { get { return id; } }
+		readonly string id;
 
-		public Client(TcpClient client, Action<string, string> callbackReceive, Action<string> callbackClose, string id)
+		internal Client(TcpClient client, Action<string, string> callbackReceive, Action<string> callbackClose, string id)
 		{
 			this.callbackClosed = callbackClose;
 			this.client = client;
@@ -30,10 +29,17 @@ namespace DagMUServer
 			StartReceive();
 		}
 
-		public async void StartReceive()
+		internal async void Send(string message)
+		{
+			if (String.IsNullOrEmpty(message)) return;
+
+			await writer.WriteLineAsync(message);
+		}
+
+		async void StartReceive()
 		{
 			while (true) {
-				string line; 
+				string line;
 				try {
 					line = await reader.ReadLineAsync();
 				} catch (ObjectDisposedException) { return; }
@@ -45,13 +51,6 @@ namespace DagMUServer
 
 				callbackReceive(line, id);
 			}
-		}
-
-		public async void Send(string message)
-		{
-			if (String.IsNullOrEmpty(message)) return;
-
-			await writer.WriteLineAsync(message);
 		}
 	}
 }

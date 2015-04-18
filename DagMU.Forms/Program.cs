@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+
+using DagMUServer;
 
 namespace DagMU.Forms
 {
@@ -12,6 +15,8 @@ namespace DagMU.Forms
         [STAThread]
         static void Main()
         {
+			Task.Run(() => new Server().Start());
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainWindow());
