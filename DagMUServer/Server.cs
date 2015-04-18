@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace DagMUServer
 			Log(typeof(Program).Assembly.GetName().Name);
 			listener = new TcpListener(port);
 			listener.Start();
-			Log("Listening on {0} : {1}", ipAddress.ToString(), port);
+			LogFormat("Listening on {0} : {1}", ipAddress.ToString(), port);
 			while (true) {
 				await acceptClient();
 			}
@@ -31,16 +32,61 @@ namespace DagMUServer
 		{
 			var client = await listener.AcceptTcpClientAsync();
 			var id = Guid.NewGuid().ToString();
-			Log("{0} connected", id);
+			LogFormat("{0} connected", id);
 			clients.Add(id, new Client(client, clientReceived, clientClosed, id));
+			clientConnected(clients[id]);
 		}
 
-		void clientReceived(string msg, string id)
+		void clientConnected(Client client)
 		{
-			Log(msg, id);
-			Client client = clients[id];
+			string dirFound = findDir("taps");
+			if (String.IsNullOrEmpty(dirFound)) return;
+			string filename = dirFound + "welcome.txt";
 
-			switch (msg) {
+			foreach (var line in File.ReadLines(filename)) {
+				client.Send(line);
+			}
+		}
+
+		void clientReceived(string msg, Client client)
+		{
+			Log(msg);
+
+			if (msg.StartsWith("dagmuecho ")) {
+				var s = msg.Substring("dagmuecho ".Length);
+				client.Send(s);
+			} else switch (msg) {
+				case "exa me=/_page/lastpaged":
+					client.Send(new List<string>() {
+						"str /_page/lastpaged:Ashkii",
+						"1 property listed.",
+					});
+					break;
+				case "exa me=/_whisp/lastwhispered":
+					client.Send("0 properties listed.");
+					break;
+				case "l":
+				case "look":
+					client.Send(new List<string>() {
+						"Name",
+						"   Description",
+					});
+					break;
+				case "exa me=/ride/_mode":
+					client.Send(new List<string>() {
+						"str /RIDE/_mode:hand",
+						"1 property listed.",
+					});
+					break;
+				case "wf #hidefrom":
+					client.Send("Hiding from: *no one*");
+					break;
+				case "@mpi {name:me}":
+					client.Send(new List<string>() {
+						"Arg:    {name:me}",
+						"Result: Kael",
+					});
+					break;
 				case "hi":
 					client.Send("hey");
 					break;
@@ -48,7 +94,7 @@ namespace DagMUServer
 					client.Send("hi");
 					break;
 				case "QUIT":
-					clientClosed(id);
+					clientClosed(client);
 					break;
 				default:
 					client.Send(msg);
@@ -56,16 +102,37 @@ namespace DagMUServer
 			}
 		}
 
-		void clientClosed(string id)
+		void clientClosed(Client client)
 		{
-			Log("{0} disconnected", id);
-			clients[id].client.Close();
-			clients.Remove(id);
+			LogFormat("{0} disconnected", client.id);
+			client.client.Close();
+			clients.Remove(client.id);
 		}
 
-		static void Log(string msg, params object[] args)
+		static void Log(string msg)
+		{
+			Console.WriteLine(msg);
+		}
+
+		static void LogFormat(string msg, params object[] args)
 		{
 			Console.WriteLine(msg, args);
+		}
+
+		private static string findDir(string dir, int levelsToTraverseUp = 4)
+		{
+			//look up a few directories for taps text folder
+			string dirFound = null;
+			string directoryPrefix = String.Empty;
+			for (int i = 0; i < levelsToTraverseUp; i++) {
+				string dirName = (String.IsNullOrEmpty(directoryPrefix) ? "./" : directoryPrefix) + dir;
+				if (Directory.Exists(dirName)) {
+					dirFound = dirName + "/";
+					break;
+				}
+				directoryPrefix += "../";
+			}
+			return dirFound;
 		}
 	}
 }

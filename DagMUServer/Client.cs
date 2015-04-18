@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DagMUServer
@@ -9,14 +11,14 @@ namespace DagMUServer
 	{
 		internal readonly TcpClient client;
 
-		readonly Action<string> callbackClosed;
-		readonly Action<string, string> callbackReceive;
+		readonly Action<Client> callbackClosed;
+		readonly Action<string, Client> callbackReceive;
 		readonly StreamReader reader;
 		readonly StreamWriter writer;
 
-		readonly string id;
+		internal readonly string id;
 
-		internal Client(TcpClient client, Action<string, string> callbackReceive, Action<string> callbackClose, string id)
+		internal Client(TcpClient client, Action<string, Client> callbackReceive, Action<Client> callbackClose, string id)
 		{
 			this.callbackClosed = callbackClose;
 			this.client = client;
@@ -29,12 +31,23 @@ namespace DagMUServer
 			StartReceive();
 		}
 
+		internal void Send(IEnumerable<string> lines)
+		{
+			foreach (var line in lines) Send(line);
+		}
+
 		internal async void Send(string message)
 		{
 			if (String.IsNullOrEmpty(message)) return;
 
-			await writer.WriteLineAsync(message);
+			await sendLock.WaitAsync();
+			try {
+				await writer.WriteLineAsync(message);
+			} finally {
+				sendLock.Release();
+			}
 		}
+		private static SemaphoreSlim sendLock = new SemaphoreSlim(1);
 
 		async void StartReceive()
 		{
@@ -42,14 +55,14 @@ namespace DagMUServer
 				string line;
 				try {
 					line = await reader.ReadLineAsync();
-				} catch (ObjectDisposedException) { return; }
+				} catch { return; }
 
 				if (String.IsNullOrEmpty(line)) {
-					callbackClosed(id);
+					callbackClosed(this);
 					return;
 				}
 
-				callbackReceive(line, id);
+				callbackReceive(line, this);
 			}
 		}
 	}

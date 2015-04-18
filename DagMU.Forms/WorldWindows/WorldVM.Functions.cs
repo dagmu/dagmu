@@ -200,8 +200,6 @@ namespace DagMU.Forms
 
 		public void Send(String line, InputBox ib = null)
 		{
-			if ((status != MuckStatus.intercepting_normal) && (ib == null)) return;//only send automatic stuff to the muck if we're in normal mode, so clicking buttons won't cause problems when the muck isn't ready for it
-
 			connection.Send(line, ib);
 			Console.Print("]" + line + "\n");
 		}
@@ -238,7 +236,7 @@ namespace DagMU.Forms
 
 		void Echo(String s)
 		{
-			connection.Send("dagmuecho dagmu_echo " + s);// should add a random number check here that we pick at startup
+			Send("dagmuecho dagmu_echo " + s);// should add a random number check here that we pick at startup
 		}
 
 		bool isecho(String s)

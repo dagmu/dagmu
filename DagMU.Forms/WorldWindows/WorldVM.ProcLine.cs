@@ -28,15 +28,12 @@ namespace DagMU.Forms
 					// intercepting_connecting
 					// Brand new connection, expecting the welcome.txt
 					boxprint(s);
-					if (!s.StartsWith(">> This notice put in for your protection from unwanted publications.")) //TAPS
-						return;
 
 					// Ready to log in
-					if (prefs.sendOnConnect != null) {
-						connection.Send(prefs.sendOnConnect);
-					}
+					if (prefs.sendOnConnect != null)
+						Send(prefs.sendOnConnect);
+
 					newStatus(MuckStatus.intercepting_connecting2);
-					// UNDONE newinputbox(3); // make a 3 line input box
 					return;
 				// end case intercepting_connecting
 
@@ -67,14 +64,14 @@ namespace DagMU.Forms
 						boxofmucktext.Clear();
 						boxofmucktext.ClearUndo();
 
-						connection.Send("exa me=/_page/lastpaged");
-						connection.Send("exa me=/_whisp/lastwhispered");
-						connection.Send("exa me=/ride/_mode");
-						connection.Send("wf #hidefrom");
+						Send("exa me=/_page/lastpaged");
+						Send("exa me=/_whisp/lastwhispered");
+						Send("exa me=/ride/_mode");
+						Send("wf #hidefrom");
 
-						connection.Send("@mpi {name:me}");//get character name on connect!
+						Send("@mpi {name:me}");//get character name on connect!
 
-						connection.Send("look");//TAPS
+						Send("look");//TAPS
 						return;
 					}
 
@@ -109,10 +106,9 @@ namespace DagMU.Forms
 						return;
 					}
 
-
 					// Email verification: infrequent but annoying
 					if (s == "### Please verify your email address!") {//TAPS
-						connection.Send("@email #verify yes"); //TAPS
+						Send("@email #verify yes"); //TAPS
 						boxprint("Email autoverified to the muck, please check console for correctness.");
 						return;
 					}
