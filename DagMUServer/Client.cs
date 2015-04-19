@@ -9,6 +9,7 @@ namespace DagMUServer
 {
 	class Client
 	{
+		internal bool LoggedIn = false;
 		internal readonly TcpClient client;
 
 		readonly Action<Client> callbackClosed;

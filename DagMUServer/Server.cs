@@ -63,11 +63,17 @@ namespace DagMUServer
 		{
 			Log(msg);
 
-			if (msg.StartsWith("dagmu_echo ")) {
+			if (!client.LoggedIn) {
+				if (msg.StartsWith("connect")) {
+					client.LoggedIn = true;
+					client.Send("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+				} else {
+					client.Send("Either that player does not exist, or has a different password.");
+				}
+			} else if (msg.StartsWith("dagmu_echo ")) {
 				if (options.echo) {
 					try {
 						var s = msg.Substring("dagmu_echo ".Length);
-						//s = s.Substring(s.IndexOf(" ") + 1);//get just the data string
 						client.Send(s);
 					} catch { }
 				} else {
