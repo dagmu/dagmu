@@ -239,8 +239,9 @@ namespace DagMU.Forms
 				debugwindow.UpdateStatus(newstatus.ToString());
 		}
 
-		void Echo(string s)
+		void Echo(string s, bool overrideEchoNotSet = false)
 		{
+			if (!echo && !overrideEchoNotSet) throw new InvalidOperationException("Echo not set.");
 			SendFormat("{0} {1}{2} {3}",
 				DagMU.Model.Constants.dagmu_echo_name,
 				DagMU.Model.Constants.dagmu_echo_prefix,

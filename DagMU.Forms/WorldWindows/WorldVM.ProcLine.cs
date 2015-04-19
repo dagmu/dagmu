@@ -23,31 +23,35 @@ namespace DagMU.Forms
 				inlimbo = false;
 
 			switch (status) {
-
+				#region connecting
 				case MuckStatus.intercepting_connecting:
-					// intercepting_connecting
 					// Brand new connection, expecting the welcome.txt
 					boxprint(s);
 
-					// Ready to log in
-					if (prefs.sendOnConnect != null)
-						Send(prefs.sendOnConnect);
-
-					newStatus(MuckStatus.intercepting_connecting2);
-					return;
-				// end case intercepting_connecting
-
-				case MuckStatus.intercepting_connecting2:
-					// intercepting_connecting2
-					// Either the MOTD or a connection error (full, locked, invalid user/pass)
-					// Login sent
-					boxprint(s);
-					if (s == "Either that player does not exist, or has a different password.") {//TAPS
-						connection.Disconnect();
-						return;
+					if (s.StartsWith(">> This notice put in for your protection from unwanted publications.")) {//TAPS
+						// Ready to log in
+						if (prefs.sendOnConnect != null) Send(prefs.sendOnConnect);//send autoconnect
+						newStatus(MuckStatus.intercepting_connecting2);//wait for login
 					}
 
-					Echo("LOGGEDIN");
+					return;
+
+				case MuckStatus.intercepting_connecting2:
+					// Not sure if logged in
+					// Either the MOTD or a connection error (full, locked, invalid user/pass)
+					boxprint(s);
+
+					switch (s) {
+						case "":
+							return;
+						case "Either that player does not exist, or has a different password.":
+							connection.Disconnect();
+							return;
+						case "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -":
+							break;
+					}
+
+					Echo("LOGGEDIN", true);
 
 					newStatus(MuckStatus.intercepting_normal);// from here it is assumed login was successful
 
@@ -57,10 +61,8 @@ namespace DagMU.Forms
 					Send("wf #hidefrom");
 					Send("@mpi {name:me}");//get character name on connect!
 
-					// TODO check for invalid login messages
 					return;
-				// end case intercepting_connecting2
-
+				#endregion
 
 				case MuckStatus.intercepting_normal:
 					// This is where we enter streammodes to deal with multiple line blocks
@@ -210,6 +212,8 @@ namespace DagMU.Forms
 
 					// WF: On-the-fly WF info, not always reliable
 					if (s.StartsWith("Somewhere on the muck, ")) {//TAPS
+						boxprint(s);
+
 						s = s.Substring(23);//TAPS
 
 						// Find the end of the name, since .net doesn't have a trimright
