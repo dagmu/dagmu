@@ -81,6 +81,9 @@ namespace DagMU.Forms
 		string lastwhispered;	// these track the last person you paged/whispered to,
 		string lastpaged;		// so when you type "p =" it will fill in the name as soon as you type the = sign
 		bool inlimbo;
+		bool echo = false;		// is dagmuecho working?
+
+		string sessionGuid = DagMU.Model.Utils.GuidEncoder.Encode(Guid.NewGuid());
 
 		MuckConnection connection;
 

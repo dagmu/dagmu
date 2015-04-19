@@ -204,6 +204,11 @@ namespace DagMU.Forms
 			Console.Print("]" + line + "\n");
 		}
 
+		public void SendFormat(String line, params object[] args)
+		{
+			Send(String.Format(line, args), null);
+		}
+
 		public void boxprint(String s)
 		{
 			if (boxofmucktext.InvokeRequired) { this.Invoke((Action)(() => boxprint(s))); return; }
@@ -234,28 +239,45 @@ namespace DagMU.Forms
 				debugwindow.UpdateStatus(newstatus.ToString());
 		}
 
-		void Echo(String s)
+		void Echo(string s)
 		{
-			Send("dagmuecho dagmu_echo " + s);// should add a random number check here that we pick at startup
+			SendFormat("{0} {1}{2} {3}",
+				DagMU.Model.Constants.dagmu_echo_name,
+				DagMU.Model.Constants.dagmu_echo_prefix,
+				this.sessionGuid,
+				s);
 		}
 
-		bool isecho(String s)
+		/// <param name="s">text from connection.</param>
+		/// <param name="msg">Will be the contained message, if echo was valid.</param>
+		/// <returns>True if valid.</returns>
+		bool isEcho(string s, out string msg)
 		{
-			// should add a random number check here that we pick at startup
+			if (s.StartsWith(DagMU.Model.Constants.dagmu_echo_prefix)) {
+				string remainder = s.Substring(DagMU.Model.Constants.dagmu_echo_prefix.Length);
+				string guid = remainder.Substring(0, this.sessionGuid.Length);
+				if (guid == this.sessionGuid) {
+					msg = remainder.Substring(this.sessionGuid.Length).Trim();
+					return true;
+				}
+			}
 
-			if (s.StartsWith("dagmu_echo "))
-				return true;
+			msg = null;
 			return false;
 		}
 
-		bool isecho(String s, String message)
+		/// <param name="s">text from connection.</param>
+		/// <param name="message">message to match against, if its a valid echo.</param>
+		/// <returns>true if a valid echo matched supplied message.</returns>
+		bool isEchoEqual(string s, string message)
 		{
-			if (!isecho(s))
-				return false;
-
-			if (s.Substring(11) == message)
-				return true;
-
+			string echoMessage;
+			if (isEcho(s, out echoMessage)) {
+				if (message == echoMessage) {
+					this.echo = true;
+					return true;
+				}
+			}
 			return false;
 		}
 

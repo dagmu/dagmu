@@ -8,7 +8,9 @@ namespace DagMUServer
 	{
 		static void Main(string[] args)
 		{
-			Task.Run(() => new Server().Start());
+			Task.Run(() => new Server(new Server.Options() {
+				echo = false
+			}).Start());
 
 			Console.ReadLine();
 		}

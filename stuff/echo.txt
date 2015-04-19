@@ -2,4 +2,6 @@
 @link dagmuecho=$nothing
 @succ dagmuecho={null:{tell:{&arg},{name:me}}}
 
+@recycle dagmuecho
+
 thanks to Ascha for Echo help

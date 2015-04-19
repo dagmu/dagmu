@@ -15,7 +15,9 @@ namespace DagMU.Forms
         [STAThread]
         static void Main()
         {
-			Task.Run(() => new Server().Start());
+			Task.Run(() => new Server(new Server.Options() {
+				echo = true,
+			}).Start());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

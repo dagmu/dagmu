@@ -9,6 +9,17 @@ namespace DagMUServer
 {
 	public class Server
 	{
+		internal Options options;
+
+		public Server(Options options = null)
+		{
+			if (options == null) {
+				this.options = new Options();
+			} else {
+				this.options = options;
+			}
+		}
+
 		public async Task Start()
 		{
 			await Start(IPAddress.Any);
@@ -52,9 +63,16 @@ namespace DagMUServer
 		{
 			Log(msg);
 
-			if (msg.StartsWith("dagmuecho ")) {
-				var s = msg.Substring("dagmuecho ".Length);
-				client.Send(s);
+			if (msg.StartsWith("dagmu_echo ")) {
+				if (options.echo) {
+					try {
+						var s = msg.Substring("dagmu_echo ".Length);
+						//s = s.Substring(s.IndexOf(" ") + 1);//get just the data string
+						client.Send(s);
+					} catch { }
+				} else {
+					client.Send("Huh?  (Type \"help\" for help.)");
+				}
 			} else switch (msg) {
 				case "exa me=/_page/lastpaged":
 					client.Send(new List<string>() {
@@ -133,6 +151,11 @@ namespace DagMUServer
 				directoryPrefix += "../";
 			}
 			return dirFound;
+		}
+
+		public class Options
+		{
+			public bool echo = true;
 		}
 	}
 }

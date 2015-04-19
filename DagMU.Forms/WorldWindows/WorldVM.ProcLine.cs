@@ -51,6 +51,12 @@ namespace DagMU.Forms
 
 					newStatus(MuckStatus.intercepting_normal);// from here it is assumed login was successful
 
+					Send("exa me=/_page/lastpaged");
+					Send("exa me=/_whisp/lastwhispered");
+					Send("exa me=/ride/_mode");
+					Send("wf #hidefrom");
+					Send("@mpi {name:me}");//get character name on connect!
+
 					// TODO check for invalid login messages
 					return;
 				// end case intercepting_connecting2
@@ -60,16 +66,9 @@ namespace DagMU.Forms
 					// This is where we enter streammodes to deal with multiple line blocks
 					// This is also where we deal with all the 1 line notices
 
-					if (isecho(s, "LOGGEDIN")) {
+					if (isEchoEqual(s, "LOGGEDIN")) {
 						boxofmucktext.Clear();
 						boxofmucktext.ClearUndo();
-
-						Send("exa me=/_page/lastpaged");
-						Send("exa me=/_whisp/lastwhispered");
-						Send("exa me=/ride/_mode");
-						Send("wf #hidefrom");
-
-						Send("@mpi {name:me}");//get character name on connect!
 
 						Send("look");//TAPS
 						return;
