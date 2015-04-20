@@ -1,0 +1,17 @@
+Shean(#152273PB)  Sex toys: 308  
+Type: PLAYER  Flags: BUILDER
+{eval:{list:redesc}}
+Key: *UNLOCKED*
+Chown_OK Key: *UNLOCKED*
+Container Key: *UNLOCKED*
+Force Key: *UNLOCKED*
+Owner Key: *UNLOCKED*
+Read Key: *UNLOCKED*
+Created:  Thu Oct 30 13:19:48 PDT 2008
+Modified: Sun Apr 19 15:09:50 PDT 2015
+Lastused: Sun Apr 19 15:11:50 PDT 2015
+Usecount: 1378
+[ Use 'examine <object>=/' to list root properties. ]
+Memory used: 21345 bytes
+Home: Master Bedroom(#136403RC)
+No actions attached.

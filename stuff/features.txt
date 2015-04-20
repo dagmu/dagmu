@@ -3,9 +3,12 @@ C# WinForms
 	done
 multiple input boxes
 mousewheel anywhere scrolls the main window
+desc editor reads your list desc(s), no matter their name.
 
 
 	bugs
+p =, wh = don't work, InputBox.cs input_KeyDown
+closing world does not close any helpers
 last intercept makes newlines
 multiline poses don't scroll to bottom correctly, only scrolls to start of line
 when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
@@ -26,7 +29,7 @@ logging
 	auto log option, log everything to separate log
 	needs better visual feedback that it's logging
 inputbox
-	command history with up/down arrows
+	command history with up/down arrows, needs to be same history across all inputboxes
 	tab-key autocompletion of names/objects that are in the same room or in your WF list
 	spellcheck using WPF is easy: https://msdn.microsoft.com/en-us/library/system.windows.controls.spellcheck.aspx https://msdn.microsoft.com/en-us/library/bb613557.aspx
 	spellcheck in Forms with ElementHost: http://stackoverflow.com/questions/4024798/trying-to-use-the-c-sharp-spellcheck-class
@@ -35,7 +38,7 @@ world window
 	colors/fonts settings
 	clickable links
 	pageup/pagedown scroll main window too (even tho input box is selected)
-	regex color highlighting
+	regex color highlighting, needs config window
 	mIRC style copying (drag select, copy, refocus)
 	timestamps optional, toggleable
 	don't autoscroll if scrolled up

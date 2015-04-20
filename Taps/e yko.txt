@@ -1,0 +1,19 @@
+Yko(#174727PBJ)  Sex toys: 134  
+Type: PLAYER  Flags: BUILDER JUMP_OK
+{null:{tell:   --<<O>>--<<( {name:me} a {gender:me} {species:me}\, looks at you. )>>--<<O>>--,this}}{list:desc}
+Key: *UNLOCKED*
+Chown_OK Key: *UNLOCKED*
+Container Key: *UNLOCKED*
+Force Key: *UNLOCKED*
+Owner Key: *UNLOCKED*
+Read Key: *UNLOCKED*
+Doing: Making things disappear.
+Created:  Thu Jun 12 09:39:48 PDT 2014
+Modified: Sun Apr 19 14:53:57 PDT 2015
+Lastused: Sun Apr 19 14:54:15 PDT 2015
+Usecount: 115
+[ Use 'examine <object>=/' to list root properties. ]
+Memory used: 6135 bytes
+Home: Halstead Tower - Apt. 83-G(#172148RLJ)
+Actions/exits:
+gohome(#90844E)

@@ -5,6 +5,8 @@ using System.IO;
 
 using DagMU.Forms.Helpers;
 using DagMU.Model;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace DagMU.Forms
 {
@@ -68,7 +70,8 @@ namespace DagMU.Forms
 			intercepting_morph,			// receiving 'morph #list'
 			intercepting_cinfo,			// receiving cinfo fields
 			intercepting_cinfomisc,		// snagging a single misc field
-			intercepting_charname		// reading our own character name
+			intercepting_charname,		// reading our own character name
+			intercepting_exame,			// exa me, self properties, desc setting
 		} public MuckStatus status;
 
 		String charname;
@@ -82,6 +85,26 @@ namespace DagMU.Forms
 		string lastpaged;		// so when you type "p =" it will fill in the name as soon as you type the = sign
 		bool inlimbo;
 		bool echo = false;		// is dagmuecho working?
+		bool expectingDescSettingLine = false; // for catching description in exame
+		bool expectingActionsExits = false; // for detecting the end of exame block
+
+		//the current @desc me=, scraped from exame
+		private string characterDescSettingString_ = null;
+		string characterDescSettingString
+		{
+			get { return characterDescSettingString_; }
+			set {
+				characterDescSettingString_ = value;
+				foreach (Match match in new Regex(@"^\w+$").Matches(value)) {//'redesc'
+					characterDescLists.Add(characterDescSettingString_);
+					return;//done, only expecting 1 match, so skip the next regex.
+				}
+				foreach (Match match in new Regex(@"\{list:(\w+)\}").Matches(value)) {//'blah blah {list:rar} blah {list:mar} blah'
+					characterDescLists.Add(match.Groups[1].Value);
+				}
+			}
+		}
+		List<string> characterDescLists = new List<string>();//redesc, desc2.. any {list:desc} that was found in desc string
 
 		string sessionGuid = DagMU.Model.Utils.GuidEncoder.Encode(Guid.NewGuid());
 

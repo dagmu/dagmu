@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DagMU.Forms.Helpers;
+using System.Text.RegularExpressions;
 
 namespace DagMU.Forms
 {
@@ -17,7 +18,7 @@ namespace DagMU.Forms
 			if (InvokeRequired) { this.Invoke((Action)(() => procline(s))); return; }
 
 			String[] words;
-			int colonindex;
+			int colonIndex;
 
 			if (inlimbo)// If the muck is saving its database we turn back on as soon as it sends something new
 				inlimbo = false;
@@ -55,11 +56,12 @@ namespace DagMU.Forms
 
 					newStatus(MuckStatus.intercepting_normal);// from here it is assumed login was successful
 
+					Send("@mpi {name:me}");//get character name on connect!
+					Send("exa me");
 					Send("exa me=/_page/lastpaged");
 					Send("exa me=/_whisp/lastwhispered");
 					Send("exa me=/ride/_mode");
 					Send("wf #hidefrom");
-					Send("@mpi {name:me}");//get character name on connect!
 
 					return;
 				#endregion
@@ -214,9 +216,9 @@ namespace DagMU.Forms
 					if (s.StartsWith("Somewhere on the muck, ")) {//TAPS
 						boxprint(s);
 
-						s = s.Substring(23);//TAPS
+						s = s.Substring("Somewhere on the muck, ".Length);//TAPS
 
-						// Find the end of the name, since .net doesn't have a trimright
+						// Find the end of the name
 						int i = 0;
 						foreach (char c in s) {
 							if (c == ' ')
@@ -244,7 +246,7 @@ namespace DagMU.Forms
 					if (s.StartsWith("str /")) {//TAPS
 					#region parsing str: current appearance, morph properties, lastpaged
 						// get rid of "str /"
-						s = s.Substring(5);
+						s = s.Substring("str /".Length);
 
 						//str /_regmorphs:  TIGER    DRAGON    WOLF    ELF    TEACHER          PURPLE          PANTSDRGN      SWIMDRGN    TEACHDRGN    DRGN    PANTSTGR    TGR    BUFFTGR    TEACHTGR    LABTGR    gothwolf    weredrgn    xmasptgr    minidrag    robedrgn    invis    mdragon    hallodrgn    sldrtgr    47drgn  
 						if (s.StartsWith("_regmorphs:")) {
@@ -276,43 +278,24 @@ namespace DagMU.Forms
 
 						//str /redesc#/1:test1
 						//str /redesc#/2:Test2
-						if (s.StartsWith("redesc#/")) {
-							#region parsing str redesc
-							// trim what we just tested for
-							s = s.Substring(8);
-
-							//:2    <-- number of lines (we discard this)
-							//1:test1
-							//2:Test2
-
-							colonindex = s.IndexOf(':');
-
-							if (colonindex == 0)
-								return;		// we got ":2" meaning number of lines in the list, which we don't care about
-
-							DescEditor.DescMode = true;
-							try {
-								String theline = s.Substring(colonindex + 1);
-								int linenum = -1;
-								linenum = int.Parse(s.Substring(0, colonindex));
-								DescEditor.updateDesc(s.Substring(colonindex + 1), linenum);
-							} catch {
-								newStatus(MuckStatus.intercepting_normal);
+						//str /redesc#/:4    <-- number of lines (we discard this)
+						{
+							var regex = new Regex(@"^(\w+)#/(\d+):(.+)$");//redesc#/2:Test2
+							var matches = regex.Matches(s);
+							if (matches.Count == 1 && matches[0].Groups.Count == 4 && !String.IsNullOrEmpty(matches[0].Groups[2].Value) ) {
+								string listName = matches[0].Groups[1].Value;
+								if (characterDescLists.Count > 0 && characterDescLists.Contains(listName)) {
+									DescEditor.updateLists(characterDescLists);
+									DescEditor.DescMode = true;//editing a list that's used in our description
+								}
+								DescEditor.updateDesc(
+									listName: listName,
+									lineNum: int.Parse(matches[0].Groups[2].Value),
+									text: matches[0].Groups[3].Value
+								);
 								return;
 							}
-							/*if (s.Substring(0,colonindex) == "1") {
-								DescEditor.updateDesc(s.Substring(colonindex+1), true); // overwrite
-								//boxprint("overwrite " + s.Substring(colonindex+1));
-							}
-							else {
-								DescEditor.updateDesc(s.Substring(colonindex+1), false);  // append
-								//boxprint("append " + s.Substring(colonindex+1));
-							}*/
-
-							return;
-
-							#endregion
-						} // end if (s.StartsWith("redesc#/"))
+						}
 
 						//str /_scent:smells like dragon
 						if (s.StartsWith("_scent:")) {
@@ -415,78 +398,80 @@ namespace DagMU.Forms
 
 							words = s.Split(new String[] { "#/" }, StringSplitOptions.RemoveEmptyEntries);
 
-							String morphcommand = words[0]; // this is the COMMAND name which is used as 'target' for the update functions-
+							string morphCommand = words[0]; // this is the COMMAND name which is used as 'target' for the update functions-
+							string listName = words[1];
 
-							s = s.Substring(morphcommand.Length + 2);
+							s = s.Substring(morphCommand.Length + 2);
 							//desc#/:7
 							//desc#/1:test1
 							//species:anthro dark wolf
 
-							if (words[1] == "desc") {
+							if (listName == "desc") {
 								s = s.Substring(6);
 								//:7
 								//1:test1
 								//2:Test2
 
-								colonindex = s.IndexOf(':');
+								colonIndex = s.IndexOf(':');
 
-								if (colonindex == 0)
+								if (colonIndex == 0)
 									return;		// we got ":7" which is the number of lines, which we don't care about
 
 								int linenum = -1;
-								try { linenum = int.Parse(s.Substring(0, colonindex)); } catch (Exception ex) { }
+								try { linenum = int.Parse(s.Substring(0, colonIndex)); } catch (Exception ex) { }
 
 								DescEditor.DescMode = false;
-								DescEditor.updateCommand(morphcommand);
-								DescEditor.updateDesc(s.Substring(colonindex + 1), linenum); // overwrite
+								DescEditor.updateCommand(morphCommand);
+								DescEditor.updateLists(new List<string>() { listName });
+								DescEditor.updateDesc(s.Substring(colonIndex + 1), linenum, listName); // overwrite
 
 								return;
 							} // end "desc#/blah"
 
 							// handle the individual details (scent, sex, message, name, species, osay, say)
 
-							colonindex = s.IndexOf(':');
+							colonIndex = s.IndexOf(':');
 
 							//species:anthro dark wolf
 
-							String detail = s.Substring(0, colonindex);	// species
-							String data = s.Substring(colonindex + 1);		// anthro dark wolf
+							String detail = s.Substring(0, colonIndex);	// species
+							String data = s.Substring(colonIndex + 1);		// anthro dark wolf
 
 							// note we use updateCommand each time to make sure the desc/morph editor is in the right state
 
 							if (detail == "name") {
-								MorphHelper.updateMorphName(morphcommand, data);
-								DescEditor.updateCommand(morphcommand);
+								MorphHelper.updateMorphName(morphCommand, data);
+								DescEditor.updateCommand(morphCommand);
 								DescEditor.updateName(data);
 								return;
 							}
 							if (detail == "message") {
-								DescEditor.updateCommand(morphcommand);
+								DescEditor.updateCommand(morphCommand);
 								DescEditor.updateMessage(data);
 								return;
 							}
 							if (detail == "sex") {
-								DescEditor.updateCommand(morphcommand);
+								DescEditor.updateCommand(morphCommand);
 								DescEditor.updateGender(data);
 								return;
 							}
 							if (detail == "species") {
-								DescEditor.updateCommand(morphcommand);
+								DescEditor.updateCommand(morphCommand);
 								DescEditor.updateSpecies(data);
 								return;
 							}
 							if (detail == "scent") {
-								DescEditor.updateCommand(morphcommand);
+								DescEditor.updateCommand(morphCommand);
 								DescEditor.updateScent(data);
 								return;
 							}
 							if (detail == "say") {
-								DescEditor.updateCommand(morphcommand);
+								DescEditor.updateCommand(morphCommand);
 								DescEditor.updateSay(data);
 								return;
 							}
 							if (detail == "osay") {
-								DescEditor.updateCommand(morphcommand);
+								DescEditor.updateCommand(morphCommand);
 								DescEditor.updateOSay(data);
 								return;
 							}
@@ -512,6 +497,18 @@ namespace DagMU.Forms
 						return;
 					}
 
+					if (!String.IsNullOrEmpty(CharName)) {
+						var regex = new Regex(@"(\w+)\(#(\d+)([A-Z]*)\)\s+(?:Sex toys:)\s+(\d+)\s*");//Shean(#152273PB)  Sex toys: 308  
+						var matches = regex.Matches(s);
+						if (matches.Count == 1 && matches[0].Groups.Count == 5) {
+							//int characterDBRef = int.Parse(matches[0].Groups[2].Value);
+							//string characterFlags = matches[1].Groups[3].Value;
+							//int sexToys = int.Parse(matches[0].Groups[4].Value);
+							newStatus(MuckStatus.intercepting_exame);
+							return;
+						}
+					}
+
 					// detect '____ properties listed.' and surpress from window
 					if (s.Length < 24) {// limit suppression abuse to just 4 ignored characters at front
 						if (s.EndsWith(" properties listed."))
@@ -528,6 +525,48 @@ namespace DagMU.Forms
 				// end case intercepting_normal ----------------------------------------------------------------/
 				////////////////////////////////////////////////////////////////////////////////////////////////
 
+				case MuckStatus.intercepting_exame://exa me
+					//second line
+					if (expectingDescSettingLine) {
+						characterDescSettingString = s.StartsWith("Key: ")
+							? null
+							: s;
+						DescEditor.updateLists(characterDescLists);
+						expectingDescSettingLine = false;
+						return;
+					}
+
+					//last n lines
+					if (expectingActionsExits) {
+						//HACK just eat the first one and go normal. don't know how many lines there will be and I don't want to send an echo to detect the end of the block
+						expectingActionsExits = false;
+						newStatus(MuckStatus.intercepting_normal);
+						return;
+					}
+
+					//first line
+					{
+						var regex = new Regex(@"Type:\s+([A-Z]+)\s+Flags:\s+(.+)");//Type: PLAYER  Flags: BUILDER JUMP_OK
+						var matches = regex.Matches(s);
+						if (matches.Count == 1 && matches[0].Groups.Count == 3) {
+							//string objectType = matches[0].Groups[1].Value;//PLAYER
+							//string objectFlags = matches[0].Groups[2].Value;//BUILDER JUMP_OK
+							expectingDescSettingLine = true;
+							return;
+						}
+					}
+
+					//last line is 'No actions attached.' or 'Actions/exits:' and then lines of actions and exits
+					if (s == "No actions attached.") {
+					} else if (s == "Actions/exits:") {
+						expectingActionsExits = true;
+					} else {
+						//don't print middle lines
+						return;//could get stuck here!
+					}
+
+					newStatus(MuckStatus.intercepting_normal);
+					return;
 
 				case MuckStatus.intercepting_charname:
 					//Result: Dagon

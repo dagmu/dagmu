@@ -11,6 +11,8 @@ namespace DagMU.Forms
 			updating = false;
 		}
 
+		public string ListName { get; set; }
+
 		public bool Checked
 		{
 			get { return checkbox.Checked; }
@@ -45,7 +47,12 @@ namespace DagMU.Forms
 		private String _muckcommandtoget;
 		public String MuckCommandToGet
 		{
-			get { return _muckcommandtoget; }
+			get {
+				if (!String.IsNullOrEmpty(ListName))
+					return "exa me=/" + ListName + "#/";
+				else
+					return _muckcommandtoget;
+			}
 			set { _muckcommandtoget = value; }
 		}
 
@@ -72,33 +79,33 @@ namespace DagMU.Forms
 			textbox.Text = newtext;
 		}
 
-		public void GotUpdate(String newtext, int linenum)
+		public void GotUpdate(String newtext, int linenum, string listName)
 		{
-			if (linenum < 0)
-				return;
+			this.ListName = listName;
+
+			if (linenum < 0) return;
+
 			Enabled = true;
 			updating = true;
-			if (linenum == 1)
-			{
+			if (linenum == 1) {
 				textbox.Clear();
 			}
 			String[] newlines = new String[Math.Max(textbox.Lines.Length, linenum)];
-			for (int i = 0; i < newlines.Length; i++)
-			{
-				if (i == linenum - 1)
+			for (int i = 0; i < newlines.Length; i++) {
+				if (i == linenum - 1) {
 					newlines[i] = newtext;
-				else if (i > textbox.Lines.Length)
+				} else if (i > textbox.Lines.Length) {
 					return;
-				else
+				} else {
 					newlines[i] = textbox.Lines[i];
+				}
 			}
 			textbox.Lines = newlines;
 		}
 
 		private void textbox_TextChanged(object sender, EventArgs e)
 		{
-			if (updating)
-			{
+			if (updating) {
 				updating = false;
 				return;
 			}
@@ -107,8 +114,7 @@ namespace DagMU.Forms
 				Checked = true;
 
 			// make sure to filter out newlines
-			if (_notreallymultiline)
-			{
+			if (_notreallymultiline) {
 				if (textbox.Text.Contains("\n"))
 					textbox.Text = textbox.Text.Replace('\n', ' ');
 				if (textbox.Text.Contains("\r"))

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
@@ -11,19 +12,19 @@ namespace DagMU.Forms.Helpers
 			InitializeComponent();
 		}
 
-		bool descmode;
+		bool descMode;
 		public bool DescMode
 		{
-			get { return descmode; }
+			get { return descMode; }
 			set
 			{
 				// switch between desc editor and morph editor
 
 				// if not changing, don't bother
-				if (descmode == value)
+				if (descMode == value)
 					return;
 
-				if (descmode)
+				if (descMode)
 				{
 					// turning into morph mode
 					muckActionText.Enabled = true;
@@ -46,20 +47,20 @@ namespace DagMU.Forms.Helpers
 						p.Input = "";
 				}
 
-				descmode = value;
+				descMode = value;
 			}
 		}
 
 		void buttonRefresh_Click(object sender, EventArgs e)
 		{
-			if (descmode)
+			if (descMode)
 			{
 				foreach (MuckPropertyTextBox p in Controls.OfType<MuckPropertyTextBox>())
 				{
-					String s = p.MuckCommandToGet;
 					p.Enabled = false;
-					if (s != null)
-						parent.Send(s, null);
+					if (!String.IsNullOrEmpty(p.MuckCommandToGet)) {
+						parent.Send(p.MuckCommandToGet, null);
+					}
 				}
 				return;
 			}
@@ -80,26 +81,24 @@ namespace DagMU.Forms.Helpers
 
 		void buttonSave_Click(object sender, EventArgs e)
 		{
-			if (descmode)
-			{
+			if (descMode) {// current desc editing
 				foreach (MuckPropertyTextBox p in Controls.OfType<MuckPropertyTextBox>())
 				{
-					String s = p.MuckCommandToSet;
+					if ( !p.Checked ) continue;//only save checked items
 
-					if (!p.Checked)
-						continue;
-
-					if (s != null)
-						parent.Send(s + p.Input, null);
-					else
-					{
-						parent.Send("lsedit me=redesc", null);
+					if ( !String.IsNullOrEmpty(p.MuckCommandToSet) ) {
+						if ( String.IsNullOrEmpty(p.Input) ) {
+							throw new ArgumentNullException("Input");
+						} else {
+							parent.Send(p.MuckCommandToSet + p.Input, null);
+						}
+					} else if ( !String.IsNullOrEmpty(p.ListName) ) {
+						parent.Send("lsedit me=" + p.ListName, null);
 						parent.Send(".del 1 1000", null);
 
 						String[] delims = { "\r\n" };
 						String[] lines = p.Input.Split(delims, StringSplitOptions.RemoveEmptyEntries);
-						foreach (String line in lines)
-						{
+						foreach (String line in lines) {
 							parent.Send(line, null);
 						}
 						parent.Send(".end", null);
@@ -107,11 +106,7 @@ namespace DagMU.Forms.Helpers
 
 					p.Checked = false;
 				}
-			}
-			else
-			{
-				// morph editing
-
+			} else {// morph editing
 				//str /morph#/boxers#/desc#/:7
 				//str /morph#/boxers#/message:changes clothes!
 				//str /morph#/boxers#/name:anthro boxer shorts nothin else
@@ -178,47 +173,56 @@ namespace DagMU.Forms.Helpers
 
 		public void updateGender(String s)
 		{
-			if (!descmode)
-				checkCommandName(labelName.Text);
+			if (!descMode) checkCommandName(labelName.Text);
 			muckGender.GotUpdate(s);
 		}
+
 		public void updateSpecies(String s)
 		{
-			if (!descmode)
-				checkCommandName(labelName.Text);
+			if (!descMode) checkCommandName(labelName.Text);
 			muckSpecies.GotUpdate(s);
 		}
+
 		public void updateScent(String s)
 		{
-			if (!descmode)
-				checkCommandName(labelName.Text);
+			if (!descMode) checkCommandName(labelName.Text);
 			muckScent.GotUpdate(s);
 		}
-		public void updateDesc(String s, int linenum)
+
+		public void updateLists(IEnumerable<string> listNames)
 		{
-			if (!descmode)
-				checkCommandName(labelName.Text);
-			muckDesc.GotUpdate(s, linenum);
+			muckDesc.ListName = listNames.First();//HACK
 		}
+
+		public void updateDesc(string text, int lineNum, string listName)
+		{
+			if (!descMode) checkCommandName(labelName.Text);
+			if (String.IsNullOrEmpty(muckDesc.ListName)) muckDesc.ListName = listName;//HACK first come first serve, only one list edit box allowed
+			muckDesc.GotUpdate(text, lineNum, listName);
+		}
+
 		public void updateSay(String s)
 		{
-			if (!descmode)
-				checkCommandName(labelName.Text);
+			if (!descMode) checkCommandName(labelName.Text);
 			muckSay.GotUpdate(s);
 		}
+
 		public void updateOSay(String s)
 		{
 			muckOSay.GotUpdate(s);
 		}
+
 		public void updateCommand(String s)
 		{
 			checkCommandName(s);
 		}
+
 		public void updateName(String s)
 		{
 			checkCommandName(labelName.Text);
 			muckLongName.GotUpdate(s);
 		}
+
 		public void updateMessage(String s)
 		{
 			checkCommandName(labelName.Text);
@@ -230,7 +234,8 @@ namespace DagMU.Forms.Helpers
 			updateGender("male");
 			updateSpecies("rar");
 			updateScent("Good");
-			updateDesc("rarrarr", 1);
+			updateLists(new List<string>(){"redesc"});
+			updateDesc("rarrarr", 1, "redesc");
 			updateSay("");
 			updateOSay("");
 		}
@@ -257,7 +262,7 @@ namespace DagMU.Forms.Helpers
 
 		void DescEditorWindow_HelpButtonClicked(object sender, CancelEventArgs e)
 		{
-			if (descmode)
+			if (descMode)
 			System.Windows.Forms.MessageBox.Show(
 				"This window changes your CURRENT muck appearance, and it will not affect any morphs. "+
 				"To save your changes for later quick access, you should use morphs.\n\n"+
