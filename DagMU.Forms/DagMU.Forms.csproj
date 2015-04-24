@@ -57,6 +57,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Presentation" />
     <Reference Include="System.Xaml" />
@@ -112,6 +113,7 @@
       <DependentUpon>HelperForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
+    <Compile Include="WorldWindows\InputTextBoxHosted.cs" />
     <Compile Include="WorldWindows\LogSettingsWindow.cs">
       <SubType>Form</SubType>
     </Compile>

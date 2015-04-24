@@ -29,15 +29,18 @@ namespace DagMU.Forms.Helpers
 		{
 			InputBoxInit(InputBoxBox.defaultheight);
 		}
+		
 		public InputBox(int numberoflines)
 		{
 			InputBoxInit(numberoflines);
 		}
+
 		public InputBox(IContainer container)
 		{
 			container.Add(this);
 			InputBoxInit(InputBoxBox.defaultheight);
 		}
+
 		void InputBoxInit(int numberoflines)
 		{
 			InitializeComponent();
