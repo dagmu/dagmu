@@ -22,7 +22,7 @@ namespace DagMUServer
 
 		public async Task Start()
 		{
-			await Start(IPAddress.Any);
+			await Start(IPAddress.Loopback);
 		}
 
 		public async Task Start(IPAddress ipAddress, int port = 2069)
