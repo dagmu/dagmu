@@ -189,19 +189,22 @@ namespace DagMU.Forms.Helpers
 			EScroll(sender, e);//pass mousewheel events to the main text window
 		}
 
-		void input_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+		void input_PreviewKeyDown(object sender, System.Windows.Forms.PreviewKeyDownEventArgs e)
 		{
 			switch (e.KeyCode) {
 				case Keys.PageUp:
-					e.SuppressKeyPress = true;
-					EScroll(sender, new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, 3));
+					EScroll(sender, new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, 300));
 					break;
 
 				case Keys.PageDown:
-					e.SuppressKeyPress = true;
-					EScroll(sender, new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, -3));
+					EScroll(sender, new MouseEventArgs(System.Windows.Forms.MouseButtons.None, 0, 0, 0, -300));
 					break;
+			}
+		}
 
+		void input_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+		{
+			switch (e.KeyCode) {
 				case Keys.Up:
 					if (history.Count == 0) break;
 					if (historyCurrent > 0) historyCurrent--;

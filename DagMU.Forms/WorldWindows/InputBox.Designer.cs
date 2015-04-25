@@ -142,6 +142,7 @@
 			this.input.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.input.TextChanged += new System.EventHandler(this.input_TextChanged);
 			this.input.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input_KeyDown);
+			this.input.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.input_PreviewKeyDown);
 			this.input.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.input_MouseWheel);
 			this.input.Location = new System.Drawing.Point(0, 0);
 			this.input.Name = "input";

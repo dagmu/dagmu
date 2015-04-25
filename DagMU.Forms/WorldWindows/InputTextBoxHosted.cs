@@ -18,6 +18,7 @@ namespace DagMU.Forms
 			base.Child = box;
 			box.TextChanged += (s, e) => OnTextChanged(e);
 			box.KeyDown += (s, e) => OnKeyDown(new System.Windows.Forms.KeyEventArgs(e.Key.ToForms()));
+			box.PreviewKeyDown += (s, e) => OnPreviewKeyDown(new System.Windows.Forms.PreviewKeyDownEventArgs(e.Key.ToForms()));
 			box.MouseWheel += (s, e) => OnMouseWheel(e.ToForms());
 			box.SpellCheck.IsEnabled = true;
 			box.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
