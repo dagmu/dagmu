@@ -224,18 +224,18 @@ namespace DagMU.Forms.Helpers
 					input.SelectionStart = input.TextLength;
 					break;
 
-				case Keys.Oemplus:
+				/*case Keys.Oemplus:
 					if (input.Text == "p " || input.Text == "page ") {
-						//input.Text = "p " + lastPagedName + "=";//insert last paged name
+						input.Text = "p " + lastPagedName + "=";//insert last paged name
 						input.SelectionStart = input.TextLength;
 						e.SuppressKeyPress = true;
 					}
 					else if (input.Text == "w " || input.Text == "wh ") {
-						//input.Text = "p " + lastWhisperedName + "=";//insert last paged name
+						input.Text = "p " + lastWhisperedName + "=";//insert last paged name
 						input.SelectionStart = input.TextLength;
 						e.SuppressKeyPress = true;
 					}
-					break;
+					break;*/
 
 				case Keys.Enter:
 					if (e.Control) break;
