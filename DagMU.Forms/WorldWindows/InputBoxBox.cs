@@ -141,7 +141,7 @@ namespace DagMU.Forms.Helpers
 		/// <summary>
 		/// Snap window focus to an inputbox
 		/// </summary>
-		public void refocus()
+		public void reFocus()
 		{
 			inputBoxes[0].refocus();
 		}

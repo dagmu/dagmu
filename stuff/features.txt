@@ -1,4 +1,11 @@
+"First line   : "
+"Second line  : "
+"Actions Exits: "
+"Middle Line  : "
+"Desc Line    : "
+
 {null:{tell:   --<<O>>--<<( {name:me}\, a {gender:me} {species:me}\, looks at you. )>>--<<O>>--,this}}{list:desc}
+{eval:{list:redesc}}
 
 this.input.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 this.input.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -16,6 +23,9 @@ desc editor reads your list desc(s), no matter their name.
 
 
 	bugs
+wrong connect command sends loggedin lines like exa me, causing welcome.txt to spam
+inputbox not focused/refocused
+pages/whispers not highlighted correctly
 p =, wh = don't work, InputBox.cs input_KeyDown
 closing world does not close any helpers
 last intercept makes newlines
@@ -25,6 +35,11 @@ richtextbox sees // as clickable link, override underlying win32 control with ht
 resize doesn't keep bottom line in view
 console needs to start a bit wider
 console needs to use richtextbox maybe, horizontal rezising is fucked
+cinfo viewer
+	shows add misc field for everyone, not just  you
+	doesn't show default fields for you, so you can't set them
+	no visual indication that clicking an unopened misc field will fetch it
+inputbox buttons don't work right if maximized
 
 	not done
 world library
@@ -37,6 +52,7 @@ logging
 	on the fly log file rename
 	auto log option, log everything to separate log
 	needs better visual feedback that it's logging
+	sang wants auto logging
 inputbox
 	command history with up/down arrows, needs to be same history across all inputboxes
 	tab-key autocompletion of names/objects that are in the same room or in your WF list

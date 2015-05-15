@@ -16,7 +16,7 @@ namespace DagMU.Forms.Helpers
 			text.Clear();
 		}
 
-		public void additem(string data)
+		public void addItem(string data)
 		{
 			if (String.IsNullOrEmpty(data))
 				return;
@@ -110,7 +110,7 @@ namespace DagMU.Forms.Helpers
 			// load from the textbox, which is the file
 
 			foreach (String line in text.Lines)
-				additem(line);
+				addItem(line);
 
 			text.Clear();
 			text.ClearUndo();

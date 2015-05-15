@@ -25,8 +25,12 @@ namespace DagMU.Forms
 			//window was AWOL once, so make sure it's got sane size
 			this.Height = Math.Max(300, this.Height);
 			this.Width = Math.Max(400, this.Width);
+			this.Left = Math.Max(0, this.Left);
+			this.Top = Math.Max(0, this.Top);
 
+#if DEBUG
 			tbnForceLocal_Click(null, null);// HACK
+#endif
 		}
 
 		void OnWorldResize(object sender, EventArgs e)
@@ -112,7 +116,7 @@ namespace DagMU.Forms
 					Port = 2069,
 					NameFull = "Localhost",
 					NameShort = "LH",
-					sendbuffersize = 4096,
+					sendBufferSize = 4096,
 					sendQUITstring = "QUIT",
 				},
 				new WorldVM.WorldPrefs() {
@@ -143,7 +147,7 @@ namespace DagMU.Forms
 				//world settings
 				NameFull = "Tapestries",
 				NameShort = "Taps",
-				sendbuffersize = 4096,
+				sendBufferSize = 4096,
 				sendQUITstring = "QUIT",
 			};
 		}

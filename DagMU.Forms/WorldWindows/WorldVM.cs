@@ -25,7 +25,7 @@ namespace DagMU.Forms
 			public bool SSL;				// use SSL or not?
 			public string CertificateHash;	// remote server certificate hash
 
-			public int sendbuffersize;		// length of text we can send to the muck, this is only used locally to alert the user
+			public int sendBufferSize;		// length of text we can send to the muck, this is only used locally to alert the user
 
 			public String sendQUITstring;	// string to send for QUIT, i.e. "QUIT"
 		} public WorldSettings settings;
@@ -41,7 +41,7 @@ namespace DagMU.Forms
 			public int sendQUITwait;	// seconds to wait before just closing the connection
 
 			public bool logging;
-			public bool quicklogging;
+			public bool quickLogging;
 
 			public enum IndentType {
 				none,
@@ -49,7 +49,7 @@ namespace DagMU.Forms
 				hanging	// RichTextBox.SelectionHangingIndent
 			}
 			public IndentType indent;
-			public int indentwidth;
+			public int indentWidth;
 
 		} public WorldPrefs prefs;
 
@@ -57,33 +57,33 @@ namespace DagMU.Forms
 		/// Muck communication status indicators. These change at runtime and not saved
 		public enum MuckStatus
 		{
-			not_connected,
-			intercepting_connecting,	// socket established, receiving welcome screen 1
-			intercepting_connecting2,	// logged in, receive login success or failure message 2
-			intercepting_normal,	// >>> normal user interaction mode <<< 4
-			intercepting_wf,			// receiving WF list
-			intercepting_ws,			// receiving WS list
-			intercepting_wi,			// receiving WI list
-			intercepting_wiflags,		// wi #flags
-			intercepting_who,			// receiving WHO list (the big one)
-			intercepting_last,			// Waiting for the rest of the laston report (to detect hidden furs to put on our wf list?)
-			intercepting_morph,			// receiving 'morph #list'
-			intercepting_cinfo,			// receiving cinfo fields
-			intercepting_cinfomisc,		// snagging a single misc field
-			intercepting_charname,		// reading our own character name
-			intercepting_exame,			// exa me, self properties, desc setting
+			NotConnected,
+			Intercepting_Connecting,	// socket established, receiving welcome screen
+			Intercepting_Connecting2,	// logged in, receive login success or failure message
+			Intercepting_Normal,		// >>> normal user interaction mode <<<
+			Intercepting_WF,			// receiving WF list
+			Intercepting_WS,			// receiving WS list
+			Intercepting_WI,			// receiving WI list
+			Intercepting_WIFlags,		// wi #flags
+			Intercepting_Who,			// receiving WHO list (the big one)
+			Intercepting_Last,			// Waiting for the rest of the laston report (to detect hidden furs to put on our wf list?)
+			Intercepting_Morph,			// receiving 'morph #list'
+			Intercepting_CInfo,			// receiving cinfo fields
+			Intercepting_CInfoMisc,		// snagging a single misc field
+			Intercepting_CharName,		// reading our own character name
+			Intercepting_ExaMe,			// exa me, self properties, desc setting
 		} public MuckStatus status;
 
-		String charname;
+		String charName;
 		public String CharName
 		{
-			get { return charname; }
-			set { charname = value; debugwindow.textboxCharName.Text = value; }
+			get { return charName; }
+			set { charName = value; debugWindow.textboxCharName.Text = value; }
 		}
 
-		string lastwhispered;	// these track the last person you paged/whispered to,
-		string lastpaged;		// so when you type "p =" it will fill in the name as soon as you type the = sign
-		bool inlimbo;
+		string lastWhispered;	// these track the last person you paged/whispered to,
+		string lastPaged;		// so when you type "p =" it will fill in the name as soon as you type the = sign
+		bool inLimbo;
 		bool echo = false;		// is dagmuecho working?
 		bool expectingDescSettingLine = false; // for catching description in exame
 		bool expectingActionsExits = false; // for detecting the end of exame block
@@ -94,25 +94,25 @@ namespace DagMU.Forms
 
 		MuckConnection connection;
 
-		int morphsintercepted;
-		string cinfointerceptingname;
-		string cinfointerceptingfieldname;
+		int morphsIntercepted;
+		string cInfoInterceptingName;
+		string cInfoInterceptingFieldName;
 
 		// Components
-		Box boxofmucktext;
-		InputBoxBox boxofinputboxes;
+		Box boxOfMuckText;
+		InputBoxBox boxOfInputBoxes;
 		ToolStrip menu;
 
 		WF wf;
-		DebugWindow debugwindow;
-		LogSettingsWindow logsettings;
+		DebugWindow debugWindow;
+		LogSettingsWindow logSettings;
 
 		internal IConsole Console;
 		internal Helpers.DescEditorWindow DescEditor;
 		internal Helpers.MorphHelperWindow MorphHelper;
 		internal Helpers.FontsColorsWindow FontsColors;
 		internal Helpers.WIHelperWindow WIHelper;
-		internal Helpers.WhoHelperWindow who;
+		internal Helpers.WhoHelperWindow Who;
 
 		Helpers.RideModeDropdown tbnRideMode;
 		System.Windows.Forms.ToolStripButton tbnDisconnect;
@@ -158,8 +158,8 @@ namespace DagMU.Forms
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnDebug = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButtonConsole = new System.Windows.Forms.ToolStripButton();
-			this.boxofinputboxes = new DagMU.Forms.Helpers.InputBoxBox();
-			this.boxofmucktext = new DagMU.Forms.Box();
+			this.boxOfInputBoxes = new DagMU.Forms.Helpers.InputBoxBox();
+			this.boxOfMuckText = new DagMU.Forms.Box();
 			this.menu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -369,42 +369,42 @@ namespace DagMU.Forms
 			// 
 			// boxofinputboxes
 			// 
-			this.boxofinputboxes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+			this.boxOfInputBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.boxofinputboxes.BackColor = System.Drawing.Color.Navy;
-			this.boxofinputboxes.Location = new System.Drawing.Point(0, 449);
-			this.boxofinputboxes.Margin = new System.Windows.Forms.Padding(0);
-			this.boxofinputboxes.Name = "boxofinputboxes";
-			this.boxofinputboxes.Size = new System.Drawing.Size(773, 57);
-			this.boxofinputboxes.TabIndex = 1;
-			this.boxofinputboxes.EScroll += boxofinputboxes_EScroll;
+			this.boxOfInputBoxes.BackColor = System.Drawing.Color.Navy;
+			this.boxOfInputBoxes.Location = new System.Drawing.Point(0, 449);
+			this.boxOfInputBoxes.Margin = new System.Windows.Forms.Padding(0);
+			this.boxOfInputBoxes.Name = "boxofinputboxes";
+			this.boxOfInputBoxes.Size = new System.Drawing.Size(773, 57);
+			this.boxOfInputBoxes.TabIndex = 1;
+			this.boxOfInputBoxes.EScroll += boxOfInputBoxes_EScroll;
 			// 
 			// boxofmucktext
 			// 
-			this.boxofmucktext.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.boxOfMuckText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.boxofmucktext.AutoWordSelection = true;
-			this.boxofmucktext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.boxofmucktext.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.boxofmucktext.Cursor = System.Windows.Forms.Cursors.Default;
-			this.boxofmucktext.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.boxofmucktext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.boxofmucktext.Location = new System.Drawing.Point(0, 0);
-			this.boxofmucktext.Margin = new System.Windows.Forms.Padding(0);
-			this.boxofmucktext.Name = "boxofmucktext";
-			this.boxofmucktext.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-			this.boxofmucktext.Size = new System.Drawing.Size(773, 449);
-			this.boxofmucktext.TabIndex = 0;
-			this.boxofmucktext.Text = "";
-			this.boxofmucktext.LinkClicked += boxofmucktext_LinkClicked;
+			this.boxOfMuckText.AutoWordSelection = true;
+			this.boxOfMuckText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+			this.boxOfMuckText.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.boxOfMuckText.Cursor = System.Windows.Forms.Cursors.Default;
+			this.boxOfMuckText.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.boxOfMuckText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+			this.boxOfMuckText.Location = new System.Drawing.Point(0, 0);
+			this.boxOfMuckText.Margin = new System.Windows.Forms.Padding(0);
+			this.boxOfMuckText.Name = "boxofmucktext";
+			this.boxOfMuckText.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+			this.boxOfMuckText.Size = new System.Drawing.Size(773, 449);
+			this.boxOfMuckText.TabIndex = 0;
+			this.boxOfMuckText.Text = "";
+			this.boxOfMuckText.LinkClicked += boxOfMuckText_LinkClicked;
 			// 
 			// World
 			// 
 			this.BackColor = System.Drawing.Color.White;
 			this.Controls.Add(this.menu);
-			this.Controls.Add(this.boxofinputboxes);
-			this.Controls.Add(this.boxofmucktext);
+			this.Controls.Add(this.boxOfInputBoxes);
+			this.Controls.Add(this.boxOfMuckText);
 			this.Margin = new System.Windows.Forms.Padding(0);
 			this.Name = "World";
 			this.Size = new System.Drawing.Size(773, 506);
@@ -420,9 +420,9 @@ namespace DagMU.Forms
 			}
 		}
 
-		void boxofinputboxes_EScroll(object sender, MouseEventArgs e)
+		void boxOfInputBoxes_EScroll(object sender, MouseEventArgs e)
 		{
-			User32.SendMouseWheelEvent(boxofmucktext, e.Delta);
+			User32.SendMouseWheelEvent(boxOfMuckText, e.Delta);
 		}
 
 		void HelperShow(IHelper hw)
@@ -491,40 +491,39 @@ namespace DagMU.Forms
 
 		void tbnDebug_Click(object sender, EventArgs e)
 		{
-			debugwindow.Show();
-			debugwindow.BringToFront();
+			debugWindow.Show();
+			debugWindow.BringToFront();
 		}
 
-		void debugwindow_EStatusReset(object sender, EventArgs e)
+		void debugWindow_EStatusReset(object sender, EventArgs e)
 		{
-			newStatus(MuckStatus.intercepting_normal);
+			newStatus(MuckStatus.Intercepting_Normal);
 		}
 
-		void debugwindow_ESend(object sender, string s)
+		void debugWindow_ESend(object sender, string s)
 		{
-			procline(s);
+			ProcLine(s);
 		}
 
 		void tbnLogSettings_Click(object sender, EventArgs e)
 		{
-			if (logsettings == null)
-				logsettings = new LogSettingsWindow();
+			if (logSettings == null)
+				logSettings = new LogSettingsWindow();
 
-			logsettings.FormClosing += logsettings_FormClosing;
-			logsettings.Show();
-			logsettings.BringToFront();
+			logSettings.FormClosing += logSettings_FormClosing;
+			logSettings.Show();
+			logSettings.BringToFront();
 		}
 
-		void logsettings_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+		void logSettings_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
 		{
-			logsettings = null;
+			logSettings = null;
 		}
 
-		public void refocus()
+		public void reFocus()
 		{
-			boxofinputboxes.refocus();
+			boxOfInputBoxes.reFocus();
 		}
-
 
 		/// <summary>
 		/// This world's ID number in the currentcollection of worlds
@@ -546,29 +545,29 @@ namespace DagMU.Forms
 			}
 		}
 
-		String loggingto;
+		String loggingTo;
 		StreamWriter LoggingStream;
 
 		public String LoggingTo
 		{
 			get
 			{
-				return loggingto;
+				return loggingTo;
 			}
 			set
 			{
-				if (value == loggingto)
+				if (value == loggingTo)
 					return;
 
 				if (Logging)
 				{
 					// stop logging
-					String loggingtosave = loggingto;
+					String loggingToSave = loggingTo;
 					LoggingStop();
-					loggingto = loggingtosave;
+					loggingTo = loggingToSave;
 					// can't File.Move on network paths, copy+delete instead
-					System.IO.File.Copy(LoggingPath + loggingto + LoggingExtension, LoggingPath + value + LoggingExtension, true);
-					System.IO.File.Delete(LoggingPath + loggingto + LoggingExtension);
+					System.IO.File.Copy(LoggingPath + loggingTo + LoggingExtension, LoggingPath + value + LoggingExtension, true);
+					System.IO.File.Delete(LoggingPath + loggingTo + LoggingExtension);
 					// restart at new place, omit history
 					LoggingStart(value, false);
 				}
@@ -576,7 +575,7 @@ namespace DagMU.Forms
 				{
 					LoggingStart(value, true);
 				}
-				loggingto = value;
+				loggingTo = value;
 				SuspendLayout();
 				tbnLogName.Text = value;
 				tbnLogName.Enabled = true;
@@ -627,12 +626,12 @@ namespace DagMU.Forms
 
 		void LoggingSaveHistory()
 		{
-			boxofmucktext.SaveFile(LoggingStream.BaseStream, System.Windows.Forms.RichTextBoxStreamType.PlainText);
+			boxOfMuckText.SaveFile(LoggingStream.BaseStream, System.Windows.Forms.RichTextBoxStreamType.PlainText);
 		}
 
 		void LoggingStart(String logfilename, bool includehistory)
 		{
-			loggingto = logfilename;
+			loggingTo = logfilename;
 			String logpath = LoggingPath + LoggingTo + LoggingExtension;
 			String firstline = "Log file for " + CharName + ", " + LogDate(System.DateTime.Now) + " " + System.DateTime.Today.ToShortTimeString() + Environment.NewLine;
 			LoggingStream = System.IO.File.AppendText(logpath);
@@ -652,7 +651,7 @@ namespace DagMU.Forms
 		{
 			if (!Logging)
 				return;
-			loggingto = null;
+			loggingTo = null;
 			LoggingStream.Close();
 			tbnLogName.Clear();
 			tbnLogName.Enabled = false;
@@ -715,7 +714,7 @@ namespace DagMU.Forms
 			Send("@set me=/ride/_mode:" + s, null);//TAPS
 		}
 
-		void boxofmucktext_LinkClicked(object sender, LinkClickedEventArgs e)
+		void boxOfMuckText_LinkClicked(object sender, LinkClickedEventArgs e)
 		{
 			System.Diagnostics.Process.Start(e.LinkText);
 		}
