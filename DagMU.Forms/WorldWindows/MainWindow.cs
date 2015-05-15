@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using DagMU.Forms.Helpers;
+using System.Threading.Tasks;
 
 namespace DagMU.Forms
 {
@@ -15,6 +16,17 @@ namespace DagMU.Forms
 		public MainWindow()
 		{
 			InitializeComponent();
+		}
+
+		void MainWindow_Load(object sender, EventArgs e)
+		{
+			this.Size = DagMU.Forms.Properties.Settings.Default.MainLastSize;
+
+			//window was AWOL once, so make sure it's got sane size
+			this.Height = Math.Max(300, this.Height);
+			this.Width = Math.Max(400, this.Width);
+
+			tbnForceLocal_Click(null, null);// HACK
 		}
 
 		void OnWorldResize(object sender, EventArgs e)
@@ -40,13 +52,6 @@ namespace DagMU.Forms
 			DagMU.Forms.Properties.Settings.Default.Save();
 		}
 
-		void MainWindow_Load(object sender, EventArgs e)
-		{
-			this.Size = DagMU.Forms.Properties.Settings.Default.MainLastSize;
-
-			tbnForceLocal_Click(null, null);// HACK 
-		}
-
 		void WorldVMAdd(WorldVM.WorldSettings settings, WorldVM.WorldPrefs prefs)
 		{
 			WorldVM w = new WorldVM(worldindex++);
@@ -68,7 +73,7 @@ namespace DagMU.Forms
 			w.EConnected += OnWorldConnected;
 			w.EDisconnected += OnWorldDisconnected;
 
-			w.Connect();
+			Task.Run(() => w.Connect());
 		}
 
 		void OnWorldDisconnected(object sender, EventArgs e)

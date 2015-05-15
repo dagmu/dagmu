@@ -157,12 +157,18 @@ namespace DagMU.Forms
 
 		void OnRead(object sender, string text)
 		{
+			if (this.InvokeRequired) { this.Invoke((Action)(() => OnRead(sender, text))); return; }
+
 			procline(text);
 			Console.Print(text + '\n');
 		}
 
 		void OnSend(object inputbox, Tuple<MuckConnection.SendStatus, string> status_errarMessage)
 		{
+			if (this.InvokeRequired) {
+				this.Invoke((Action)(() => OnSend(inputbox, status_errarMessage))); return;
+			}
+
 			switch (status_errarMessage.Item1)
 			{
 				case MuckConnection.SendStatus.send_error:
