@@ -88,23 +88,7 @@ namespace DagMU.Forms
 		bool expectingDescSettingLine = false; // for catching description in exame
 		bool expectingActionsExits = false; // for detecting the end of exame block
 
-		//the current @desc me=, scraped from exame
-		private string characterDescSettingString_ = null;
-		string characterDescSettingString
-		{
-			get { return characterDescSettingString_; }
-			set {
-				characterDescSettingString_ = value;
-				foreach (Match match in new Regex(@"^\w+$").Matches(value)) {//'redesc'
-					characterDescLists.Add(characterDescSettingString_);
-					return;//done, only expecting 1 match, so skip the next regex.
-				}
-				foreach (Match match in new Regex(@"\{list:(\w+)\}").Matches(value)) {//'blah blah {list:rar} blah {list:mar} blah'
-					characterDescLists.Add(match.Groups[1].Value);
-				}
-			}
-		}
-		List<string> characterDescLists = new List<string>();//redesc, desc2.. any {list:desc} that was found in desc string
+		List<string> characterDescLists = new List<string>();//redesc, desc2.. any {list:desc} that was found in desc string, scraped from 'exa me'
 
 		string sessionGuid = DagMU.Model.Utils.GuidEncoder.Encode(Guid.NewGuid());
 

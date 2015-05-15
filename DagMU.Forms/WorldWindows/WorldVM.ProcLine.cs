@@ -48,19 +48,21 @@ namespace DagMU.Forms
 						case "Either that player does not exist, or has a different password.":
 							connection.Disconnect();
 							return;
+						default:
 						case "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -":
 							break;
 					}
-
-					Echo("LOGGEDIN", true);
-
-					newStatus(MuckStatus.intercepting_normal);// from here it is assumed login was successful
 
 					Send("@mpi {name:me}");//get character name on connect!
 					Send("exa me");
 					Send("exa me=/_page/lastpaged");
 					Send("exa me=/_whisp/lastwhispered");
 					Send("exa me=/ride/_mode");
+
+					Echo("LOGGEDIN", true);
+
+					newStatus(MuckStatus.intercepting_normal);// from here it is assumed login was successful
+
 					Send("wf #hidefrom");
 
 					return;
@@ -206,6 +208,7 @@ namespace DagMU.Forms
 
 					// WF: Master WF List, always correct
 					if (s == "Players online for whom you are watching:") {//TAPS
+						boxprint(s);
 						newStatus(MuckStatus.intercepting_wf);
 						wf.UpdateFullStarting();
 						return;
@@ -497,6 +500,7 @@ namespace DagMU.Forms
 						return;
 					}
 
+					//exa me
 					if (!String.IsNullOrEmpty(CharName)) {
 						var regex = new Regex(@"(\w+)\(#(\d+)([A-Z]*)\)\s+(?:Sex toys:)\s+(\d+)\s*");//Shean(#152273PB)  Sex toys: 308  
 						var matches = regex.Matches(s);
@@ -504,6 +508,15 @@ namespace DagMU.Forms
 							//int characterDBRef = int.Parse(matches[0].Groups[2].Value);
 							//string characterFlags = matches[1].Groups[3].Value;
 							//int sexToys = int.Parse(matches[0].Groups[4].Value);
+
+							#if DEBUG
+							boxprint("First line   : " + s);
+							#else
+							boxprint(s);
+							#endif
+
+							expectingActionsExits = false;
+							expectingDescSettingLine = false;
 							newStatus(MuckStatus.intercepting_exame);
 							return;
 						}
@@ -528,11 +541,34 @@ namespace DagMU.Forms
 				case MuckStatus.intercepting_exame://exa me
 					//second line
 					if (expectingDescSettingLine) {
-						characterDescSettingString = s.StartsWith("Key: ")
+						//the current @desc me=, scraped from exame
+						string characterDescSettingString = s.StartsWith("Key: ")
 							? null
 							: s;
+
+						characterDescLists.Clear();
+
+						var singleWordMatches = new Regex(@"^\w+$").Matches(characterDescSettingString);
+						if (singleWordMatches.Count > 0) {
+							//done, only expecting 1 match, so skip the next regex.
+							foreach (Match match in singleWordMatches) {//'redesc'
+								characterDescLists.Add(characterDescSettingString);
+							}
+						} else {
+							foreach (Match match in new Regex(@"\{list:(\w+)\}").Matches(characterDescSettingString)) {//'blah blah {list:rar} blah {list:mar} blah'
+								characterDescLists.Add(match.Groups[1].Value);
+							}
+						}
+
 						DescEditor.updateLists(characterDescLists);
 						expectingDescSettingLine = false;
+
+						#if DEBUG
+						boxprint("Desc Line    : " + s);
+						#else
+						boxprint(s);
+						#endif
+
 						return;
 					}
 
@@ -540,6 +576,13 @@ namespace DagMU.Forms
 					if (expectingActionsExits) {
 						//HACK just eat the first one and go normal. don't know how many lines there will be and I don't want to send an echo to detect the end of the block
 						expectingActionsExits = false;
+
+						#if DEBUG
+						boxprint("Actions Exits: " + s);
+						#else
+						boxprint(s);
+						#endif
+
 						newStatus(MuckStatus.intercepting_normal);
 						return;
 					}
@@ -552,6 +595,13 @@ namespace DagMU.Forms
 							//string objectType = matches[0].Groups[1].Value;//PLAYER
 							//string objectFlags = matches[0].Groups[2].Value;//BUILDER JUMP_OK
 							expectingDescSettingLine = true;
+
+							#if DEBUG
+							boxprint("Second line  : " + s);
+							#else
+							boxprint(s);
+							#endif
+
 							return;
 						}
 					}
@@ -560,13 +610,27 @@ namespace DagMU.Forms
 					if (s == "No actions attached.") {
 					} else if (s == "Actions/exits:") {
 						expectingActionsExits = true;
+
+						#if DEBUG
+						boxprint("Actions Exits: " + s);
+						#else
+						boxprint(s);
+						#endif
+
+						return;
 					} else {
-						//don't print middle lines
+						#if DEBUG
+						boxprint("Middle Line  : " + s);
+						#else
+						boxprint(s);
+						#endif
+
 						return;//could get stuck here!
 					}
 
 					newStatus(MuckStatus.intercepting_normal);
 					return;
+
 
 				case MuckStatus.intercepting_charname:
 					//Result: Dagon
@@ -638,6 +702,8 @@ namespace DagMU.Forms
 						wf.UpdateFullDone(); // the wf should have all the names its gonna get now
 						return;
 					}
+
+					boxprint(s);
 
 					// must be the WF names, do a quick check to make sure it's a name line and not something else
 					words = s.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

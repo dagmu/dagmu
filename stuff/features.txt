@@ -1,3 +1,12 @@
+{null:{tell:   --<<O>>--<<( {name:me}\, a {gender:me} {species:me}\, looks at you. )>>--<<O>>--,this}}{list:desc}
+
+this.input.Font = new System.Drawing.Font("Lucida Console", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+this.input.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+this.input.TextChanged += new System.EventHandler(this.input_TextChanged);
+this.input.KeyDown += new System.Windows.Forms.KeyEventHandler(this.input_KeyDown);
+this.input.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.input_MouseWheel);
+
+
 C# WinForms
 
 	done
