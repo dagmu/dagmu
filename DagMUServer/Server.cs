@@ -64,7 +64,7 @@ namespace DagMUServer
 			Log(msg);
 
 			if (!client.LoggedIn) {
-				if (msg.StartsWith("connect")) {
+				if (msg.StartsWith("c")) {
 					client.LoggedIn = true;
 					client.Send("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 				} else {
