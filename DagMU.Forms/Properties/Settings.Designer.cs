@@ -133,7 +133,7 @@ namespace DagMU.Forms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Impact, 8.25pt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Lucida Console, 11.25pt")]
         public global::System.Drawing.Font BoxFont {
             get {
                 return ((global::System.Drawing.Font)(this["BoxFont"]));
