@@ -36,21 +36,6 @@ namespace DagMU.Forms
 		public class WorldPrefs
 		{
 			public String sendOnConnect;	// (character login string)
-
-			public bool sendQUITfirst;	// Send "QUIT" and wait X seconds before closing connection
-			public int sendQUITwait;	// seconds to wait before just closing the connection
-
-			public bool logging;
-			public bool quickLogging;
-
-			public enum IndentType {
-				none,
-				normal,	// RichTextBox.SelectionIndent
-				hanging	// RichTextBox.SelectionHangingIndent
-			}
-			public IndentType indent;
-			public int indentWidth;
-
 		} public WorldPrefs prefs;
 
 		// Current Status
@@ -85,6 +70,7 @@ namespace DagMU.Forms
 		string lastPaged;		// so when you type "p =" it will fill in the name as soon as you type the = sign
 		bool inLimbo;
 		bool echo = false;		// is dagmuecho working?
+
 		bool expectingDescSettingLine = false; // for catching description in exame
 		bool expectingActionsExits = false; // for detecting the end of exame block
 
