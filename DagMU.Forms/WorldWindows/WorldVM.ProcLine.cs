@@ -36,7 +36,7 @@ namespace DagMU.Forms
 				case MuckStatus.Intercepting_Morph: Intercepting_Morph(s); return;
 			}
 
-			boxPrint("Errar! Unparsed line: " + s);
+			boxErrar("Unparsed line: " + s);
 		}
 
 		/// <summary>
@@ -239,7 +239,7 @@ namespace DagMU.Forms
 					return;
 				}
 
-				boxPrint("Errar: malformed WF line");
+				boxErrar("malformed WF line: " + s);
 				return;
 			}
 			#endregion
@@ -545,7 +545,7 @@ namespace DagMU.Forms
 				return;
 			}
 
-			boxPrint("errar: cannot parse morph detail: " + detail + " : " + data);
+			boxErrar("cannot parse morph detail: " + detail + " : " + data);
 		}
 
 		private void Intercepting_CharName(string s)

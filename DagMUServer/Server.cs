@@ -140,7 +140,7 @@ namespace DagMUServer
 
 		static void LogFormat(string msg, params object[] args)
 		{
-			Console.WriteLine(msg, args);
+			Log(String.Format(msg, args));
 		}
 
 		private static string findDir(string dir, int levelsToTraverseUp = 4)

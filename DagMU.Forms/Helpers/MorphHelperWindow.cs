@@ -55,7 +55,7 @@ namespace DagMU.Forms.Helpers
 			item.Checked = true; // mark that this was updated
 
 			if (item.SubItems.Count != 2) {
-				parent.boxPrint("errar: " + target + " has " + item.SubItems.Count + " subitems instead of 1. Message was: " + message + "This should never be seen.");
+				parent.boxErrar(target + " has " + item.SubItems.Count + " subitems instead of 1. Message was: " + message + "This should never be seen.");
 			}
 
 			// set message to given

@@ -141,7 +141,7 @@ namespace DagMU.Forms
 			switch (status_errarMessage.Item1)
 			{
 				case MuckConnection.SendStatus.send_error:
-					boxPrint("Send errar! " + status_errarMessage.Item2 ?? "");
+					boxErrar("Send errar! " + status_errarMessage.Item2 ?? "");
 					if (inputbox != null) (inputbox as InputBox).newstatus(InputBox.Status.Disconnected);
 					Disconnect();
 					break;
@@ -234,7 +234,7 @@ namespace DagMU.Forms
 			try {
 				await connection.Connect(settings.Address, settings.Port, settings.SSL, settings.CertificateHash);
 			} catch (Exception e) {
-				boxPrint("Error connecting: " + e.Message);
+				boxErrar("Error connecting: " + e.Message);
 			}
 		}
 
@@ -268,6 +268,11 @@ namespace DagMU.Forms
 			Log(s);
 
 			boxOfMuckText.Add(s);
+		}
+
+		public void boxErrar(string s)
+		{
+			boxPrint("Errar: " + s);
 		}
 
 		void newStatus(MuckStatus newstatus, string message = null)
