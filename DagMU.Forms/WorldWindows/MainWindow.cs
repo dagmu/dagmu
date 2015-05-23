@@ -18,7 +18,7 @@ namespace DagMU.Forms
 			InitializeComponent();
 		}
 
-		void MainWindow_Load(object sender, EventArgs e)
+		private void MainWindow_Load(object sender, EventArgs e)
 		{
 			this.Size = DagMU.Forms.Properties.Settings.Default.MainLastSize;
 
@@ -33,7 +33,7 @@ namespace DagMU.Forms
 #endif
 		}
 
-		void OnWorldResize(object sender, EventArgs e)
+		private void OnWorldResize(object sender, EventArgs e)
 		{
 			WorldVM w = (WorldVM)sender;
 
@@ -45,18 +45,18 @@ namespace DagMU.Forms
 			ResumeLayout();
 		}
 
-		void checkBox1_CheckedChanged(object sender, EventArgs e)
+		private void checkBox1_CheckedChanged(object sender, EventArgs e)
 		{
 			User32.FlashWindow(Handle, cbFlash.Checked);
 		}
 
-		void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			DagMU.Forms.Properties.Settings.Default.MainLastSize = this.Size;
 			DagMU.Forms.Properties.Settings.Default.Save();
 		}
 
-		void WorldVMAdd(WorldVM.WorldSettings settings, WorldVM.WorldPrefs prefs)
+		private void WorldVMAdd(WorldVM.WorldSettings settings, WorldVM.WorldPrefs prefs)
 		{
 			WorldVM w = new WorldVM(worldindex++);
 			worlds.Add(w);
@@ -73,42 +73,23 @@ namespace DagMU.Forms
 			w.Resize += new EventHandler(OnWorldResize);
 			Controls.Add(w);
 
-			w.EClosing += OnWorldClosing;
-			w.EConnected += OnWorldConnected;
-			w.EDisconnected += OnWorldDisconnected;
+			w.EConnected += (sender, e) => { if (sender as WorldVM == currentworld) tbnConnectEnabled(false); };
+			w.EDisconnected += (sender, e) => { if (sender as WorldVM == currentworld) tbnConnectEnabled(true); };
+			w.EClosing += (sender, e) => {
+				WorldVM world = sender as WorldVM;
+				if (world == currentworld)
+					tbnConnectEnabled(true);
+				world.Hide();
+				Controls.Remove(world);
+				worlds.Remove(world);
+			};
 
 			Task.Run(() => w.Connect());
 		}
 
-		void OnWorldDisconnected(object sender, EventArgs e)
-		{
-			if (sender as WorldVM == currentworld)
-				tbnConnectEnabled(true);
-		}
+		private WorldVM CurrentWorld { get { return worlds.SingleOrDefault(x => x == currentworld); } }
 
-		void OnWorldConnecting(object sender, EventArgs e)
-		{
-		}
-
-		void OnWorldConnected(object sender, EventArgs e)
-		{
-			if (sender as WorldVM == currentworld)
-				tbnConnectEnabled(false);
-		}
-
-		void OnWorldClosing(object sender, EventArgs e)
-		{
-			WorldVM world = sender as WorldVM;
-			if (world == currentworld)
-				tbnConnectEnabled(true);
-			world.Hide();
-			Controls.Remove(world);
-			worlds.Remove(world);
-		}
-
-		WorldVM CurrentWorld { get { return worlds.SingleOrDefault(x => x == currentworld); } }
-
-		void tbnForceLocal_Click(object sender, EventArgs e)
+		private void tbnForceLocal_Click(object sender, EventArgs e)
 		{
 			WorldVMAdd(
 				new WorldVM.WorldSettings() {
@@ -124,7 +105,7 @@ namespace DagMU.Forms
 			);
 		}
 
-		void tbnTaps_Click(object sender, EventArgs e)
+		private void tbnTaps_Click(object sender, EventArgs e)
 		{
 			WorldVMAdd(
 				tapsSettings(),
@@ -133,7 +114,7 @@ namespace DagMU.Forms
 			);
 		}
 
-		WorldVM.WorldSettings tapsSettings()
+		private WorldVM.WorldSettings tapsSettings()
 		{
 			return new WorldVM.WorldSettings() {
 				//connection settings
@@ -152,7 +133,7 @@ namespace DagMU.Forms
 			};
 		}
 
-		void tbnConnect_Click(object sender, EventArgs e)
+		private void tbnConnect_Click(object sender, EventArgs e)
 		{
 			WorldVM w = CurrentWorld;
 
@@ -163,7 +144,7 @@ namespace DagMU.Forms
 				w.Connect();
 		}
 
-		void tbnConnectEnabled(bool value)
+		private void tbnConnectEnabled(bool value)
 		{
 			Invoke((Action)(() => tbnConnect.Enabled = value ));
 		}
