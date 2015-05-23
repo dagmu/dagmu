@@ -11,14 +11,18 @@ namespace DagMU.Forms
 	{
 		public Box() {
 			stuffToMatch = new List<TextMatch>() {
-				new TextMatch("Shean", Color.Teal),
-				new TextMatch("Dagon", Color.MediumPurple),
-				new TextMatch("Yko", Color.Yellow),
-				new TextMatch("Mkosi", Color.Orange),
 				new TextMatch(new Regex("\bpage(s|(-pose))?\b"), Color.Red),
 				new TextMatch(new Regex("\bwhisper(s)?\b"), Color.Blue),
 				new TextMatch(new Regex(@"^([A-Za-z0-9_\-]+) (?:has ((?:dis|re|)connected|left|arrived)|(goes home)|(?:concentrates on a distant place, and )(fades from sight)|(?:(?:is )(taken home)(?: to sleep by the local police))).$"), Color.Gray),
 				new TextMatch(new Regex(@"^Somewhere on the muck, ([A-Za-z0-9_\-]+) has ((?:|re|dis)connected).$"), Color.Gray),
+			};
+
+			namesToMatch = new List<TextMatch>() {
+				new TextMatch("Shean", Color.Teal),
+				new TextMatch("Dagon", Color.MediumPurple),
+				new TextMatch("Yko", Color.Yellow),
+				new TextMatch("Szai", Color.Yellow),
+				new TextMatch("Mkosi", Color.Orange),
 			};
 
 			this.ReadOnly = true;
@@ -74,6 +78,8 @@ namespace DagMU.Forms
 		}
 
 		public List<TextMatch> stuffToMatch { get; set; }
+		public List<TextMatch> namesToMatch { get; set; }
+
 		public event EventHandler ScrolledToBottom;
 
 		//thanks to http://stackoverflow.com/a/6550415/3320154 for Suspend/ResumePainting for stealth mode appendtext
@@ -183,6 +189,12 @@ namespace DagMU.Forms
 		{
 			List<TextMatchPlace> placesToColor = new List<TextMatchPlace>();
 			foreach (TextMatch textMatch in stuffToMatch) {
+				foreach (Match match in textMatch.Regex.Matches(s)) {
+					TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
+					placesToColor.Add(blah);
+				}
+			}
+			foreach (TextMatch textMatch in namesToMatch) {
 				foreach (Match match in textMatch.Regex.Matches(s)) {
 					TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
 					placesToColor.Add(blah);

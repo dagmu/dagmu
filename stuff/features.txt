@@ -23,9 +23,14 @@ desc editor reads your list desc(s), no matter their name.
 
 
 	bugs
-wrong connect command sends loggedin lines like exa me, causing welcome.txt to spam
+scroll to bottom issues when resizing
 inputbox not focused/refocused
+'looked at you' line not highlighted
+customizable highlighting
+automatic name highlighting
+detect editplayer's looktrap (x looked at you), use for auto highlighting. won't work with looktraps built into desc.. custom highlighting would bypass the problem.
 pages/whispers not highlighted correctly
+wrong connect command sends loggedin lines like exa me, causing welcome.txt to spam
 p =, wh = don't work, InputBox.cs input_KeyDown
 closing world does not close any helpers
 last intercept makes newlines
