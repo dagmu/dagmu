@@ -9,6 +9,7 @@ namespace DagMU.Forms
 {
 	class Box : RichTextBox
 	{
+		#region constructor
 		public Box() {
 			stuffToMatch = new List<TextMatch>() {
 				new TextMatch(new Regex("\bpage(s|(-pose))?\b"), Color.Red),
@@ -27,6 +28,34 @@ namespace DagMU.Forms
 
 			this.ReadOnly = true;
 		}
+		#endregion
+
+		#region public interface
+		public void Add(string s, Color? color = null)
+		{
+			bool autoScroll = this.SelectionLength == 0 && IsAtMaxScroll && !mouseDown;
+			List<TextMatchPlace> placesToColor = GetColorPlaces(s);
+
+			this.SuspendPainting();
+			this.SelectionStart = this.TextLength;
+			this.AppendText("\n");
+			int startIndex = this.TextLength;
+			this.AppendText(s);
+			foreach (TextMatchPlace place in placesToColor) {
+				this.Select(startIndex + place.Index, place.Length);
+				this.SelectionColor = place.Color;
+			}
+			this.SelectionLength = 0;
+			this.SelectionColor = this.ForeColor;
+			this.ResumePainting();
+
+			if (autoScroll) ScrollToBottom();
+		}
+		#endregion
+
+		#region textMatch
+		public List<TextMatch> stuffToMatch { get; set; }
+		public List<TextMatch> namesToMatch { get; set; }
 
 		public class TextMatch
 		{
@@ -55,55 +84,12 @@ namespace DagMU.Forms
 			public int Index, Length;
 			public Color Color;
 		}
+		#endregion
 
-		public void Add(string s, Color? color = null)
-		{
-			bool autoScroll = this.SelectionLength == 0 && IsAtMaxScroll && !mouseDown;
-			List<TextMatchPlace> placesToColor = GetColorPlaces(s);
-
-			this.SuspendPainting();
-			this.SelectionStart = this.TextLength;
-			this.AppendText("\n");
-			int startIndex = this.TextLength;
-			this.AppendText(s);
-			foreach (TextMatchPlace place in placesToColor) {
-				this.Select(startIndex + place.Index, place.Length);
-				this.SelectionColor = place.Color;
-			}
-			this.SelectionLength = 0;
-			this.SelectionColor = this.ForeColor;
-			this.ResumePainting();
-
-			if (autoScroll) ScrollToBottom();
-		}
-
-		public List<TextMatch> stuffToMatch { get; set; }
-		public List<TextMatch> namesToMatch { get; set; }
-
-		public event EventHandler ScrolledToBottom;
-
-		//thanks to http://stackoverflow.com/a/6550415/3320154 for Suspend/ResumePainting for stealth mode appendtext
-		//thanks to http://stackoverflow.com/a/10238729/3320154 for IsAtMaxScroll/OnScrolledToBottom
-		//thanks to http://stackoverflow.com/a/10646424/3320154 for VerticalScroll get/set
-
-		Point _ScrollPoint;
-		bool _Painting = true;
-		IntPtr _EventMask;
-		int _SuspendIndex = 0;
-		int _SuspendLength = 0;
-		bool mouseDown = false;
-
-		public int VerticalScroll
-		{
-			get { return GetScrollPos((IntPtr)this.Handle, SB_VERT); }
-			set { SetScrollPos((IntPtr)this.Handle, SB_VERT, value, true); }
-		}
-
-		public void VerticalScrollRange(out int minScroll, out int maxScroll)
-		{
-			GetScrollRange(this.Handle, SB_VERT, out minScroll, out maxScroll);
-		}
-
+		#region suspend painting
+		/// <summary>
+		/// suspend painting, for stealth mode appendtext - thanks to http://stackoverflow.com/a/6550415/3320154
+		/// </summary>
 		public void SuspendPainting()
 		{
 			if (_Painting) {
@@ -128,28 +114,22 @@ namespace DagMU.Forms
 			}
 		}
 
-		public bool IsAtMaxScroll
-		{
-			get
-			{
-				int minScroll, maxScroll;
-				VerticalScrollRange(out minScroll, out maxScroll);
+		bool _Painting = true;
+		int _SuspendIndex = 0;
+		int _SuspendLength = 0;
+		Point _ScrollPoint;
+		IntPtr _EventMask;
+		#endregion
 
-				Point rtfPoint = Point.Empty;
-				SendMessage(this.Handle, EM_GETSCROLLPOS, 0, ref rtfPoint);
-				return (rtfPoint.Y + this.ClientSize.Height >= maxScroll);
-			}
-		}
+		#region text selection
+		public event EventHandler Refocus;
 
-		protected virtual void OnScrolledToBottom(EventArgs e)
-		{
-			if (ScrolledToBottom != null)
-				ScrolledToBottom(this, e);
-		}
+		bool mouseDown = false;
 
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
 			this.mouseDown = true;
+
 			base.OnMouseDown(e);
 		}
 
@@ -158,33 +138,16 @@ namespace DagMU.Forms
 			if (this.SelectionLength > 0) {
 				Clipboard.SetText(this.SelectedText);
 				this.SelectionLength = 0;
-				Refocus();
+				Refocus(this, null);
 			}
 
 			this.mouseDown = false;
+
 			base.OnMouseUp(mevent);
 		}
+		#endregion
 
-		protected override void OnKeyUp(KeyEventArgs e)
-		{
-			NotSureIfScrolled();
-
-			base.OnKeyUp(e);
-		}
-
-		protected override void WndProc(ref Message m)
-		{
-			if (m.Msg == WM_VSCROLL || m.Msg == WM_MOUSEWHEEL)
-				NotSureIfScrolled();
-
-			base.WndProc(ref m);
-		}
-
-		private void Refocus()
-		{
-			//send event to refocus inputbox
-		}
-
+		#region textMatch private
 		private List<TextMatchPlace> GetColorPlaces(string s)
 		{
 			List<TextMatchPlace> placesToColor = new List<TextMatchPlace>();
@@ -201,6 +164,58 @@ namespace DagMU.Forms
 				}
 			}
 			return placesToColor;
+		}
+		#endregion
+
+		#region scroll
+		/// <summary>
+		/// thanks to http://stackoverflow.com/a/10238729/3320154 for IsAtMaxScroll/OnScrolledToBottom
+		/// </summary>
+		public event EventHandler ScrolledToBottom;
+
+		public int VerticalScroll
+		{
+			get { return GetScrollPos((IntPtr)this.Handle, SB_VERT); }
+			set { SetScrollPos((IntPtr)this.Handle, SB_VERT, value, true); }
+		}
+
+		public void VerticalScrollRange(out int minScroll, out int maxScroll)
+		{
+			GetScrollRange(this.Handle, SB_VERT, out minScroll, out maxScroll);
+		}
+
+		public bool IsAtMaxScroll
+		{
+			get
+			{
+				int minScroll, maxScroll;
+				VerticalScrollRange(out minScroll, out maxScroll);
+
+				Point rtfPoint = Point.Empty;
+				SendMessage(this.Handle, EM_GETSCROLLPOS, 0, ref rtfPoint);
+				return (rtfPoint.Y + this.ClientSize.Height >= maxScroll);
+			}
+		}
+
+		protected override void OnKeyUp(KeyEventArgs e)
+		{
+			NotSureIfScrolled();
+
+			base.OnKeyUp(e);
+		}
+
+		protected virtual void OnScrolledToBottom(EventArgs e)
+		{
+			if (ScrolledToBottom != null)
+				ScrolledToBottom(this, e);
+		}
+
+		protected override void WndProc(ref Message m)
+		{
+			if (m.Msg == WM_VSCROLL || m.Msg == WM_MOUSEWHEEL)
+				NotSureIfScrolled();
+
+			base.WndProc(ref m);
 		}
 
 		private void ScrollToBottom()
@@ -244,5 +259,6 @@ namespace DagMU.Forms
 		const int EM_SETSCROLLPOS = WM_USER + 222;
 		const int EM_GETEVENTMASK = WM_USER + 59;
 		const int EM_SETEVENTMASK = WM_USER + 69;
+		#endregion
 	}
 }

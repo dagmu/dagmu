@@ -10,7 +10,7 @@ namespace DagMU.Forms
 {
 	[Designer(typeof(ControlDesigner))]
 	//[DesignerSerializer("System.Windows.Forms.Design.ControlCodeDomSerializer, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.ComponentModel.Design.Serialization.CodeDomSerializer, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-	public class InputTextBoxHosted : ElementHost
+	public class InputTextBoxHosted : ElementHost, IRefocus
 	{
 		public InputTextBoxHosted()
 		{
@@ -83,6 +83,11 @@ namespace DagMU.Forms
 		public void Select(int start, int length)
 		{
 			box.Select(start, length);
+		}
+
+		public void Refocus()
+		{
+			box.Focus();
 		}
 
 		public System.Windows.Media.Brush SelectionBrush

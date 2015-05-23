@@ -384,6 +384,7 @@ namespace DagMU.Forms
 			this.boxOfMuckText.TabIndex = 0;
 			this.boxOfMuckText.Text = "";
 			this.boxOfMuckText.LinkClicked += boxOfMuckText_LinkClicked;
+			this.boxOfMuckText.Refocus += boxOfMuckText_Refocus;
 			// 
 			// World
 			// 
@@ -398,6 +399,11 @@ namespace DagMU.Forms
 			this.menu.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+		}
+
+		private void boxOfMuckText_Refocus(object sender, EventArgs e)
+		{
+			boxOfInputBoxes.Refocus();
 		}
 
 		public bool Connected {
@@ -508,7 +514,7 @@ namespace DagMU.Forms
 
 		public void reFocus()
 		{
-			boxOfInputBoxes.reFocus();
+			boxOfInputBoxes.Refocus();
 		}
 
 		/// <summary>

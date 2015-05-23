@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DagMU.Forms.Helpers
 {
-	public partial class InputBoxBox : UserControl
+	public partial class InputBoxBox : UserControl, IRefocus
 	{
 		public InputBoxBox()
 		{
@@ -141,9 +141,9 @@ namespace DagMU.Forms.Helpers
 		/// <summary>
 		/// Snap window focus to an inputbox
 		/// </summary>
-		public void reFocus()
+		public void Refocus()
 		{
-			inputBoxes[0].refocus();
+			inputBoxes[0].Refocus();
 		}
 	}
 }

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DagMU.Forms.Helpers
 {
-	public partial class InputBox : System.Windows.Forms.UserControl
+	public partial class InputBox : System.Windows.Forms.UserControl, IRefocus
 	{
 		const int bufferSize = 500;
 
@@ -76,9 +76,10 @@ namespace DagMU.Forms.Helpers
 			Normal			// enable, refocus
 		}
 
-		public void refocus()
+		public void Refocus()
 		{
 			input.Focus();
+			input.Refocus();
 		}
 
 		public void newstatus(Status msg)
@@ -96,7 +97,7 @@ namespace DagMU.Forms.Helpers
 					goto case Status.Normal;
 				case Status.Normal:
 					input.Enabled = true;
-					refocus();
+					Refocus();
 					break;
 			}
 		}
@@ -169,13 +170,13 @@ namespace DagMU.Forms.Helpers
 		void buttonSmaller_Click(object sender, EventArgs e)
 		{
 			Lines = Lines - 1;
-			refocus();
+			Refocus();
 		}
 
 		void buttonBigger_Click(object sender, EventArgs e)
 		{
 			Lines = Lines + 1;
-			refocus();
+			Refocus();
 		}
 
 		void buttonMore_Click(object sender, EventArgs e)
