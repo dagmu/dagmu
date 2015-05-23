@@ -20,15 +20,15 @@ namespace DagMUServer
 			}
 		}
 
-		public async Task Start()
+		public async Task Start(int port)
 		{
-			await Start(IPAddress.Loopback);
+			await Start(IPAddress.Loopback, port);
 		}
 
-		public async Task Start(IPAddress ipAddress, int port = 2069)
+		public async Task Start(IPAddress ipAddress, int port)
 		{
 			Log(typeof(Program).Assembly.GetName().Name);
-			listener = new TcpListener(port);
+			listener = new TcpListener(ipAddress, port);
 			listener.Start();
 			LogFormat("Listening on {0} : {1}", ipAddress.ToString(), port);
 			while (true) {

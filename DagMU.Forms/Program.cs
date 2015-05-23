@@ -18,7 +18,7 @@ namespace DagMU.Forms
 #if DEBUG
 			Task.Run(() => new Server(new Server.Options() {
 				echo = true,
-			}).Start());
+			}).Start(2069));
 #endif
 
             Application.EnableVisualStyles();

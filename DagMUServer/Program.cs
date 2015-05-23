@@ -10,7 +10,7 @@ namespace DagMUServer
 		{
 			Task.Run(() => new Server(new Server.Options() {
 				echo = false
-			}).Start());
+			}).Start(2069));
 
 			Console.ReadLine();
 		}
