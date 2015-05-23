@@ -1,3 +1,13 @@
+^(?:\w+ )(page(?:s|(?:-pose))?)(?:, \"".*\"" to \w+\.)$
+You page, "blah" to Dagon.
+Dagon pages, "blah" to you.
+You page-pose, "Dagon blah" to Dagon
+In a page-pose to you, Dagon blah
+You whisper, "blah" to Dagon.
+Dagon whispers, "blah" to you.
+You whisper, "Dagon blah" to Dagon.
+Dagon whispers, "Dagon blah" to you.
+
 "First line   : "
 "Second line  : "
 "Actions Exits: "
@@ -28,7 +38,6 @@ multiline poses don't scroll to bottom correctly, only scrolls to start of line
 'looked at you' line not highlighted
 world/connection/character CRUD
 customizable highlighting
-pages/whispers not highlighted correctly
 automatic name highlighting
 inputbox buttons don't work right if maximized
 last intercept makes newlines

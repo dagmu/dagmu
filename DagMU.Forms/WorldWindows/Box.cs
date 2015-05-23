@@ -12,8 +12,9 @@ namespace DagMU.Forms
 		#region constructor
 		public Box() {
 			stuffToMatch = new List<TextMatch>() {
-				new TextMatch(new Regex("\bpage(s|(-pose))?\b"), Color.Red),
-				new TextMatch(new Regex("\bwhisper(s)?\b"), Color.Blue),
+				new TextMatch(new Regex(@"^[\w]+ (page(?:s|(?:-pose))?), \"".*\"" to [\w]*[.]?$"), Color.FromArgb(205,92,92)),
+				new TextMatch(new Regex(@"^(?:In a )(page-pose)(?: to you, \w+ .+)$"), Color.FromArgb(205,92,92)),
+				new TextMatch(new Regex(@"^[\w]+ (whisper(?:s?)), \"".*\"" to [\w]*.$"), Color.FromArgb(72,209,204)),
 				new TextMatch(new Regex(@"^([A-Za-z0-9_\-]+) (?:has ((?:dis|re|)connected|left|arrived)|(goes home)|(?:concentrates on a distant place, and )(fades from sight)|(?:(?:is )(taken home)(?: to sleep by the local police))).$"), Color.Gray),
 				new TextMatch(new Regex(@"^Somewhere on the muck, ([A-Za-z0-9_\-]+) has ((?:|re|dis)connected).$"), Color.Gray),
 			};
@@ -54,10 +55,31 @@ namespace DagMU.Forms
 		#endregion
 
 		#region textMatch
-		public List<TextMatch> stuffToMatch { get; set; }
-		public List<TextMatch> namesToMatch { get; set; }
+		private List<TextMatch> stuffToMatch { get; set; }
+		private List<TextMatch> namesToMatch { get; set; }
 
-		public class TextMatch
+		private List<TextMatchPlace> GetColorPlaces(string s)
+		{
+			List<TextMatchPlace> placesToColor = new List<TextMatchPlace>();
+			foreach (TextMatch textMatch in stuffToMatch) {
+				foreach (Match match in textMatch.Regex.Matches(s)) {
+					for (int j = 1; j < match.Groups.Count; j++) {
+						var group = match.Groups[j];
+						TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = group.Index, Length = group.Length };
+						placesToColor.Add(blah);
+					}
+				}
+			}
+			foreach (TextMatch textMatch in namesToMatch) {
+				foreach (Match match in textMatch.Regex.Matches(s)) {
+					TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
+					placesToColor.Add(blah);
+				}
+			}
+			return placesToColor;
+		}
+
+		private class TextMatch
 		{
 			public TextMatch(string value, Color color) : this(color) { Match = value; }
 			public TextMatch(Regex regex, Color color) : this(color) { Regex = regex; }
@@ -79,7 +101,7 @@ namespace DagMU.Forms
 			string match;
 		}
 
-		public struct TextMatchPlace
+		private struct TextMatchPlace
 		{
 			public int Index, Length;
 			public Color Color;
@@ -144,26 +166,6 @@ namespace DagMU.Forms
 			this.mouseDown = false;
 
 			base.OnMouseUp(mevent);
-		}
-		#endregion
-
-		#region textMatch private
-		private List<TextMatchPlace> GetColorPlaces(string s)
-		{
-			List<TextMatchPlace> placesToColor = new List<TextMatchPlace>();
-			foreach (TextMatch textMatch in stuffToMatch) {
-				foreach (Match match in textMatch.Regex.Matches(s)) {
-					TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
-					placesToColor.Add(blah);
-				}
-			}
-			foreach (TextMatch textMatch in namesToMatch) {
-				foreach (Match match in textMatch.Regex.Matches(s)) {
-					TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
-					placesToColor.Add(blah);
-				}
-			}
-			return placesToColor;
 		}
 		#endregion
 

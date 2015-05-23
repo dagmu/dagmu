@@ -512,8 +512,9 @@ namespace DagMU.Forms
 			logSettings = null;
 		}
 
-		public void reFocus()
+		public void Refocus()
 		{
+			if (boxOfInputBoxes.InvokeRequired) { this.Invoke((Action)(() => Refocus())); return; }
 			boxOfInputBoxes.Refocus();
 		}
 

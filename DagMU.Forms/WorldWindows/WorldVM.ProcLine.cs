@@ -84,6 +84,8 @@ namespace DagMU.Forms
 		/// </summary>
 		private void Intercepting_Normal(string s)
 		{
+			if (s == null) return;
+
 			if (isEchoEqual(s, "LOGGEDIN")) {
 				onSynced();
 				return;

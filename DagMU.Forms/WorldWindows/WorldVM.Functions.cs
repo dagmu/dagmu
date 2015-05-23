@@ -10,7 +10,7 @@ using System.Windows.Forms.Integration;
 
 namespace DagMU.Forms
 {
-	partial class WorldVM
+	partial class WorldVM : IRefocus
 	{
 		public WorldVM(int myindex)
 		{
@@ -109,6 +109,7 @@ namespace DagMU.Forms
 				case MuckConnection.ConnectEventArgs.StatusEnum.Connected:
 					newStatus(MuckStatus.Intercepting_Connecting, args.Message);
 					EConnected(this, null);
+					Refocus();
 					break;
 
 				case MuckConnection.ConnectEventArgs.StatusEnum.Got_Disconnected:
@@ -341,7 +342,7 @@ namespace DagMU.Forms
 		void OnRideModeSelected(object sender, String ridemode)
 		{
 			Send("@set me=/ride/_mode:" + ridemode);//TAPS
-			reFocus();
+			Refocus();
 		}
 	}
 }
