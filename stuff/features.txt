@@ -22,30 +22,32 @@ mousewheel anywhere scrolls the main window
 desc editor reads your list desc(s), no matter their name.
 
 
-	bugs
-scroll to bottom issues when resizing
-inputbox not focused/refocused
+	bug stoppers
+scroll to bottom issues when resizing. resize doesn't keep bottom line in view.
+multiline poses don't scroll to bottom correctly, only scrolls to start of line
 'looked at you' line not highlighted
+world/connection/character CRUD
 customizable highlighting
-automatic name highlighting
-detect editplayer's looktrap (x looked at you), use for auto highlighting. won't work with looktraps built into desc.. custom highlighting would bypass the problem.
 pages/whispers not highlighted correctly
+automatic name highlighting
+inputbox buttons don't work right if maximized
+last intercept makes newlines
+closing world does not close any helpers
+when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
+
+	bug wishes
 wrong connect command sends loggedin lines like exa me, causing welcome.txt to spam
 p =, wh = don't work, InputBox.cs input_KeyDown
-closing world does not close any helpers
-last intercept makes newlines
-multiline poses don't scroll to bottom correctly, only scrolls to start of line
-when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
 richtextbox sees // as clickable link, override underlying win32 control with http://www.codeproject.com/Articles/9196/Links-with-arbitrary-text-in-a-RichTextBox or disable DetectURL and parse manually
-resize doesn't keep bottom line in view
 console needs to start a bit wider
 console needs to use richtextbox maybe, horizontal rezising is fucked
+
+detect editplayer's looktrap (x looked at you), use for auto highlighting. won't work with looktraps built into desc.. custom highlighting would bypass the problem.
+
 cinfo viewer
 	shows add misc field for everyone, not just  you
 	doesn't show default fields for you, so you can't set them
 	no visual indication that clicking an unopened misc field will fetch it
-inputbox buttons don't work right if maximized
-
 	not done
 world library
 	add world, store mucks/characters separately
@@ -103,3 +105,7 @@ WF
 	fur db integration, save info locally for furs
 WHO list interception
 stupid statistics (time since pose, time per pose, average character name length)
+
+wishes
+
+passthru: use Server to host the current session, allowing other dagmus or telnets to connect to it without causing a second connection to the server. pass-thru connections with one active session.
