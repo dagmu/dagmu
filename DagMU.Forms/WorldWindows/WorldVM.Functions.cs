@@ -56,6 +56,11 @@ namespace DagMU.Forms
 			FontsColors = new FontsColorsWindow();
 			Helpers.Add(FontsColors);
 
+			Settings = new DagMUWPF.Windows.Settings() as IHelper;
+			ElementHost.EnableModelessKeyboardInterop(Settings as System.Windows.Window);
+			Helpers.Add(Settings);
+			Settings.Show();
+
 			foreach (IHelper w in Helpers)
 			{
 				if (w is HelperForm) (w as HelperForm).parent = this;

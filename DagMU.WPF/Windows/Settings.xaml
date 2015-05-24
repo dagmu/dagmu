@@ -1,0 +1,9 @@
+﻿<src:Helper x:Class="DagMUWPF.Windows.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				xmlns:src="clr-namespace:DagMUWPF.Windows"
+        Title="Settings" Height="300" Width="300">
+    <Grid>
+        
+    </Grid>
+</src:Helper>
