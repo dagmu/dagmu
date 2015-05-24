@@ -212,6 +212,12 @@ namespace DagMU.Forms
 				ScrolledToBottom(this, e);
 		}
 
+		protected override void OnLayout(LayoutEventArgs levent)
+		{
+			base.OnLayout(levent);
+			//ScrollToBottom();
+		}
+
 		protected override void WndProc(ref Message m)
 		{
 			if (m.Msg == WM_VSCROLL || m.Msg == WM_MOUSEWHEEL)

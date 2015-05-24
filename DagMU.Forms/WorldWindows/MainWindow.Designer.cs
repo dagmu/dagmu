@@ -33,12 +33,12 @@ namespace DagMU.Forms
 			this.cbFlash = new System.Windows.Forms.CheckBox();
 			this.menu = new System.Windows.Forms.ToolStrip();
 			this.tbnConnect = new System.Windows.Forms.ToolStripDropDownButton();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.tbnSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnForce = new System.Windows.Forms.ToolStripMenuItem();
 			this.tbnTaps = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.tbnSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnSites = new System.Windows.Forms.ToolStripMenuItem();
-			this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tbnAdd = new System.Windows.Forms.ToolStripMenuItem();
 			this.menu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -72,12 +72,12 @@ namespace DagMU.Forms
 			// 
 			this.tbnConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.tbnConnect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
+            this.tbnSeparator1,
             this.tbnForce,
             this.tbnTaps,
-            this.toolStripSeparator2,
+            this.tbnSeparator2,
             this.tbnSites,
-            this.addNewToolStripMenuItem});
+            this.tbnAdd});
 			this.tbnConnect.Image = global::DagMU.Forms.Properties.Resources.lightning;
 			this.tbnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnConnect.Name = "tbnConnect";
@@ -87,8 +87,8 @@ namespace DagMU.Forms
 			// 
 			// toolStripSeparator1
 			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+			this.tbnSeparator1.Name = "toolStripSeparator1";
+			this.tbnSeparator1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// tbnForce
 			// 
@@ -108,8 +108,8 @@ namespace DagMU.Forms
 			// 
 			// toolStripSeparator2
 			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+			this.tbnSeparator2.Name = "toolStripSeparator2";
+			this.tbnSeparator2.Size = new System.Drawing.Size(149, 6);
 			// 
 			// tbnSites
 			// 
@@ -120,9 +120,9 @@ namespace DagMU.Forms
 			// 
 			// addNewToolStripMenuItem
 			// 
-			this.addNewToolStripMenuItem.Name = "addNewToolStripMenuItem";
-			this.addNewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.addNewToolStripMenuItem.Text = "Add New";
+			this.tbnAdd.Name = "addNewToolStripMenuItem";
+			this.tbnAdd.Size = new System.Drawing.Size(152, 22);
+			this.tbnAdd.Text = "Add New";
 			// 
 			// MainWindow
 			// 
@@ -149,11 +149,11 @@ namespace DagMU.Forms
 		private System.Windows.Forms.CheckBox cbFlash;
 		private ToolStrip menu;
 		private System.Windows.Forms.ToolStripDropDownButton tbnConnect;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripSeparator tbnSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem tbnForce;
 		private System.Windows.Forms.ToolStripMenuItem tbnTaps;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripSeparator tbnSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem tbnSites;
-		private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem tbnAdd;
 	}
 }
