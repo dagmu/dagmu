@@ -15,8 +15,8 @@ namespace DagMU.Forms
 				new TextMatch(new Regex(@"^[\w]+ (page(?:s|(?:-pose))?), \"".*\"" to [\w]*[.]?$"), Color.FromArgb(205,92,92)),
 				new TextMatch(new Regex(@"^(?:In a )(page-pose)(?: to you, \w+ .+)$"), Color.FromArgb(205,92,92)),
 				new TextMatch(new Regex(@"^[\w]+ (whisper(?:s?)), \"".*\"" to [\w]*.$"), Color.FromArgb(72,209,204)),
-				new TextMatch(new Regex(@"^([A-Za-z0-9_\-]+) (?:has ((?:dis|re|)connected|left|arrived)|(goes home)|(?:concentrates on a distant place, and )(fades from sight)|(?:(?:is )(taken home)(?: to sleep by the local police))).$"), Color.Gray),
-				new TextMatch(new Regex(@"^Somewhere on the muck, ([A-Za-z0-9_\-]+) has ((?:|re|dis)connected).$"), Color.Gray),
+				new TextMatch(new Regex(@"((?:[A-Za-z0-9_\-]+) (?:has (?:(?:dis|re|)connected|left|arrived)|(?:goes home)|(?:concentrates on a distant place, and )(?:fades from sight)|(?:(?:is )(?:taken home)(?: to sleep by the local police))).)$"), Color.Gray),
+				new TextMatch(new Regex(@"^(Somewhere on the muck, (?:[A-Za-z0-9_\-]+) has (?:(?:|re|dis)connected).)$"), Color.Gray),
 			};
 
 			namesToMatch = new List<TextMatch>() {

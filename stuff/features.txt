@@ -1,3 +1,5 @@
+^((?:[A-Za-z0-9_\-]+) (?:has (?:(?:dis|re|)connected|left|arrived)|(?:goes home)|(?:concentrates on a distant place, and )(?:fades from sight)|(?:(?:is )(?:taken home)(?: to sleep by the local police))).)$
+
 ^(?:\w+ )(page(?:s|(?:-pose))?)(?:, \"".*\"" to \w+\.)$
 You page, "blah" to Dagon.
 Dagon pages, "blah" to you.
@@ -7,6 +9,14 @@ You whisper, "blah" to Dagon.
 Dagon whispers, "blah" to you.
 You whisper, "Dagon blah" to Dagon.
 Dagon whispers, "Dagon blah" to you.
+Furlop concentrates on a distant place, and fades from sight.
+Kelissan goes home.
+Kelissan has left.
+Ozzy_Lampwick is taken home to sleep by the local police.
+Ozzy_Lampwick has left.
+Maurice is taken home to sleep by the local police.
+Tamarack concentrates on a distant place, and fades from sight.
+
 
 "First line   : "
 "Second line  : "
@@ -31,8 +41,8 @@ multiple input boxes
 mousewheel anywhere scrolls the main window
 desc editor reads your list desc(s), no matter their name.
 
-
-	bug stoppers
+	stoppers
+end key
 scroll to bottom issues when resizing. resize doesn't keep bottom line in view.
 multiline poses don't scroll to bottom correctly, only scrolls to start of line
 'looked at you' line not highlighted
