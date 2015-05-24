@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 using DagMU.Forms.Helpers;
-using System.Text.RegularExpressions;
 
 namespace DagMU.Forms
 {
@@ -36,7 +33,7 @@ namespace DagMU.Forms
 				case MuckStatus.Intercepting_Morph: Intercepting_Morph(s); return;
 			}
 
-			boxErrar("Unparsed line: " + s);
+			Errar("Unparsed line: " + s);
 		}
 
 		/// <summary>
@@ -45,12 +42,12 @@ namespace DagMU.Forms
 		/// </summary>
 		private void Intercepting_Connecting1(string s)
 		{
-			boxPrint(s);
+			Print(s);
 
 			if (s.StartsWith(">> This notice put in for your protection from unwanted publications.")) {//TAPS
 				// Ready to log in
 				onReady();
-				newStatus(MuckStatus.Intercepting_Connecting2);//wait for login
+				NewStatus(MuckStatus.Intercepting_Connecting2);//wait for login
 			}
 		}
 
@@ -60,7 +57,7 @@ namespace DagMU.Forms
 		/// </summary>
 		private void Intercepting_Connecting2(string s)
 		{
-			boxPrint(s);
+			Print(s);
 
 			switch (s) {
 				case "":
@@ -75,7 +72,7 @@ namespace DagMU.Forms
 
 			onLoggedIn();
 
-			newStatus(MuckStatus.Intercepting_Normal);// from here it is assumed login was successful
+			NewStatus(MuckStatus.Intercepting_Normal);// from here it is assumed login was successful
 		}
 
 		/// <summary>
@@ -86,7 +83,7 @@ namespace DagMU.Forms
 		{
 			if (s == null) return;
 
-			if (isEchoEqual(s, "LOGGEDIN")) {
+			if (Model.Echo.isEchoEqual(s, "LOGGEDIN", sessionGuid)) {
 				onSynced();
 				return;
 			}
@@ -99,7 +96,7 @@ namespace DagMU.Forms
 
 			//  morph #list
 			if (s == "Morph Hammer V1.2 (C) 1994 by Triggur") {
-				newStatus(MuckStatus.Intercepting_Morph);
+				NewStatus(MuckStatus.Intercepting_Morph);
 				morphsIntercepted = 0;
 				MorphHelper.addMorphStarting();
 				return;
@@ -107,7 +104,7 @@ namespace DagMU.Forms
 
 			// WHO list, so huge we don't want it in our main window
 			if (s == "Name____________ Online__ Idle Doing___________________________________________") {//TAPS
-				newStatus(MuckStatus.Intercepting_Who);
+				NewStatus(MuckStatus.Intercepting_Who);
 				Who.Show();
 				Who.starting();
 				return;
@@ -115,7 +112,7 @@ namespace DagMU.Forms
 
 			// WI #flags
 			if (s == "-- WhatIsZ Extended V1.0.0.1 WF --------------------------------[ List flags ]") {//TAPS
-				newStatus(MuckStatus.Intercepting_WIFlags);
+				NewStatus(MuckStatus.Intercepting_WIFlags);
 				WIHelper.addstarting();
 				return;
 			}
@@ -123,7 +120,7 @@ namespace DagMU.Forms
 			// Email verification: infrequent but annoying
 			if (s == "### Please verify your email address!") {//TAPS
 				Send("@email #verify yes"); //TAPS
-				boxPrint("Email autoverified to the muck, please check console for correctness.");
+				Print("Email autoverified to the muck, please check console for correctness.");
 				return;
 			}
 
@@ -139,8 +136,8 @@ namespace DagMU.Forms
 
 			// Last
 			if (s == "Name              Laston             Last Connected    Last Disconnected") {//TAPS
-				newStatus(MuckStatus.Intercepting_Last);
-				boxPrint(s);
+				NewStatus(MuckStatus.Intercepting_Last);
+				Print(s);
 				return;
 			}
 
@@ -162,12 +159,12 @@ namespace DagMU.Forms
 
 						cInfoInterceptingFieldName = s.Substring(s.IndexOf("field: ") + ("field: ").Length);
 
-						newStatus(MuckStatus.Intercepting_CInfoMisc);
+						NewStatus(MuckStatus.Intercepting_CInfoMisc);
 						return;
 					}
 				} catch { return; }
 
-				newStatus(MuckStatus.Intercepting_CInfo);
+				NewStatus(MuckStatus.Intercepting_CInfo);
 				return;
 			}
 
@@ -183,13 +180,13 @@ namespace DagMU.Forms
 			// WF: Hides/unhides
 			if (s == "Adding #all to your hidefrom list.") {//TAPS
 				wf.Hiding = WF.HiddenEnum.HidingFromAll;
-				boxPrint("Now hidden from WF.");
+				Print("Now hidden from WF.");
 				return;
 			}
 
 			if (s == "Removing #all from your hidefrom list.") {//TAPS
 				wf.Hiding = WF.HiddenEnum.VisibleToAll;
-				boxPrint("Now visible to WF.");
+				Print("Now visible to WF.");
 				return;
 			}
 
@@ -199,7 +196,7 @@ namespace DagMU.Forms
 				else
 					wf.Hiding = WF.HiddenEnum.VisibleToAll;
 
-				boxPrint(s);
+				Print(s);
 				return;
 			}
 
@@ -211,15 +208,15 @@ namespace DagMU.Forms
 
 			// WF: Master WF List, always correct
 			if (s == "Players online for whom you are watching:") {//TAPS
-				boxPrint(s);
-				newStatus(MuckStatus.Intercepting_WF);
+				Print(s);
+				NewStatus(MuckStatus.Intercepting_WF);
 				wf.UpdateFullStarting();
 				return;
 			}
 
 			// WF: On-the-fly WF info, not always reliable
 			if (s.StartsWith("Somewhere on the muck, ")) {//TAPS
-				boxPrint(s);
+				Print(s);
 
 				s = s.Substring("Somewhere on the muck, ".Length);//TAPS
 
@@ -241,7 +238,7 @@ namespace DagMU.Forms
 					return;
 				}
 
-				boxErrar("malformed WF line: " + s);
+				Errar("malformed WF line: " + s);
 				return;
 			}
 			#endregion
@@ -259,7 +256,7 @@ namespace DagMU.Forms
 			//Arg:    {name:me}
 			//Result: Dagon
 			if (s == "Arg:    {name:me}") {
-				newStatus(MuckStatus.Intercepting_CharName);
+				NewStatus(MuckStatus.Intercepting_CharName);
 				return;
 			}
 
@@ -273,14 +270,14 @@ namespace DagMU.Forms
 					//int sexToys = int.Parse(matches[0].Groups[4].Value);
 
 #if DEBUG
-					boxPrint("First line   : " + s);
+					Print("First line   : " + s);
 #else
 					boxPrint(s);
 #endif
 
 					expectingActionsExits = false;
 					expectingDescSettingLine = false;
-					newStatus(MuckStatus.Intercepting_ExaMe);
+					NewStatus(MuckStatus.Intercepting_ExaMe);
 					return;
 				}
 			}
@@ -295,7 +292,7 @@ namespace DagMU.Forms
 
 			// Anything that makes it down this far into normal text is either normal text
 			// or we just don't know how to interpret it yet!
-			boxPrint(s);
+			Print(s);
 		}
 
 		/// <summary>
@@ -547,7 +544,7 @@ namespace DagMU.Forms
 				return;
 			}
 
-			boxErrar("cannot parse morph detail: " + detail + " : " + data);
+			Errar("cannot parse morph detail: " + detail + " : " + data);
 		}
 
 		private void Intercepting_CharName(string s)
@@ -558,7 +555,7 @@ namespace DagMU.Forms
 			else
 				ProcLine(s);
 
-			newStatus(MuckStatus.Intercepting_Normal);
+			NewStatus(MuckStatus.Intercepting_Normal);
 		}
 
 		private void Intercepting_CInfo(string s)
@@ -569,7 +566,7 @@ namespace DagMU.Forms
 			CInfoHelperWindow cwindd = FindMakeCInfoWindow(cInfoInterceptingName);
 
 			if (s == "> Done.") {
-				newStatus(MuckStatus.Intercepting_Normal);
+				NewStatus(MuckStatus.Intercepting_Normal);
 				cwindd.Show();
 				cwindd.BringToFront();
 				return;
@@ -600,7 +597,7 @@ namespace DagMU.Forms
 		private void Intercepting_CInfoMisc(string s)
 		{
 			if (!s.StartsWith("> ")) {
-				newStatus(MuckStatus.Intercepting_Normal);
+				NewStatus(MuckStatus.Intercepting_Normal);
 				ProcLine(s);
 				return;
 			}
@@ -611,7 +608,7 @@ namespace DagMU.Forms
 
 			FindMakeCInfoWindow(cInfoInterceptingName).UpdateField(cInfoInterceptingFieldName, s, true);
 
-			newStatus(MuckStatus.Intercepting_Normal);
+			NewStatus(MuckStatus.Intercepting_Normal);
 		}
 
 		private void Intercepting_ExaMe(string s)
@@ -619,7 +616,7 @@ namespace DagMU.Forms
 			//second line
 			if (expectingDescSettingLine) {
 #if DEBUG
-				boxPrint("Desc Line    : " + s);
+				Print("Desc Line    : " + s);
 #else
 				boxPrint(s);
 #endif
@@ -646,7 +643,7 @@ namespace DagMU.Forms
 				DescEditor.updateLists(characterDescLists);
 
 #if DEBUG
-				boxPrint("Desc lists: " + String.Join(",", characterDescLists));
+				Print("Desc lists: " + String.Join(",", characterDescLists));
 #endif
 
 				expectingDescSettingLine = false;
@@ -660,12 +657,12 @@ namespace DagMU.Forms
 				expectingActionsExits = false;
 
 #if DEBUG
-				boxPrint("Actions Exits: " + s);
+				Print("Actions Exits: " + s);
 #else
 				boxPrint(s);
 #endif
 
-				newStatus(MuckStatus.Intercepting_Normal);
+				NewStatus(MuckStatus.Intercepting_Normal);
 				return;
 			}
 
@@ -679,7 +676,7 @@ namespace DagMU.Forms
 					expectingDescSettingLine = true;
 
 #if DEBUG
-					boxPrint("Second line  : " + s);
+					Print("Second line  : " + s);
 #else
 					boxPrint(s);
 #endif
@@ -694,7 +691,7 @@ namespace DagMU.Forms
 				expectingActionsExits = true;
 
 #if DEBUG
-				boxPrint("Actions Exits: " + s);
+				Print("Actions Exits: " + s);
 #else
 				boxPrint(s);
 #endif
@@ -702,7 +699,7 @@ namespace DagMU.Forms
 				return;
 			} else {
 #if DEBUG
-				boxPrint("Middle Line  : " + s);
+				Print("Middle Line  : " + s);
 #else
 				boxPrint(s);
 #endif
@@ -710,7 +707,7 @@ namespace DagMU.Forms
 				return;//could get stuck here!
 			}
 
-			newStatus(MuckStatus.Intercepting_Normal);
+			NewStatus(MuckStatus.Intercepting_Normal);
 		}
 
 		private void Intercepting_Last(string s)
@@ -728,7 +725,7 @@ namespace DagMU.Forms
 
 			if (s.Length != 71) {
 				// line doesn't match our recognition test, recycle it into procline to escape this trap
-				newStatus(MuckStatus.Intercepting_Normal);
+				NewStatus(MuckStatus.Intercepting_Normal);
 				ProcLine(s);
 				return;
 			}
@@ -744,10 +741,10 @@ namespace DagMU.Forms
 				String tmpStatus = s.Substring(18, 19).TrimEnd(new Char[] { ' ' });	//18, 19	--- ONLINE ---, ( Last week ), ( Yesterday ), ( Today ), ( 23 weeks ago )
 				String tmpTime1 = s.Substring(37, 16);	//37, 16	07:49PM 08/31/08
 				String tmpTime2 = s.Substring(55);		//55, -		10:04PM 08/31/08
-				boxPrint("[" + tmpName + "]\n[" + tmpStatus + "]\n[" + tmpTime1 + "]\n[" + tmpTime2 + "]");
+				Print("[" + tmpName + "]\n[" + tmpStatus + "]\n[" + tmpTime1 + "]\n[" + tmpTime2 + "]");
 			}
 
-			newStatus(MuckStatus.Intercepting_Normal);
+			NewStatus(MuckStatus.Intercepting_Normal);
 		}
 
 		private void Intercepting_Morph(string s)
@@ -818,7 +815,7 @@ namespace DagMU.Forms
 				return;
 
 			// any other text gets recycled back to procline and we get out of this intercept trap
-			newStatus(MuckStatus.Intercepting_Normal);
+			NewStatus(MuckStatus.Intercepting_Normal);
 			//procline(s); // don't recycle to eat the last ' '
 			MorphHelper.addMorphDone();
 		}
@@ -834,7 +831,7 @@ namespace DagMU.Forms
 				// we don't actually need the total, but i want to make sure the who is working right
 				// and use for random useless statistics
 				Who.done();
-				newStatus(MuckStatus.Intercepting_Normal);
+				NewStatus(MuckStatus.Intercepting_Normal);
 			}
 			Who.newline(s);
 		}
@@ -863,7 +860,7 @@ namespace DagMU.Forms
 				return;
 			}
 
-			newStatus(MuckStatus.Intercepting_Normal);
+			NewStatus(MuckStatus.Intercepting_Normal);
 
 			// any other text gets recycled back to procline and we get out of this intercept trap
 			if (!s.StartsWith("----"))
@@ -875,18 +872,18 @@ namespace DagMU.Forms
 		private void Intercepting_WF(string s)
 		{
 			if (s == "Done.") {//TAPS
-				newStatus(MuckStatus.Intercepting_Normal);
+				NewStatus(MuckStatus.Intercepting_Normal);
 				wf.UpdateFullDone(); // the wf should have all the names its gonna get now
 				return;
 			}
 
-			boxPrint(s);
+			Print(s);
 
 			// must be the WF names, do a quick check to make sure it's a name line and not something else
 			string[] words = s.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 			// the names are space padded in collumns of 18, so we can do a quick check to make sure
 			if ((s.Length % 18) != 0) {
-				newStatus(MuckStatus.Intercepting_Normal);
+				NewStatus(MuckStatus.Intercepting_Normal);
 				wf.UpdateFullAbort(); // tell the wf to take what it's got
 				return;
 			}

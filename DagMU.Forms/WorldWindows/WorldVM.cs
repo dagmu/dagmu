@@ -59,6 +59,7 @@ namespace DagMU.Forms
 			Intercepting_ExaMe,			// exa me, self properties, desc setting
 		} public MuckStatus status;
 
+		#region public properties
 		String charName;
 		public String CharName
 		{
@@ -66,10 +67,25 @@ namespace DagMU.Forms
 			set { charName = value; debugWindow.textboxCharName.Text = value; }
 		}
 
+		/// <summary>
+		/// This world's ID number in the currentcollection of worlds
+		/// </summary>
+		public readonly int Index;
+
+		public bool Connected {
+			get { return connection.Connected; }
+		}
+
+		public event EventHandler EConnected;
+		public event EventHandler EDisconnected;
+		public event EventHandler EClosing;
+		#endregion
+
+		#region privates
 		string lastWhispered;	// these track the last person you paged/whispered to,
 		string lastPaged;		// so when you type "p =" it will fill in the name as soon as you type the = sign
 		bool inLimbo;
-		bool echo = false;		// is dagmuecho working?
+		bool Synced = false;//is dagmuecho working?
 
 		bool expectingDescSettingLine = false; // for catching description in exame
 		bool expectingActionsExits = false; // for detecting the end of exame block
@@ -121,6 +137,7 @@ namespace DagMU.Forms
 		System.Windows.Forms.ToolStripTextBox tbnLogName;
 		System.Windows.Forms.ToolStripButton tbnMorphs;
 		System.Windows.Forms.ToolStripButton tbnDebug;
+		#endregion
 
 		void InitializeComponent()
 		{
@@ -351,7 +368,7 @@ namespace DagMU.Forms
 			this.tbnConsole.Name = "tbnConsole";
 			this.tbnConsole.Size = new System.Drawing.Size(23, 22);
 			this.tbnConsole.Text = "Console Window";
-			this.tbnConsole.Click += new System.EventHandler(this.toolStripButtonConsole_Click);
+			this.tbnConsole.Click += new System.EventHandler(this.tbnConsole_Click);
 			// 
 			// boxOfInputBoxes
 			// 
@@ -401,18 +418,7 @@ namespace DagMU.Forms
 
 		}
 
-		private void boxOfMuckText_Refocus(object sender, EventArgs e)
-		{
-			boxOfInputBoxes.Refocus();
-		}
-
-		public bool Connected {
-			get {
-				return connection.Connected;
-			}
-		}
-
-		void boxOfInputBoxes_EScroll(object sender, MouseEventArgs e)
+		private void boxOfInputBoxes_EScroll(object sender, MouseEventArgs e)
 		{
 			User32.SendMouseWheelEvent(boxOfMuckText, e.Delta);
 		}
@@ -423,6 +429,7 @@ namespace DagMU.Forms
 			hw.BringToFront();
 		}
 
+		#region tbn clicks
 		void tbnDisconnect_Click(object sender, EventArgs e)
 		{
 			if (connection.Connected)
@@ -471,7 +478,7 @@ namespace DagMU.Forms
 			HelperShow(cwin);
 		}
 
-		void toolStripButtonConsole_Click(object sender, EventArgs e)
+		void tbnConsole_Click(object sender, EventArgs e)
 		{
 			HelperShow(Console);
 		}
@@ -488,7 +495,7 @@ namespace DagMU.Forms
 
 		void debugWindow_EStatusReset(object sender, EventArgs e)
 		{
-			newStatus(MuckStatus.Intercepting_Normal);
+			NewStatus(MuckStatus.Intercepting_Normal);
 		}
 
 		void debugWindow_ESend(object sender, string s)
@@ -505,26 +512,21 @@ namespace DagMU.Forms
 			HelperShow(logSettings);
 		}
 
+		void tbnRideMode_ESelect(object sender, string s)
+		{
+			Send("@set me=/ride/_mode:" + s, null);//TAPS
+		}
+
+		void tbnLogging_ButtonClick(object sender, EventArgs e)
+		{
+			LoggingToggle();
+		}
+		#endregion
+
 		void logSettings_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
 		{
 			logSettings = null;
 		}
-
-		public void Refocus()
-		{
-			if (boxOfInputBoxes.InvokeRequired) { this.Invoke((Action)(() => Refocus())); return; }
-			boxOfInputBoxes.Refocus();
-		}
-
-		/// <summary>
-		/// This world's ID number in the currentcollection of worlds
-		/// </summary>
-		public int Index { get { return index; } }
-		int index;
-
-		public event EventHandler EConnected;
-		public event EventHandler EDisconnected;
-		public event EventHandler EClosing;
 
 		#region logging
 		public bool Logging
@@ -620,6 +622,14 @@ namespace DagMU.Forms
 			boxOfMuckText.SaveFile(LoggingStream.BaseStream, System.Windows.Forms.RichTextBoxStreamType.PlainText);
 		}
 
+		void LoggingToggle()
+		{
+			if (Logging)
+				LoggingStop();
+			else
+				LoggingQuickStart();
+		}
+
 		void LoggingStart(String logfilename, bool includehistory)
 		{
 			loggingTo = logfilename;
@@ -652,14 +662,6 @@ namespace DagMU.Forms
 		{
 			if (!Logging) return;
 			LoggingStream.WriteLine(s + Environment.NewLine);
-		}
-
-		void tbnLogging_ButtonClick(object sender, EventArgs e)
-		{
-			if (Logging)
-				LoggingStop();
-			else
-				LoggingQuickStart();
 		}
 
 		void tbnLog_MouseEnter(object sender, EventArgs e)
@@ -698,12 +700,7 @@ namespace DagMU.Forms
 				e.SuppressKeyPress = true;
 			}
 		}
-#endregion
-
-		void tbnRideMode_ESelect(object sender, string s)
-		{
-			Send("@set me=/ride/_mode:" + s, null);//TAPS
-		}
+		#endregion
 
 		void boxOfMuckText_LinkClicked(object sender, LinkClickedEventArgs e)
 		{

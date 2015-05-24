@@ -14,7 +14,7 @@ namespace DagMU.Forms
 	{
 		public WorldVM(int myindex)
 		{
-			index = myindex;
+			Index = myindex;
 			charName = null;
 
 			connection = new MuckConnection();
@@ -35,7 +35,7 @@ namespace DagMU.Forms
 			Helpers.Add(Console);
 			Console.Show();
 
-			//wf = new WF(this);
+			wf = new WF(this);
 
 			logSettings = null;
 
@@ -75,12 +75,13 @@ namespace DagMU.Forms
 
 			boxOfMuckText.Font = global::DagMU.Forms.Properties.Settings.Default.Font;
 			boxOfMuckText.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Forms.Properties.Settings.Default, "BoxFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+
+			boxOfMuckText.Refocus += (sender, args) => { boxOfInputBoxes.Refocus(); };
 		}
 
 		List<IHelper> Helpers = new List<IHelper>();
 
-		List<CInfoHelperWindow> CInfoHelperWindows = new List<CInfoHelperWindow>();
-
+		#region events
 		void onInputBoxesHasTextToSend(object sender, string msg)
 		{
 			Send(msg, sender as InputBox);
@@ -112,7 +113,7 @@ namespace DagMU.Forms
 		{
 			switch (args.Status) {
 				case MuckConnection.ConnectEventArgs.StatusEnum.Connected:
-					newStatus(MuckStatus.Intercepting_Connecting, args.Message);
+					NewStatus(MuckStatus.Intercepting_Connecting, args.Message);
 					EConnected(this, null);
 					Refocus();
 					break;
@@ -120,7 +121,7 @@ namespace DagMU.Forms
 				case MuckConnection.ConnectEventArgs.StatusEnum.Got_Disconnected:
 				case MuckConnection.ConnectEventArgs.StatusEnum.Error_Connecting:
 					EDisconnected(this, null);
-					newStatus(MuckStatus.NotConnected, args.Message);
+					NewStatus(MuckStatus.NotConnected, args.Message);
 					break;
 			}
 		}
@@ -147,7 +148,7 @@ namespace DagMU.Forms
 			switch (status_errarMessage.Item1)
 			{
 				case MuckConnection.SendStatus.send_error:
-					boxErrar("Send errar! " + status_errarMessage.Item2 ?? "");
+					Errar("Send errar! " + status_errarMessage.Item2 ?? "");
 					if (inputbox != null) (inputbox as InputBox).newstatus(InputBox.Status.Disconnected);
 					Disconnect();
 					break;
@@ -180,7 +181,7 @@ namespace DagMU.Forms
 
 			Echo("LOGGEDIN", true);
 
-			newStatus(MuckStatus.Intercepting_Normal);// from here it is assumed login was successful
+			NewStatus(MuckStatus.Intercepting_Normal);// from here it is assumed login was successful
 
 			Send("wf #hidefrom");
 		}
@@ -190,10 +191,22 @@ namespace DagMU.Forms
 		/// </summary>
 		private void onSynced()
 		{
+			Synced = true;
+
 			boxOfMuckText.Clear();
 			boxOfMuckText.ClearUndo();
 			Send("look");//TAPS
 		}
+
+		private void OnRideModeSelected(object sender, String ridemode)
+		{
+			Send("@set me=/ride/_mode:" + ridemode);//TAPS
+			Refocus();
+		}
+		#endregion
+
+		#region cinfo
+		List<CInfoHelperWindow> CInfoHelperWindows = new List<CInfoHelperWindow>();
 
 		CInfoHelperWindow FindCInfoWindow(String charactername)
 		{
@@ -229,18 +242,19 @@ namespace DagMU.Forms
 			Helpers.Remove((CInfoHelperWindow)sender);
 			CInfoHelperWindows.Remove((CInfoHelperWindow)sender);
 		}
+		#endregion
 
 		public async Task Connect()
 		{
 			if (connection.Connected)
 				return;
 
-			boxPrint("Connecting to " + settings.NameFull + " [" + settings.Address + " : " + settings.Port + "]");
+			Print("Connecting to " + settings.NameFull + " [" + settings.Address + " : " + settings.Port + "]");
 
 			try {
 				await connection.Connect(settings.Address, settings.Port, settings.SSL, settings.CertificateHash);
 			} catch (Exception e) {
-				boxErrar("Error connecting: " + e.Message);
+				Errar("Error connecting: " + e.Message);
 			}
 		}
 
@@ -248,23 +262,18 @@ namespace DagMU.Forms
 		{
 			connection.Disconnect();
 			EDisconnected(this, null);
-			newStatus(MuckStatus.NotConnected);
+			NewStatus(MuckStatus.NotConnected);
 		}
 
-		public void Send(String line, InputBox ib = null)
+		public void Send(String line, InputBox inputBox = null)
 		{
-			connection.Send(line, ib);
+			connection.Send(line, inputBox);
 			Console.Print("]" + line + "\n");
 		}
 
-		public void SendFormat(String line, params object[] args)
+		public void Print(String s)
 		{
-			Send(String.Format(line, args), null);
-		}
-
-		public void boxPrint(String s)
-		{
-			if (boxOfMuckText.InvokeRequired) { this.Invoke((Action)(() => boxPrint(s))); return; }
+			if (boxOfMuckText.InvokeRequired) { this.Invoke((Action)(() => Print(s))); return; }
 
 			if (this.ParentForm == null) return;
 
@@ -276,78 +285,41 @@ namespace DagMU.Forms
 			boxOfMuckText.Add(s);
 		}
 
-		public void boxErrar(string s)
+		public void Errar(string s)
 		{
-			boxPrint("Errar: " + s);
+			Print("Errar: " + s);
 		}
 
-		void newStatus(MuckStatus newstatus, string message = null)
+		void NewStatus(MuckStatus newStatus, string message = null)
 		{
 			//debugwindow.Text = ((int)newstatus).ToString();
 
-			if (newstatus == MuckStatus.NotConnected) {
-				boxPrint(String.Join(": ", "Disconnected.", message));
+			if (newStatus == MuckStatus.NotConnected) {
+				Print(String.Join(": ", "Disconnected.", message));
 
 				// tell input boxes to grey out or go away. grey out if there is text untyped, go away if they are empty
 				boxOfInputBoxes.UpdateStatus(InputBox.Status.Disconnected);
 			}
 
-			status = newstatus;
+			status = newStatus;
 			if (debugWindow != null)
-				debugWindow.UpdateStatus(newstatus.ToString());
+				debugWindow.UpdateStatus(newStatus.ToString());
+		}
+
+		public void Refocus()
+		{
+			if (boxOfInputBoxes.InvokeRequired) { this.Invoke((Action)(() => Refocus())); return; }
+			boxOfInputBoxes.Refocus();
 		}
 
 		void Echo(string s, bool overrideEchoNotSet = false)
 		{
-			if (!echo && !overrideEchoNotSet) throw new InvalidOperationException("Echo not set.");
-			SendFormat("{0} {1}{2} {3}",
+			if (!Synced && !overrideEchoNotSet) throw new InvalidOperationException("Echo not set.");
+			Send(String.Format("{0} {1}{2} {3}",
 				DagMU.Model.Constants.dagmu_echo_name,
 				DagMU.Model.Constants.dagmu_echo_prefix,
 				this.sessionGuid,
-				s);
-		}
-
-		/// <param name="s">text from connection.</param>
-		/// <param name="msg">Will be the contained message, if echo was valid.</param>
-		/// <returns>True if valid.</returns>
-		bool isEcho(string s, out string msg)
-		{
-			if (String.IsNullOrEmpty(s)) throw new ArgumentNullException("msg");
-
-			if (s.StartsWith(DagMU.Model.Constants.dagmu_echo_prefix)) {
-				string remainder = s.Substring(DagMU.Model.Constants.dagmu_echo_prefix.Length);
-				string guid = remainder.Substring(0, this.sessionGuid.Length);
-				if (guid == this.sessionGuid) {
-					msg = remainder.Substring(this.sessionGuid.Length).Trim();
-					return true;
-				}
-			}
-
-			msg = null;
-			return false;
-		}
-
-		/// <param name="s">text from connection.</param>
-		/// <param name="message">message to match against, if its a valid echo.</param>
-		/// <returns>true if a valid echo matched supplied message.</returns>
-		bool isEchoEqual(string s, string message)
-		{
-			if (String.IsNullOrEmpty(s)) return false;
-
-			string echoMessage;
-			if (isEcho(s, out echoMessage)) {
-				if (message == echoMessage) {
-					this.echo = true;
-					return true;
-				}
-			}
-			return false;
-		}
-
-		void OnRideModeSelected(object sender, String ridemode)
-		{
-			Send("@set me=/ride/_mode:" + ridemode);//TAPS
-			Refocus();
+				s));
 		}
 	}
 }
