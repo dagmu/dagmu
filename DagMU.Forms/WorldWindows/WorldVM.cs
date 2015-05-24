@@ -174,7 +174,7 @@ namespace DagMU.Forms
             this.tbnConsole});
 			this.menu.Location = new System.Drawing.Point(36, 0);
 			this.menu.Name = "menu";
-			this.menu.Size = new System.Drawing.Size(491, 25);
+			this.menu.Size = new System.Drawing.Size(481, 25);
 			this.menu.TabIndex = 5;
 			this.menu.Text = "glassToolStrip1";
 			// 
@@ -217,7 +217,7 @@ namespace DagMU.Forms
 			// toolStripSeparator5
 			// 
 			this.toolStripSeparator5.Name = "toolStripSeparator5";
-			this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+			this.toolStripSeparator5.Size = new System.Drawing.Size(57, 6);
 			// 
 			// tbnLog
 			// 
@@ -303,10 +303,11 @@ namespace DagMU.Forms
 			// tbnWF
 			// 
 			this.tbnWF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.tbnWF.Enabled = false;
 			this.tbnWF.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnWF.Name = "tbnWF";
-			this.tbnWF.Size = new System.Drawing.Size(38, 22);
-			this.tbnWF.Text = "-WF-";
+			this.tbnWF.Size = new System.Drawing.Size(28, 22);
+			this.tbnWF.Text = "WF";
 			this.tbnWF.Click += new System.EventHandler(this.tbnWF_Click);
 			// 
 			// tbnSeparator4
@@ -419,6 +420,7 @@ namespace DagMU.Forms
 		void HelperShow(IHelper hw)
 		{
 			hw.Show();
+			hw.BringToFront();
 		}
 
 		void tbnDisconnect_Click(object sender, EventArgs e)
@@ -431,8 +433,7 @@ namespace DagMU.Forms
 
 		void tbnWF_Click(object sender, EventArgs e)
 		{
-			wf.Show();
-			wf.BringToFront();
+			HelperShow(wf);
 		}
 
 		void tbnDesc_Click(object sender, EventArgs e)
@@ -467,8 +468,7 @@ namespace DagMU.Forms
 				cwin = MakeCInfoWindow(CharName);
 			}
 
-			cwin.Show();
-			cwin.BringToFront();
+			HelperShow(cwin);
 		}
 
 		void toolStripButtonConsole_Click(object sender, EventArgs e)
@@ -483,8 +483,7 @@ namespace DagMU.Forms
 
 		void tbnDebug_Click(object sender, EventArgs e)
 		{
-			debugWindow.Show();
-			debugWindow.BringToFront();
+			HelperShow(debugWindow);
 		}
 
 		void debugWindow_EStatusReset(object sender, EventArgs e)
@@ -503,8 +502,7 @@ namespace DagMU.Forms
 				logSettings = new LogSettingsWindow();
 
 			logSettings.FormClosing += logSettings_FormClosing;
-			logSettings.Show();
-			logSettings.BringToFront();
+			HelperShow(logSettings);
 		}
 
 		void logSettings_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)

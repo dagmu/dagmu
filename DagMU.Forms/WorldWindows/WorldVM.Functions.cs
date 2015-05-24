@@ -35,7 +35,7 @@ namespace DagMU.Forms
 			Helpers.Add(Console);
 			Console.Show();
 
-			wf = new WF(this);
+			//wf = new WF(this);
 
 			logSettings = null;
 

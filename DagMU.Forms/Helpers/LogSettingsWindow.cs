@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DagMU.Forms.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DagMU.Forms
+namespace DagMU.Forms.Helpers
 {
-	public partial class LogSettingsWindow : Form
+	public partial class LogSettingsWindow : HelperForm
 	{
 		public LogSettingsWindow()
 		{

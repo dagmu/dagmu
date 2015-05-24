@@ -17,5 +17,9 @@ namespace DagMUWPF.Windows
 			e.Cancel = true;
 			this.Hide();
 		}
+
+		void IHelper.BringToFront() {
+			this.Activate();
+		}
 	}
 }

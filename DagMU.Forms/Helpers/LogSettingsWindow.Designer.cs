@@ -1,4 +1,4 @@
-﻿namespace DagMU.Forms
+﻿namespace DagMU.Forms.Helpers
 {
 	partial class LogSettingsWindow
 	{

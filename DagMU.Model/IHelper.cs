@@ -9,6 +9,7 @@ namespace DagMU.Model
 	public interface IHelper
 	{
 		void Show();
+		void BringToFront();
 		void Hide();
 	}
 }

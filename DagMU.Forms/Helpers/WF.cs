@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
 
+using DagMU.Model;
+
 namespace DagMU.Forms
 {
-	public partial class WF : UserControl
+	public partial class WF : UserControl, IHelper
 	{
 		public WF(DagMU.Forms.WorldVM parentworld)
 		{
