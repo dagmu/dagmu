@@ -3,7 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 				xmlns:src="clr-namespace:DagMUWPF.Windows"
         Title="Settings" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+	<StackPanel>
+		<DataGrid Name="gridStuffToMatch"
+			ItemsSource="{Binding Path=stuffToMatch}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="String" Width="*" Binding="{Binding str}" />
+				<DataGridTextColumn Header="Color"  Width="*" Binding="{Binding str}" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</StackPanel>
 </src:Helper>

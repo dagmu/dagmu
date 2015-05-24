@@ -83,6 +83,7 @@
     <Compile Include="aLogViewer.Designer.cs">
       <DependentUpon>aLogViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\BuilderWindow.cs">
       <SubType>Form</SubType>
     </Compile>

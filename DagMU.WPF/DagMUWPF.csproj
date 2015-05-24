@@ -57,7 +57,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\InputBoxBox.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Flags.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Windows\Console.xaml.cs">

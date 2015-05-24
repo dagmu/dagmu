@@ -7,6 +7,7 @@ using DagMU.Model;
 using DagMU.Forms.Helpers;
 using DagMUWPF.Windows;
 using System.Windows.Forms.Integration;
+using System.Collections.ObjectModel;
 
 namespace DagMU.Forms
 {
@@ -16,6 +17,7 @@ namespace DagMU.Forms
 		{
 			Index = myindex;
 			charName = null;
+			Model.Data Data = new Model.Data();
 
 			connection = new MuckConnection();
 			connection.EConnect += onConnect;
@@ -77,6 +79,7 @@ namespace DagMU.Forms
 			boxOfMuckText.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::DagMU.Forms.Properties.Settings.Default, "BoxFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
 
 			boxOfMuckText.Refocus += (sender, args) => { boxOfInputBoxes.Refocus(); };
+			boxOfMuckText.IoC(new Tuple<ObservableCollection<Data.TextMatch>, ObservableCollection<Data.TextMatch>>(Data.stuffToMatch, Data.namesToMatch));
 		}
 
 		List<IHelper> Helpers = new List<IHelper>();

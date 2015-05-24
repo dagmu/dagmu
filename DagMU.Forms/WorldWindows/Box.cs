@@ -5,29 +5,22 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
+using DagMU.Model;
+using System.Collections.ObjectModel;
+
 namespace DagMU.Forms
 {
 	class Box : RichTextBox
 	{
 		#region constructor
 		public Box() {
-			stuffToMatch = new List<TextMatch>() {
-				new TextMatch(new Regex(@"^[\w]+ (page(?:s|(?:-pose))?), \"".*\"" to [\w]*[.]?$"), Color.FromArgb(205,92,92)),
-				new TextMatch(new Regex(@"^(?:In a )(page-pose)(?: to you, \w+ .+)$"), Color.FromArgb(205,92,92)),
-				new TextMatch(new Regex(@"^[\w]+ (whisper(?:s?)), \"".*\"" to [\w]*.$"), Color.FromArgb(72,209,204)),
-				new TextMatch(new Regex(@"((?:[A-Za-z0-9_\-]+) (?:has (?:(?:dis|re|)connected|left|arrived)|(?:goes home)|(?:concentrates on a distant place, and )(?:fades from sight)|(?:(?:is )(?:taken home)(?: to sleep by the local police))).)$"), Color.Gray),
-				new TextMatch(new Regex(@"^(Somewhere on the muck, (?:[A-Za-z0-9_\-]+) has (?:(?:|re|dis)connected).)$"), Color.Gray),
-			};
-
-			namesToMatch = new List<TextMatch>() {
-				new TextMatch("Shean", Color.Teal),
-				new TextMatch("Dagon", Color.MediumPurple),
-				new TextMatch("Yko", Color.Yellow),
-				new TextMatch("Szai", Color.Yellow),
-				new TextMatch("Mkosi", Color.Orange),
-			};
-
 			this.ReadOnly = true;
+		}
+
+		public void IoC(Tuple<ObservableCollection<Data.TextMatch>, ObservableCollection<Data.TextMatch>> ioc)
+		{
+			stuffToMatch = ioc.Item1;
+			namesToMatch = ioc.Item2;
 		}
 		#endregion
 
@@ -35,16 +28,16 @@ namespace DagMU.Forms
 		public void Add(string s, Color? color = null)
 		{
 			bool autoScroll = this.SelectionLength == 0 && IsAtMaxScroll && !mouseDown;
-			List<TextMatchPlace> placesToColor = GetColorPlaces(s);
+			List<Data.TextMatchPlace> placesToColor = GetColorPlaces(s);
 
 			this.SuspendPainting();
 			this.SelectionStart = this.TextLength;
 			this.AppendText("\n");
 			int startIndex = this.TextLength;
 			this.AppendText(s);
-			foreach (TextMatchPlace place in placesToColor) {
+			foreach (Data.TextMatchPlace place in placesToColor) {
 				this.Select(startIndex + place.Index, place.Length);
-				this.SelectionColor = place.Color;
+				this.SelectionColor = Color.FromArgb(place.Color.R, place.Color.G, place.Color.B);
 			}
 			this.SelectionLength = 0;
 			this.SelectionColor = this.ForeColor;
@@ -55,56 +48,28 @@ namespace DagMU.Forms
 		#endregion
 
 		#region textMatch
-		private List<TextMatch> stuffToMatch { get; set; }
-		private List<TextMatch> namesToMatch { get; set; }
-
-		private List<TextMatchPlace> GetColorPlaces(string s)
+		private ObservableCollection<Data.TextMatch> stuffToMatch;
+		private ObservableCollection<Data.TextMatch> namesToMatch;
+		
+		private List<Data.TextMatchPlace> GetColorPlaces(string s)
 		{
-			List<TextMatchPlace> placesToColor = new List<TextMatchPlace>();
-			foreach (TextMatch textMatch in stuffToMatch) {
+			List<Data.TextMatchPlace> placesToColor = new List<Data.TextMatchPlace>();
+			foreach (Data.TextMatch textMatch in stuffToMatch) {
 				foreach (Match match in textMatch.Regex.Matches(s)) {
 					for (int j = 1; j < match.Groups.Count; j++) {
 						var group = match.Groups[j];
-						TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = group.Index, Length = group.Length };
+						Data.TextMatchPlace blah = new Data.TextMatchPlace() { Color = textMatch.Color, Index = group.Index, Length = group.Length };
 						placesToColor.Add(blah);
 					}
 				}
 			}
-			foreach (TextMatch textMatch in namesToMatch) {
+			foreach (Data.TextMatch textMatch in namesToMatch) {
 				foreach (Match match in textMatch.Regex.Matches(s)) {
-					TextMatchPlace blah = new TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
+					Data.TextMatchPlace blah = new Data.TextMatchPlace() { Color = textMatch.Color, Index = match.Index, Length = match.Length };
 					placesToColor.Add(blah);
 				}
 			}
 			return placesToColor;
-		}
-
-		private class TextMatch
-		{
-			public TextMatch(string value, Color color) : this(color) { Match = value; }
-			public TextMatch(Regex regex, Color color) : this(color) { Regex = regex; }
-			public TextMatch(Color color) { this.Color = color; }
-
-			public String Match {
-				get { return match; }
-				set { regex = null; match = value; }
-			}
-
-			public Regex Regex {
-				get { if (regex == null) regex = new Regex(@"\b" + match + @"\b"); return regex; }
-				set { regex = value; }
-			}
-
-			public Color Color;
-
-			Regex regex = null;
-			string match;
-		}
-
-		private struct TextMatchPlace
-		{
-			public int Index, Length;
-			public Color Color;
 		}
 		#endregion
 

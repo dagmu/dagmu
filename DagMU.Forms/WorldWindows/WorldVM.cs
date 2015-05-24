@@ -121,7 +121,7 @@ namespace DagMU.Forms
 		System.Windows.Forms.ToolStripButton tbnDisconnect;
 		System.Windows.Forms.ToolStripSeparator tbnSeparator1;
 		System.Windows.Forms.ToolStripDropDownButton tbnSettingsDropDown;
-		System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+		System.Windows.Forms.ToolStripSeparator tbnSeparator5;
 		System.Windows.Forms.ToolStripSplitButton tbnLog;
 		System.Windows.Forms.ToolStripSeparator tbnSeparator6;
 		System.Windows.Forms.ToolStripMenuItem tbnLogSettings;
@@ -146,7 +146,7 @@ namespace DagMU.Forms
 			this.tbnSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnFonts = new System.Windows.Forms.ToolStripButton();
 			this.tbnSettingsDropDown = new System.Windows.Forms.ToolStripDropDownButton();
-			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+			this.tbnSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.tbnLog = new System.Windows.Forms.ToolStripSplitButton();
 			this.tbnLogName = new System.Windows.Forms.ToolStripTextBox();
 			this.tbnSeparator6 = new System.Windows.Forms.ToolStripSeparator();
@@ -223,7 +223,7 @@ namespace DagMU.Forms
 			// 
 			this.tbnSettingsDropDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.tbnSettingsDropDown.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator5});
+            this.tbnSeparator5});
 			this.tbnSettingsDropDown.Image = global::DagMU.Forms.Properties.Resources.cog_go;
 			this.tbnSettingsDropDown.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tbnSettingsDropDown.Name = "tbnSettingsDropDown";
@@ -231,10 +231,10 @@ namespace DagMU.Forms
 			this.tbnSettingsDropDown.Text = "Settings";
 			this.tbnSettingsDropDown.Click += new System.EventHandler(this.tbnSettingsDropDown_Click);
 			// 
-			// toolStripSeparator5
+			// tbnSeparator5
 			// 
-			this.toolStripSeparator5.Name = "toolStripSeparator5";
-			this.toolStripSeparator5.Size = new System.Drawing.Size(57, 6);
+			this.tbnSeparator5.Name = "toolStripSeparator5";
+			this.tbnSeparator5.Size = new System.Drawing.Size(57, 6);
 			// 
 			// tbnLog
 			// 
