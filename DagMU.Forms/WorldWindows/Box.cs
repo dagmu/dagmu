@@ -205,6 +205,7 @@ namespace DagMU.Forms
 		{
 			this.SelectionStart = this.TextLength;
 			this.ScrollToCaret();
+			SendMessage(this.Handle, WM_VSCROLL, SB_PAGEBOTTOM, IntPtr.Zero);
 			/*int minScroll, maxScroll;
 			VerticalScrollRange(out minScroll, out maxScroll);
 			
@@ -223,7 +224,7 @@ namespace DagMU.Forms
 			//Console.WriteLine("scroll " + String.Join(" ", new int[] { minScroll, curScroll, maxScroll, isAtMaxScroll ? 1 : 0 }));
 		}
 
-		private bool wasAtBottom = false;
+		private bool wasAtBottom = true;
 
 		[DllImport("user32.dll")]
 		static extern bool GetScrollRange(IntPtr hWnd, int nBar, out int lpMinPos, out int lpMaxPos);
@@ -242,6 +243,7 @@ namespace DagMU.Forms
 
 		const int WM_USER = 0x400;
 		const int WM_VSCROLL = 0x115;
+		const int SB_PAGEBOTTOM = 7;
 		const int WM_MOUSEWHEEL = 0x20A;
 		const int WM_SETREDRAW = 0x000B;
 		const int SB_VERT = 1;
