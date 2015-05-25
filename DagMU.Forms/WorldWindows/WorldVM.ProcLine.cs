@@ -272,7 +272,7 @@ namespace DagMU.Forms
 #if DEBUG
 					Print("First line   : " + s);
 #else
-					boxPrint(s);
+					Print(s);
 #endif
 
 					expectingActionsExits = false;
@@ -618,7 +618,7 @@ namespace DagMU.Forms
 #if DEBUG
 				Print("Desc Line    : " + s);
 #else
-				boxPrint(s);
+				Print(s);
 #endif
 
 				//the current @desc me=, scraped from exame
@@ -659,7 +659,7 @@ namespace DagMU.Forms
 #if DEBUG
 				Print("Actions Exits: " + s);
 #else
-				boxPrint(s);
+				Print(s);
 #endif
 
 				NewStatus(MuckStatus.Intercepting_Normal);
@@ -678,7 +678,7 @@ namespace DagMU.Forms
 #if DEBUG
 					Print("Second line  : " + s);
 #else
-					boxPrint(s);
+					Print(s);
 #endif
 
 					return;
@@ -693,7 +693,7 @@ namespace DagMU.Forms
 #if DEBUG
 				Print("Actions Exits: " + s);
 #else
-				boxPrint(s);
+				Print(s);
 #endif
 
 				return;
@@ -701,7 +701,7 @@ namespace DagMU.Forms
 #if DEBUG
 				Print("Middle Line  : " + s);
 #else
-				boxPrint(s);
+				Print(s);
 #endif
 
 				return;//could get stuck here!

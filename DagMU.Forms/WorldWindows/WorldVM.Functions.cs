@@ -27,6 +27,7 @@ namespace DagMU.Forms
 			InitializeComponent();
 
 			boxOfInputBoxes.Resize += onInputBoxesResize;
+			boxOfInputBoxes.EScroll += boxOfInputBoxes_EScroll;
 			boxOfInputBoxes.EWantsToSend += onInputBoxesHasTextToSend;
 			onInputBoxesResize(null, null);
 
@@ -85,6 +86,16 @@ namespace DagMU.Forms
 		List<IHelper> Helpers = new List<IHelper>();
 
 		#region events
+		public void onResizeBegin(object sender, System.EventArgs e)
+		{
+			boxOfMuckText.onResizeBegin(sender, e);
+		}
+
+		public void onResizeEnd(object sender, System.EventArgs e)
+		{
+			boxOfMuckText.onResizeEnd(sender, e);
+		}
+
 		void onInputBoxesHasTextToSend(object sender, string msg)
 		{
 			Send(msg, sender as InputBox);

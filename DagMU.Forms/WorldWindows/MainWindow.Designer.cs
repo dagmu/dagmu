@@ -135,7 +135,9 @@ namespace DagMU.Forms
 			this.Location = global::DagMU.Forms.Properties.Settings.Default.MainLastLocation;
 			this.Name = "MainWindow";
 			this.Text = "DagMU";
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
+			this.ResizeBegin += OnResizeBegin;
+			this.ResizeEnd += OnResizeEnd;
 			this.Load += new System.EventHandler(this.MainWindow_Load);
 			this.menu.ResumeLayout(false);
 			this.menu.PerformLayout();

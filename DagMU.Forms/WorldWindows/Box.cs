@@ -164,6 +164,16 @@ namespace DagMU.Forms
 			}
 		}
 
+		internal void onResizeEnd(object sender, EventArgs e)
+		{
+			if (wasAtBottom) ScrollToBottom();
+		}
+
+		internal void onResizeBegin(object sender, EventArgs e)
+		{
+			wasAtBottom = IsAtMaxScroll;
+		}
+
 		protected override void OnKeyUp(KeyEventArgs e)
 		{
 			NotSureIfScrolled();
@@ -195,6 +205,11 @@ namespace DagMU.Forms
 		{
 			this.SelectionStart = this.TextLength;
 			this.ScrollToCaret();
+			/*int minScroll, maxScroll;
+			VerticalScrollRange(out minScroll, out maxScroll);
+			
+			Console.WriteLine(String.Format("Scrolly: min={0} current={1} max={2}", minScroll, this.VerticalScroll, maxScroll));
+			this.VerticalScroll = maxScroll;*/
 		}
 
 		private void NotSureIfScrolled()
@@ -207,6 +222,8 @@ namespace DagMU.Forms
 			if (isAtMaxScroll) OnScrolledToBottom(EventArgs.Empty);
 			//Console.WriteLine("scroll " + String.Join(" ", new int[] { minScroll, curScroll, maxScroll, isAtMaxScroll ? 1 : 0 }));
 		}
+
+		private bool wasAtBottom = false;
 
 		[DllImport("user32.dll")]
 		static extern bool GetScrollRange(IntPtr hWnd, int nBar, out int lpMinPos, out int lpMaxPos);
