@@ -28,9 +28,11 @@ namespace DagMU.Forms
 			this.Left = Math.Max(0, this.Left);
 			this.Top = Math.Max(0, this.Top);
 
-#if DEBUG
+			#if DEBUG
 			tbnForceLocal_Click(null, null);// HACK
-#endif
+			#else
+			cbFlash.Visible = false;
+			#endif
 		}
 
 		private void OnWorldResize(object sender, EventArgs e)

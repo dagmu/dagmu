@@ -85,9 +85,9 @@ namespace DagMU.Forms
 			this.tbnConnect.Text = "Connect";
 			this.tbnConnect.Click += new System.EventHandler(this.tbnConnect_Click);
 			// 
-			// toolStripSeparator1
+			// tbnSeparator1
 			// 
-			this.tbnSeparator1.Name = "toolStripSeparator1";
+			this.tbnSeparator1.Name = "tbnSeparator1";
 			this.tbnSeparator1.Size = new System.Drawing.Size(149, 6);
 			// 
 			// tbnForce
@@ -106,21 +106,23 @@ namespace DagMU.Forms
 			this.tbnTaps.Text = "Taps";
 			this.tbnTaps.Click += new System.EventHandler(this.tbnTaps_Click);
 			// 
-			// toolStripSeparator2
+			// tbnSeparator2
 			// 
-			this.tbnSeparator2.Name = "toolStripSeparator2";
+			this.tbnSeparator2.Name = "tbnSeparator2";
 			this.tbnSeparator2.Size = new System.Drawing.Size(149, 6);
 			// 
 			// tbnSites
 			// 
+			this.tbnSites.Enabled = false;
 			this.tbnSites.Image = global::DagMU.Forms.Properties.Resources.cog_edit;
 			this.tbnSites.Name = "tbnSites";
 			this.tbnSites.Size = new System.Drawing.Size(152, 22);
 			this.tbnSites.Text = "Sites";
 			// 
-			// addNewToolStripMenuItem
+			// tbnAdd
 			// 
-			this.tbnAdd.Name = "addNewToolStripMenuItem";
+			this.tbnAdd.Enabled = false;
+			this.tbnAdd.Name = "tbnAdd";
 			this.tbnAdd.Size = new System.Drawing.Size(152, 22);
 			this.tbnAdd.Text = "Add New";
 			// 
