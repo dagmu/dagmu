@@ -16,6 +16,8 @@ namespace DagMU.Model
 			new TextMatch(new Regex(@"^[\w]+ (whisper(?:s?)), \"".*\"" to [\w]*.$"), new ColorRGB(72,209,204)),
 			new TextMatch(new Regex(@"((?:[A-Za-z0-9_\-]+) (?:has (?:(?:dis|re|)connected|left|arrived)|(?:goes home)|(?:concentrates on a distant place, and )(?:fades from sight)|(?:(?:is )(?:taken home)(?: to sleep by the local police))).)$"), ColorRGB.Grey),
 			new TextMatch(new Regex(@"^(Somewhere on the muck, (?:[A-Za-z0-9_\-]+) has (?:(?:|re|dis)connected).)$"), ColorRGB.Grey),
+			new TextMatch(new Regex(@"(<)(?:.+)\b(just looked at you>)"), ColorRGB.Cyan),//<Kael just looked at you>
+			new TextMatch(new Regex(@"(<<< )(?:.+)((?:just)? looked at you[!]? >>>)"), ColorRGB.Cyan),//<<< Speckle male white wolf looked at you! >>>
 		};
 
 		public ObservableCollection<TextMatch> namesToMatch = new ObservableCollection<TextMatch>() {
@@ -72,6 +74,7 @@ namespace DagMU.Model
 			public static ColorRGB Orange { get { return new ColorRGB(255, 102, 0); } }
 			public static ColorRGB Teal { get { return new ColorRGB(0, 128, 128); } }
 			public static ColorRGB Yellow { get { return new ColorRGB(255, 215, 0); } }
+			public static ColorRGB Cyan { get { return new ColorRGB(0, 255, 255); } }
 		}
 	}
 }
