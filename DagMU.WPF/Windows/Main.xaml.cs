@@ -90,5 +90,16 @@ namespace DagMUWPF.Windows
 				winworlds = new Worlds();
 			winworlds.Show();
 		}
+
+		private void btnScroll_Click(object sender, RoutedEventArgs e)
+		{
+			box.ScrollToEnd();
+		}
+
+		private void btnPrint_Click(object sender, RoutedEventArgs e)
+		{
+			for (int i = 0; i < 10; i++)
+				box.AppendText("\ntest");
+		}
 	}
 }

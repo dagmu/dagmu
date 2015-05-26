@@ -29,8 +29,8 @@
 
 					<ToolBarTray DockPanel.Dock="Top">
 						<ToolBar x:Name="toolbarWorld">
-							<Button>hi</Button>
-							<Button>hi</Button>
+							<Button x:Name="btnPrint" Content="print" Click="btnPrint_Click"/>
+							<Button x:Name="btnScroll" Content="scroll" Click="btnScroll_Click"/>
 						</ToolBar>
 						<ToolBar x:Name="toolbarRidemode" >
 							<ComboBox x:Name="dropdownRideMode" Width="100" ItemsSource="{Binding Path=RideModes}"/>
@@ -39,10 +39,9 @@
 
 					<ctr:InputBoxBox x:Name="InputBoxBox" Height="Auto" DockPanel.Dock="Bottom">
 						<TextBox x:Name="InputBox" Height="66" />
-						<TextBox/>
 					</ctr:InputBoxBox>
 
-					<TextBox x:Name="WorldBox">
+					<TextBox x:Name="box" VerticalScrollBarVisibility="Visible">
 						<TextBox.Background>
 							<LinearGradientBrush>
 								<GradientStop Color="LightBlue" Offset="0" />
