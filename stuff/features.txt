@@ -42,16 +42,16 @@ mousewheel anywhere scrolls the main window
 desc editor reads your list desc(s), no matter their name.
 
 	stoppers
-end key
-scroll to bottom issues when resizing. resize doesn't keep bottom line in view.
-multiline poses don't scroll to bottom correctly, only scrolls to start of line
-'looked at you' line not highlighted
 world/connection/character CRUD
 customizable highlighting
 automatic name highlighting
+end key
+closing world does not close any helpers
+scroll to bottom issues when resizing. resize doesn't keep bottom line in view.
+multiline poses don't scroll to bottom correctly, only scrolls to start of line
+'looked at you' line not highlighted
 inputbox buttons don't work right if maximized
 last intercept makes newlines
-closing world does not close any helpers
 when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
 
 	bug wishes
@@ -63,6 +63,8 @@ console needs to use richtextbox maybe, horizontal rezising is fucked
 
 detect editplayer's looktrap (x looked at you), use for auto highlighting. won't work with looktraps built into desc.. custom highlighting would bypass the problem.
 
+doing
+	doing is only set per session, would be nice to auto-set it to the last one on login.
 cinfo viewer
 	shows add misc field for everyone, not just  you
 	doesn't show default fields for you, so you can't set them
