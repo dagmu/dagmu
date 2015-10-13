@@ -81,6 +81,8 @@ namespace DagMU.Forms
 
 			boxOfMuckText.Refocus += (sender, args) => { boxOfInputBoxes.Refocus(); };
 			boxOfMuckText.IoC(new Tuple<ObservableCollection<Data.TextMatch>, ObservableCollection<Data.TextMatch>>(Data.stuffToMatch, Data.namesToMatch));
+
+			boxOfMuckText.LinkClicked += (sender, args) => { boxOfMuckText_LinkClicked(sender, args); };
 		}
 
 		List<IHelper> Helpers = new List<IHelper>();
