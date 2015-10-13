@@ -120,7 +120,7 @@ namespace DagMU.Forms
 			base.OnMouseDown(e);
 		}
 
-		protected override void OnMouseUp(MouseEventArgs mevent)
+		protected override void OnMouseUp(MouseEventArgs e)
 		{
 			if (this.SelectionLength > 0) {
 				Clipboard.SetText(this.SelectedText);
@@ -130,7 +130,7 @@ namespace DagMU.Forms
 
 			this.mouseDown = false;
 
-			base.OnMouseUp(mevent);
+			base.OnMouseUp(e);
 		}
 		#endregion
 
