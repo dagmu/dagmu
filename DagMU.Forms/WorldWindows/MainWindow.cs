@@ -28,12 +28,16 @@ namespace DagMU.Forms
 			this.Left = Math.Max(0, this.Left);
 			this.Top = Math.Max(0, this.Top);
 
+			Worlds = new DagMUWPF.Windows.Worlds();
+
 			#if DEBUG
 			tbnForceLocal_Click(null, null);// HACK
 			#else
 			cbFlash.Visible = false;
 			#endif
 		}
+
+		public DagMUWPF.Windows.Worlds Worlds;
 
 		private void OnWorldResize(object sender, EventArgs e)
 		{
@@ -165,5 +169,11 @@ namespace DagMU.Forms
 		{
 			Invoke((Action)(() => tbnConnect.Enabled = value ));
 		}
-    }
+
+		private void tbnSites_Click(object sender, EventArgs e)
+		{
+			Worlds.Show();
+			Worlds.BringIntoView();
+		}
+	}
 }

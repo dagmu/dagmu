@@ -113,11 +113,11 @@ namespace DagMU.Forms
 			// 
 			// tbnSites
 			// 
-			this.tbnSites.Enabled = false;
 			this.tbnSites.Image = global::DagMU.Forms.Properties.Resources.cog_edit;
 			this.tbnSites.Name = "tbnSites";
 			this.tbnSites.Size = new System.Drawing.Size(152, 22);
 			this.tbnSites.Text = "Sites";
+			this.tbnSites.Click += new System.EventHandler(this.tbnSites_Click);
 			// 
 			// tbnAdd
 			// 
@@ -138,8 +138,6 @@ namespace DagMU.Forms
 			this.Name = "MainWindow";
 			this.Text = "DagMU";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
-			this.ResizeBegin += OnResizeBegin;
-			this.ResizeEnd += OnResizeEnd;
 			this.Load += new System.EventHandler(this.MainWindow_Load);
 			this.menu.ResumeLayout(false);
 			this.menu.PerformLayout();
