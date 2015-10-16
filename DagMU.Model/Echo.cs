@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DagMU.Model
+namespace Model
 {
 	public static class Echo
 	{
@@ -15,8 +15,8 @@ namespace DagMU.Model
 		{
 			if (String.IsNullOrEmpty(s)) throw new ArgumentNullException("msg");
 
-			if (s.StartsWith(DagMU.Model.Constants.dagmu_echo_prefix)) {
-				string remainder = s.Substring(DagMU.Model.Constants.dagmu_echo_prefix.Length);
+			if (s.StartsWith(Model.Constants.dagmu_echo_prefix)) {
+				string remainder = s.Substring(Model.Constants.dagmu_echo_prefix.Length);
 				string guid = remainder.Substring(0, sessionGuid.Length);
 				if (guid == sessionGuid) {
 					msg = remainder.Substring(sessionGuid.Length).Trim();

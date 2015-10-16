@@ -394,9 +394,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DagMU.Model\DagMU.Model.csproj">
+    <ProjectReference Include="..\DagMU.Model\Model.csproj">
       <Project>{57b2bbe5-681c-4e8b-b1f3-3af0f54ec73e}</Project>
-      <Name>DagMU.Model</Name>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\DagMU.WPF\DagMUWPF.csproj">
       <Project>{0ab16579-3be6-4fbf-b057-5641138faa9c}</Project>

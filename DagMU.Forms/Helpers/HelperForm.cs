@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using DagMU.Model;
+using Model;
 
 namespace DagMU.Forms.Helpers
 {

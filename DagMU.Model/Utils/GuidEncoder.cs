@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DagMU.Model.Utils
+namespace Model.Utils
 {
 	public static class GuidEncoder
 	{

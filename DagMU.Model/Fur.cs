@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DagMU.Model
+namespace Model
 {
 	[Serializable]
 	public class Fur

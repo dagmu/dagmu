@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Threading.Tasks;
-using DagMU.Model;
+using Model;
 using DagMU.Forms.Helpers;
 using DagMUWPF.Windows;
 using System.Windows.Forms.Integration;
@@ -332,8 +332,8 @@ namespace DagMU.Forms
 		{
 			if (!Synced && !overrideEchoNotSet) throw new InvalidOperationException("Echo not set.");
 			Send(String.Format("{0} {1}{2} {3}",
-				DagMU.Model.Constants.dagmu_echo_name,
-				DagMU.Model.Constants.dagmu_echo_prefix,
+				Model.Constants.dagmu_echo_name,
+				Model.Constants.dagmu_echo_prefix,
 				this.sessionGuid,
 				s));
 		}

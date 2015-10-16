@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 
 using DagMU.Forms.Helpers;
-using DagMU.Model;
+using Model;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
@@ -92,7 +92,7 @@ namespace DagMU.Forms
 
 		List<string> characterDescLists = new List<string>();//redesc, desc2.. any {list:desc} that was found in desc string, scraped from 'exa me'
 
-		string sessionGuid = DagMU.Model.Utils.GuidEncoder.Encode(Guid.NewGuid());
+		string sessionGuid = Model.Utils.GuidEncoder.Encode(Guid.NewGuid());
 
 		MuckConnection connection;
 

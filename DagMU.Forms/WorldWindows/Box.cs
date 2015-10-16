@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-using DagMU.Model;
+using Model;
 using System.Collections.ObjectModel;
 
 namespace DagMU.Forms

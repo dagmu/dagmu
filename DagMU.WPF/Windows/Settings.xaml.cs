@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using DagMU.Model;
+using Model;
 
 namespace DagMUWPF.Windows
 {
