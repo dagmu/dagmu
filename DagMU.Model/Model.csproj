@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="Fur.cs" />
     <Compile Include="IConsole.cs" />
     <Compile Include="Echo.cs" />
     <Compile Include="IHelper.cs" />
