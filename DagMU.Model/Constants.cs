@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-	public class Constants
+	public static class Constants
 	{
 		public const string dagmu_echo_name = "dagmu_echo";
 		public const string dagmu_echo_prefix = "dagmu_echo";

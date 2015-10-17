@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Model.Utils
 {
 	public static class Echo
 	{
@@ -13,10 +13,10 @@ namespace Model
 		/// <returns>True if valid.</returns>
 		public static bool isEcho(string s, out string msg, string sessionGuid)
 		{
-			if (String.IsNullOrEmpty(s)) throw new ArgumentNullException("msg");
+			if (string.IsNullOrEmpty(s)) throw new ArgumentNullException(nameof(msg));
 
-			if (s.StartsWith(Model.Constants.dagmu_echo_prefix)) {
-				string remainder = s.Substring(Model.Constants.dagmu_echo_prefix.Length);
+			if (s.StartsWith(Constants.dagmu_echo_prefix)) {
+				string remainder = s.Substring(Constants.dagmu_echo_prefix.Length);
 				string guid = remainder.Substring(0, sessionGuid.Length);
 				if (guid == sessionGuid) {
 					msg = remainder.Substring(sessionGuid.Length).Trim();
@@ -33,7 +33,7 @@ namespace Model
 		/// <returns>true if a valid echo matched supplied message.</returns>
 		public static bool isEchoEqual(string s, string message, string sessionGuid)
 		{
-			if (String.IsNullOrEmpty(s)) return false;
+			if (string.IsNullOrEmpty(s)) return false;
 
 			string echoMessage;
 			if (isEcho(s, out echoMessage, sessionGuid)) {

@@ -5,12 +5,16 @@ namespace Model
 	[Serializable]
 	public class World
 	{
-		#region construction
-		public World() { Name = String.Empty; }
-		public World(String value) { Name = value; }
-		#endregion
+		public World() : this(string.Empty) { }
 
-		public Muck Muck { get; set; }
-		public String Name { get; set; }
+		public World(string value)
+		{
+			Name = value;
+		}
+
+		public string Name { get; set; }
+		public string NameShort { get; set; }
+
+		public string QUITString { get; set; }
 	}
 }

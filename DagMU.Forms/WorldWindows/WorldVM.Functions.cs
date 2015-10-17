@@ -17,7 +17,7 @@ namespace DagMU.Forms
 		{
 			Index = myindex;
 			charName = null;
-			Model.Data Data = new Model.Data();
+			Data Data = new Data();
 
 			connection = new MuckConnection();
 			connection.EConnect += onConnect;
@@ -195,7 +195,7 @@ namespace DagMU.Forms
 			Send("exa me=/_whisp/lastwhispered");
 			Send("exa me=/ride/_mode");
 
-			Echo("LOGGEDIN", true);
+			SendEcho("LOGGEDIN", true);
 
 			NewStatus(MuckStatus.Intercepting_Normal);// from here it is assumed login was successful
 
@@ -328,12 +328,12 @@ namespace DagMU.Forms
 			boxOfInputBoxes.Refocus();
 		}
 
-		void Echo(string s, bool overrideEchoNotSet = false)
+		void SendEcho(string s, bool overrideEchoNotSet = false)
 		{
 			if (!Synced && !overrideEchoNotSet) throw new InvalidOperationException("Echo not set.");
 			Send(String.Format("{0} {1}{2} {3}",
-				Model.Constants.dagmu_echo_name,
-				Model.Constants.dagmu_echo_prefix,
+				Constants.dagmu_echo_name,
+				Constants.dagmu_echo_prefix,
 				this.sessionGuid,
 				s));
 		}

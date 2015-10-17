@@ -1,7 +1,8 @@
-@action dagmuecho=me
-@link dagmuecho=$nothing
-@succ dagmuecho={null:{tell:{&arg},{name:me}}}
-
 @recycle dagmuecho
 
-thanks to Ascha for Echo help
+@recycle dagmu_echo
+@action dagmu_echo=me
+@link dagmu_echo=$nothing
+@succ dagmu_echo={null:{tell:{&arg},{name:me}}}
+
+dagmuecho thanks to Ascha for Echo help

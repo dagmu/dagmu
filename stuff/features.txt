@@ -1,3 +1,4 @@
+
 ^((?:[A-Za-z0-9_\-]+) (?:has (?:(?:dis|re|)connected|left|arrived)|(?:goes home)|(?:concentrates on a distant place, and )(?:fades from sight)|(?:(?:is )(?:taken home)(?: to sleep by the local police))).)$
 
 ^(?:\w+ )(page(?:s|(?:-pose))?)(?:, \"".*\"" to \w+\.)$
@@ -44,12 +45,13 @@ desc editor reads your list desc(s), no matter their name.
 	stoppers
 world/connection/character CRUD
 customizable highlighting
+	'looked at you' line not highlighted
 automatic name highlighting
 end key
 closing world does not close any helpers
+closing app does not close server
 scroll to bottom issues when resizing. resize doesn't keep bottom line in view.
 multiline poses don't scroll to bottom correctly, only scrolls to start of line
-'looked at you' line not highlighted
 inputbox buttons don't work right if maximized
 last intercept makes newlines
 when you open desc editor and something is unset, the box will remain greyed out: gender, species, scent, desc
@@ -60,7 +62,6 @@ p =, wh = don't work, InputBox.cs input_KeyDown
 richtextbox sees // as clickable link, override underlying win32 control with http://www.codeproject.com/Articles/9196/Links-with-arbitrary-text-in-a-RichTextBox or disable DetectURL and parse manually
 console needs to start a bit wider
 console needs to use richtextbox maybe, horizontal rezising is fucked
-
 detect editplayer's looktrap (x looked at you), use for auto highlighting. won't work with looktraps built into desc.. custom highlighting would bypass the problem.
 
 doing

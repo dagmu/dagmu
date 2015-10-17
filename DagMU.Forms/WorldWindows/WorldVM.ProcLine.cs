@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 using DagMU.Forms.Helpers;
+using Model.Utils;
 
 namespace DagMU.Forms
 {
@@ -83,7 +84,7 @@ namespace DagMU.Forms
 		{
 			if (s == null) return;
 
-			if (Model.Echo.isEchoEqual(s, "LOGGEDIN", sessionGuid)) {
+			if (Echo.isEchoEqual(s, "LOGGEDIN", sessionGuid)) {
 				onSynced();
 				return;
 			}
