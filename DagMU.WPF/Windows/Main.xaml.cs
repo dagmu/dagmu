@@ -101,5 +101,10 @@ namespace DagMUWPF.Windows
 			for (int i = 0; i < 10; i++)
 				box.AppendText("\ntest");
 		}
+
+	    private void Worlds_MouseDown(object sender, MouseButtonEventArgs e)
+	    {
+	        New_MouseDown(null, null);
+	    }
 	}
 }
